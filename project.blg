@@ -6,45 +6,45 @@ The style file: abbrvnat.bst
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 Database file #1: citation.bib
 Warning--I didn't find a database entry for "dong_dynamics_2016"
-You've used 1 entry,
+You've used 2 entries,
             2773 wiz_defined-function locations,
-            603 strings with 4816 characters,
-and the built_in function-call counts, 451 in all, are:
-= -- 44
-> -- 10
-< -- 1
-+ -- 4
-- -- 3
-* -- 34
-:= -- 75
-add.period$ -- 5
-call.type$ -- 1
-change.case$ -- 4
-chr.to.int$ -- 1
-cite$ -- 2
-duplicate$ -- 20
-empty$ -- 41
-format.name$ -- 4
-if$ -- 89
+            613 strings with 5068 characters,
+and the built_in function-call counts, 934 in all, are:
+= -- 94
+> -- 31
+< -- 2
++ -- 11
+- -- 9
+* -- 74
+:= -- 149
+add.period$ -- 10
+call.type$ -- 2
+change.case$ -- 9
+chr.to.int$ -- 2
+cite$ -- 4
+duplicate$ -- 40
+empty$ -- 81
+format.name$ -- 13
+if$ -- 191
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 15
-num.names$ -- 4
-pop$ -- 5
+missing$ -- 2
+newline$ -- 22
+num.names$ -- 8
+pop$ -- 11
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 7
 quote$ -- 0
-skip$ -- 14
+skip$ -- 30
 stack$ -- 0
-substring$ -- 27
-swap$ -- 1
+substring$ -- 54
+swap$ -- 2
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 11
+type$ -- 22
 warning$ -- 0
-while$ -- 5
+while$ -- 10
 width$ -- 0
-write$ -- 24
+write$ -- 41
 (There was 1 warning)

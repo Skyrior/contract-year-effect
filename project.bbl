@@ -1,9 +1,18 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{2}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Gibbons and Murphy(1992)]{gibbons_1992}
+R.~Gibbons and K.~J. Murphy.
+\newblock Optimal incentive contracts in the presence of career concerns:
+  Theory and evidence.
+\newblock \emph{Journal of Political Economy}, 100\penalty0 (3):\penalty0
+  468--505, 1992.
+\newblock ISSN 00223808, 1537534X.
+\newblock URL \url{http://www.jstor.org/stable/2138728}.
 
 \bibitem[Holmström(1999)]{holmstrom_contracts_1999}
 B.~Holmström.
