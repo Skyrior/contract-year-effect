@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: project.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: abbrvnat.bst
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+Database file #1: citation.bib
+Warning--I didn't find a database entry for "dong_dynamics_2016"
+You've used 1 entry,
+            2773 wiz_defined-function locations,
+            603 strings with 4816 characters,
+and the built_in function-call counts, 451 in all, are:
+= -- 44
+> -- 10
+< -- 1
++ -- 4
+- -- 3
+* -- 34
+:= -- 75
+add.period$ -- 5
+call.type$ -- 1
+change.case$ -- 4
+chr.to.int$ -- 1
+cite$ -- 2
+duplicate$ -- 20
+empty$ -- 41
+format.name$ -- 4
+if$ -- 89
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 15
+num.names$ -- 4
+pop$ -- 5
+preamble$ -- 1
+purify$ -- 3
+quote$ -- 0
+skip$ -- 14
+stack$ -- 0
+substring$ -- 27
+swap$ -- 1
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 11
+warning$ -- 0
+while$ -- 5
+width$ -- 0
+write$ -- 24
+(There was 1 warning)

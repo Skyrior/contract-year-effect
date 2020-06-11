@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  10 JUN 2020 22:24
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  11 JUN 2020 14:46
 entering extended mode
 **./Project.tex
 (Project.tex
@@ -585,9 +585,8 @@ LaTeX Font Info:    Trying to load font information for U+bbm on input line 81.
 
  (D:\applications\Latex\tex/latex/bbm\ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [4]
-No file Project.bbl.
-[5] [6
+) [4] (Project.bbl) [5]
+[6
 
 ] [7
 
@@ -604,15 +603,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 130.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 130.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 130.
 Package rerunfilecheck Info: File `Project.out' has not changed.
-(rerunfilecheck)             Checksum: CFBC8544B711F14BCD26F2D0033B727C;625.
+(rerunfilecheck)             Checksum: 214D5763E1E28DE3234102810BC92CFB;625.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 130.
  ) 
 Here is how much of TeX's memory you used:
- 15289 strings out of 414044
- 270907 string characters out of 2898609
- 594261 words of memory out of 3000000
- 32757 multiletter control sequences out of 15000+200000
- 542722 words of font info for 78 fonts, out of 3000000 for 9000
+ 15299 strings out of 414044
+ 271097 string characters out of 2898609
+ 594289 words of memory out of 3000000
+ 32763 multiletter control sequences out of 15000+200000
+ 542730 words of font info for 79 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
  51i,11n,46p,1425b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
 
