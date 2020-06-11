@@ -16,4 +16,4 @@ merged_nba <- merge(merged_nba, touches, by=c("name", "Season"))
 
 library(csv)
 library(readr)
-readr::write_csv(merged_nba, "merged_nba.csv")
+readr::write_csv(merged_nba, "nba.csv")
