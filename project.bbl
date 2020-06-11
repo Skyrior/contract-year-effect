@@ -1,0 +1,51 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Alchian and Demsetz(1972)]{alchian_1972}
+A.~A. Alchian and H.~Demsetz.
+\newblock Production, information costs, and economic organization.
+\newblock \emph{The American Economic Review}, 62\penalty0 (5):\penalty0
+  777--795, 1972.
+\newblock ISSN 00028282.
+\newblock URL \url{http://www.jstor.org/stable/1815199}.
+
+\bibitem[Gibbons and Murphy(1992)]{gibbons_1992}
+R.~Gibbons and K.~J. Murphy.
+\newblock Optimal incentive contracts in the presence of career concerns:
+  Theory and evidence.
+\newblock \emph{Journal of Political Economy}, 100\penalty0 (3):\penalty0
+  468--505, 1992.
+\newblock ISSN 00223808, 1537534X.
+\newblock URL \url{http://www.jstor.org/stable/2138728}.
+
+\bibitem[Holmström(1999)]{holmstrom_contracts_1999}
+B.~Holmström.
+\newblock Managerial incentive problems: A dynamic perspective.
+\newblock \emph{The Review of Economic Studies}, 66\penalty0 (1):\penalty0
+  169--182, 1999.
+\newblock ISSN 00346527, 1467937X.
+\newblock URL \url{http://www.jstor.org/stable/2566954}.
+
+\bibitem[Prendergast(1999)]{prendergast_1999}
+C.~Prendergast.
+\newblock The provision of incentives in firms.
+\newblock \emph{Journal of Economic Literature}, 37\penalty0 (1):\penalty0
+  7--63, March 1999.
+\newblock \doi{10.1257/jel.37.1.7}.
+\newblock URL \url{https://www.aeaweb.org/articles?id=10.1257/jel.37.1.7}.
+
+\bibitem[Ress(1994)]{ress_1994}
+G.~Ress.
+\newblock Ex ante safeguards against ex post opportunism in international
+  treaties: Theory and practice of international public law.
+\newblock \emph{Journal of Institutional and Theoretical Economics (JITE) /
+  Zeitschrift für die gesamte Staatswissenschaft}, 150\penalty0 (1):\penalty0
+  279--303, 1994.
+\newblock ISSN 09324569.
+\newblock URL \url{http://www.jstor.org/stable/40753040}.
+
+\end{thebibliography}

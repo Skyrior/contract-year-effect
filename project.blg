@@ -3,48 +3,52 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: project.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: abbrvnat.bst
+Illegal, another \bibstyle command---line 37 of file project.aux
+ : \bibstyle
+ :          {abbrvnat}
+I'm skipping whatever remains of this command
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 Database file #1: citation.bib
 Warning--I didn't find a database entry for "dong_dynamics_2016"
-You've used 2 entries,
+You've used 5 entries,
             2773 wiz_defined-function locations,
-            613 strings with 5068 characters,
-and the built_in function-call counts, 934 in all, are:
-= -- 94
-> -- 31
-< -- 2
-+ -- 11
-- -- 9
-* -- 74
-:= -- 149
-add.period$ -- 10
-call.type$ -- 2
-change.case$ -- 9
-chr.to.int$ -- 2
-cite$ -- 4
-duplicate$ -- 40
-empty$ -- 81
-format.name$ -- 13
-if$ -- 191
+            643 strings with 5801 characters,
+and the built_in function-call counts, 2219 in all, are:
+= -- 226
+> -- 72
+< -- 5
++ -- 26
+- -- 21
+* -- 177
+:= -- 349
+add.period$ -- 25
+call.type$ -- 5
+change.case$ -- 22
+chr.to.int$ -- 5
+cite$ -- 10
+duplicate$ -- 100
+empty$ -- 198
+format.name$ -- 30
+if$ -- 463
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 22
-num.names$ -- 8
-pop$ -- 11
+missing$ -- 5
+newline$ -- 43
+num.names$ -- 20
+pop$ -- 27
 preamble$ -- 1
-purify$ -- 7
+purify$ -- 17
 quote$ -- 0
-skip$ -- 30
+skip$ -- 71
 stack$ -- 0
-substring$ -- 54
-swap$ -- 2
+substring$ -- 122
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 22
+type$ -- 55
 warning$ -- 0
-while$ -- 10
+while$ -- 24
 width$ -- 0
-write$ -- 41
-(There was 1 warning)
+write$ -- 92
+(There was 1 error message)
