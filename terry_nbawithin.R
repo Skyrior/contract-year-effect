@@ -1,6 +1,8 @@
 install.packages("plm")
 library(plm)
 
+
+
 lm(data = nba, 
     nba$usg ~ nba$contract_year + nba$salary_current + nba$min
     + nba$name + nba$season + nba$age.x,
@@ -93,6 +95,8 @@ plmdbo <- plm(data = nba, model = "within",
     index = "season",
     effect = "twoways",
     weights = nba$min)
+
+
 
 
 
