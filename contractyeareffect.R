@@ -440,6 +440,11 @@ gee.ws <- geeglm(formula = ws ~ contract_year + min + as.factor(name) + pos + as
 summary.geews <- my.summary.lm(summary(gee.ws), 
                                my.rows=grep("contract_year|min|season|salary_current|Intercept",
                                             names(coef(gee.ws))))
+broom::confint_tidy(gee.ws, parm = "contract_year")
+broom::confint_tidy(gee.ws, parm = "min")
+broom::confint_tidy(gee.ws, parm = "salary_current")
+broom::confint_tidy(gee.ws, parm = "(Intercept)")
+
 gee.ows <- geeglm(formula = ows ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
                  + salary_current,
                  family = gaussian,
@@ -449,6 +454,11 @@ gee.ows <- geeglm(formula = ows ~ contract_year + min + as.factor(name) + pos + 
 summary.geeows <- my.summary.lm(summary(gee.ows), 
                                my.rows=grep("contract_year|min|season|salary_current|Intercept",
                                             names(coef(gee.ows))))
+broom::confint_tidy(gee.ows, parm = "contract_year")
+broom::confint_tidy(gee.ows, parm = "min")
+broom::confint_tidy(gee.ows, parm = "salary_current")
+broom::confint_tidy(gee.ows, parm = "(Intercept)")
+
 gee.dws <- geeglm(formula = dws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
                   + salary_current,
                   family = gaussian,
@@ -458,6 +468,12 @@ gee.dws <- geeglm(formula = dws ~ contract_year + min + as.factor(name) + pos + 
 summary.geedws <- my.summary.lm(summary(gee.dws), 
                                 my.rows=grep("contract_year|min|season|salary_current|Intercept",
                                              names(coef(gee.dws))))
+broom::confint_tidy(gee.dws, parm = "contract_year")
+broom::confint_tidy(gee.dws, parm = "min")
+broom::confint_tidy(gee.dws, parm = "salary_current")
+broom::confint_tidy(gee.dws, parm = "(Intercept)")
+
+
 gee.usg <- geeglm(formula = usg ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
                   + salary_current,
                   family = gaussian,
@@ -466,230 +482,6 @@ gee.usg <- geeglm(formula = usg ~ contract_year + min + as.factor(name) + pos + 
                   id = team)
 broom::confint_tidy(gee.ws, parm = "contract_year")
 
-## -------------------------------------------------------------------------
-##
-## Grouping it up by teams
-##
-## For tackling correlated observations
-##
-## -------------------------------------------------------------------------
-
-# drop duplicate columns
-nba.LASSO <- nba %>%
-  select(-"player_y") %>%
-  select(-"season_1") %>%
-  select(-"age_2")
-
-# filter teams that are TOT (meaning they were floating among teams)
-
-nba.LASSO <- nba.LASSO %>%
-  filter(team != "TOT")
-
-# produce weighted mean by team
-
-nba.LASSO <- nba.LASSO %>%
-  group_by(team, season) %>%
-  mutate_all(funs(weighted.mean(.,min))) %>%
-  summarize_all(mean)
-
-# drop columns that aren't meaningful when summed (produces NA)
-
-nba.LASSO <- nba.LASSO %>%
-  select_if(~sum(!is.na(.)) > 0)
-
-nba.a2 <- nba.a2 %>%
-  filter(team.x != "TOT") %>%
-  group_by(team.x, season) %>%
-  mutate_all(funs(weighted.mean(.,min))) %>%
-  summarize_all(mean)
-
-nba.t2 <- nba.t2 %>%
-  filter(team.x != "TOT") %>%
-  group_by(team.x, season) %>%
-  mutate_all(funs(weighted.mean(.,min.x))) %>%
-  summarize_all(mean)
-
-nba.b2 <- nba.b2 %>%
-  filter(team.x != "TOT") %>%
-  group_by(team.x, season) %>%
-  mutate_all(funs(weighted.mean(.,min.x))) %>%
-  summarize_all(mean)
-
-nba.f2 <- nba.f2 %>%
-  filter(team.x != "TOT") %>%
-  group_by(team.x, season) %>%
-  mutate_all(funs(weighted.mean(.,min))) %>%
-  summarize_all(mean)
-
-## -------------------------------------------------------------------------
-##
-## Fixed Effect OLS For Teams:
-##
-## -------------------------------------------------------------------------
-
-
-team.usage <- lm(formula = usg ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-                + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamusage <- my.summary.lm(summary(team.usage), 
-                               my.rows=grep("contract_year|min|season|salary_current",
-                                            names(coef(team.usage))))
-
-team.dws <- lm(formula = dws ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-              + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamdws <- my.summary.lm(summary(team.dws), 
-                             my.rows=grep("contract_year|min|season|salary_current",
-                                          names(coef(team.dws))))
-
-team.ows <- lm(formula = ows ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-              + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamows <- my.summary.lm(summary(team.ows), 
-                             my.rows=grep("contract_year|min|season|salary_current",
-                                          names(coef(team.ows))))
-
-team.ws <- lm(formula = ws ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-             + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamws <- my.summary.lm(summary(team.ws), 
-                            my.rows=grep("contract_year|min|season|salary_current",
-                                         names(coef(team.ws))))
-
-
-team.distfeet <- lm(formula = dist_feet ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-                   + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamdistfeet <- my.summary.lm(summary(team.distfeet), 
-                                  my.rows=grep("contract_year|min|season|salary_current",
-                                               names(coef(team.distfeet))))
-
-team.distdef <- lm(formula = dist_miles_def ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-                  + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamdistdef <- my.summary.lm(summary(team.distdef), 
-                                 my.rows=grep("contract_year|min|season|salary_current",
-                                              names(coef(team.distdef))))
-
-team.distoff <- lm(formula = dist_miles_off ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-                  + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamdistoff <- my.summary.lm(summary(team.distoff), 
-                                 my.rows=grep("contract_year|min|season|salary_current",
-                                              names(coef(team.distoff))))
-
-team.avgs <- lm(formula = avg_speed ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamavgs <- my.summary.lm(summary(team.avgs), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.avgs))))
-
-team.sdef <- lm(formula = avg_speed_def ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamsdef <- my.summary.lm(summary(team.sdef), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.sdef))))
-
-team.soff <- lm(formula = avg_speed_off ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamsoff <- my.summary.lm(summary(team.soff), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.soff))))
-
-team.ws48 <- lm(formula = ws_48 ~ contract_year + min + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.a2, weights = nba.a2$min)
-summary.teamws48 <- my.summary.lm(summary(team.ws48), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.ws48))))
-
-team.box <- lm(formula = box_outs ~ contract_year + min.y + as.factor(team.x) + as.factor(season) 
-              + salary_current, data = nba.b2, weights = nba.b2$min.y)
-summary.teambox <- my.summary.lm(summary(team.box), 
-                             my.rows=grep("contract_year|min|season|salary_current",
-                                          names(coef(team.box))))
-
-team.obox <- lm(formula = off_box_outs ~ contract_year + min.y + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.b2, weights = nba.b2$min.y)
-summary.teamobox <- my.summary.lm(summary(team.obox), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.obox))))
-
-team.dbox <- lm(formula = def_box_outs ~ contract_year + min.y + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.b2, weights = nba.b2$min.y)
-summary.teamdbox <- my.summary.lm(summary(team.dbox), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.dbox))))
-
-team.avgt <- lm(formula = avg_sec_per_touch ~ contract_year + min.y + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.t2, weights = nba.t2$min.y)
-summary.teamavgt <- my.summary.lm(summary(team.avgt), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.avgt))))
-
-team.avgd <- lm(formula = avg_drib_per_touch ~ contract_year + min.y + as.factor(team.x) + as.factor(season) 
-               + salary_current, data = nba.t2, weights = nba.t2$min.y)
-summary.teamavgd <- my.summary.lm(summary(team.avgd), 
-                              my.rows=grep("contract_year|min|season|salary_current",
-                                           names(coef(team.avgd))))
-
-
-## -------------------------------------------------------------------------
-##
-## Export Fixed Team Effect OLS as tables (w/ Stargazer)
-##
-## -------------------------------------------------------------------------
-
-cat(stargazer(team.dbox, team.obox, team.box, dep.var.labels = c("Defensive Box Outs",
-                                                              "Offensive Box Outs",
-                                                              "Box Outs"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Box Outs as the Dependent Variables"), sep = '\n', file = "tables/tboxout.txt")
-cat(stargazer(team.avgs, team.soff, team.sdef, dep.var.labels = c("Average Speed", 
-                                                               "Offensive Speed", "Defensive Speed"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",  "Position",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Speed Metrics as the Dependent Variable"), sep = '\n', file = "tables/tspeed.txt")
-cat(stargazer(team.distdef, team.distoff, team.distfeet,
-              dep.var.labels = c("Distance: Defensive", "Distance: Offensive", "Distance"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",  "Position",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Distance as the Dependent Variable"), sep = '\n', file = "tables/tdistdef.txt")
-cat(stargazer(team.dws, team.ows, team.ws, team.ws48,
-              dep.var.labels = c("Defensive Win Shares", "Offensive Win Shares",
-                                 "Win Shares", "Win Shares per 48 minutes"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",  "Position",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Win Shares as the Dependent Variable"),sep = '\n',  file = "tables/tdws.txt")
-cat(stargazer(team.avgd, dep.var.labels = "Average Seconds per Dribble",
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Average Seconds per Dribble as the Dependent Variable"),
-    sep = '\n', file = "tables/tavgd.txt")
-cat(stargazer(team.avgt, dep.var.labels = "Average Seconds per Touch",
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Average Seconds per Touch as the Dependent Variable"),
-    sep = '\n', file = "tables/tavgt.txt")
-cat(stargazer(team.usage, dep.var.labels = "Usage Rate",
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played", "Position",
-                                   "Current Salary"), omit = c("team.x", "season"),
-              add.lines = list(c("Team Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Usage Rate"), sep = '\n', file = "tables/tusage.txt")
-
 
 ## -------------------------------------------------------------------------
 ##
@@ -697,86 +489,124 @@ cat(stargazer(team.usage, dep.var.labels = "Usage Rate",
 ##
 ## -------------------------------------------------------------------------
 
-nba.fullmerged <- nba.fullmerged %>%
-  filter(team.x != "TOT")
+## We require X to be the matrix of controls. That would be:
+## Height
+## Weight
+## Age
+## PER - player efficiency rating
+## min - minutes played
+## TS - True shooting percentage
+## x3p_ar - 3-point attempt rate
+## f_tr - Free throw attempt rate
+## orb, drb, trb - rebound percentage
+## ast, stl, blk - assist, steal, block
+## tov - turnover
+## usg - usage percentage
+## obpm, dbpm, bpm - box plus/minus
+## vorp - value over replacement player
+## dist_miles, dist_miles_off, dist_miles_def
+## avg_speed, avg_speed_off, avg_speed_def
+## salary_current,
+## box_outs, off_box_outs, def_box_outs
+## team_reb_on_box_outs,
+## player_reb_on_box_outs,
+## touches
+## front_ct_touches,
+## time_of_poss,
+## avg_sec_per_touch,
+## avg_drib_per_touch,
+## pts_per_touch,
+## elbow_touches,
+## post_ups,
+## paint_touches,
+## pts_per_elbow_touch,
+## pts_per_post_touch,
+## pts_per_paint_touch
 
-X <- c("contract_year", "name", "height", "weight", "season",
-       "age.x", "pos", "g", "mp", "rk", "salary_current", "team.x", "w.y", "l.y")
-X2 <- c("name", "team.x", "pos", "season")
-nba.lasso <- nba.fullmerged %>%
-  select(all_of(X))
-nba.lasso <- dummy_cols(nba.lasso)
-nba.lasso <- nba.lasso %>%
-  select(-one_of(X2))
-nba.lasso <- as.matrix(nba.lasso)
+X.controls <- c("height", "weight", "age",
+       "min", "f_tr", "orb", "drb", "trb",
+       "ast", "stl", "blk", "tov", "dist_miles",
+       "dist_miles_off", "dist_miles_def", "salary_current",
+       "box_outs", "off_box_outs", "def_box_outs",
+       "team_reb_on_box_outs", "player_reb_on_box_outs",
+       "touches", "front_ct_touches", "time_of_poss",
+       "avg_sec_per_touch", "avg_drib_per_touch",
+       "pts_per_touch", "elbow_touches",
+       "post_ups", "paint_touches", "pts_per_elbow_touch",
+       "pts_per_post_touch", "pts_per_paint_touch")
 
-Z <- c("name", "height", "weight", "season",
-       "age.x", "pos", "g", "mp", "rk", "salary_current", "team.x", "w.y", "l.y")
-nba.z <- nba.fullmerged %>%
-  select(all_of(Z))
-nba.z <- dummy_cols(nba.z)
-nba.z <- nba.z %>%
-  select(-one_of(X2))
-nba.z <- as.matrix(nba.z)
+X <- nba.LASSO %>%
+  ungroup %>%
+  select(all_of(X.controls))
 
-nba.y <- nba.fullmerged %>%
-  select("ows")
-nba.y <- as.vector(nba.y)
+X <- as.matrix(X)
 
-nba.d <- nba.fullmerged %>%
-  select("contract_year")
-nba.d <- as.vector(nba.d)
+## Y is the matrix of outcome.
 
-Y <- c("ows", "contract_year", "name", "height", "weight", "season",
-       "age.x", "pos", "g", "mp", "rk", "salary_current", "team.x", "w.y", "l.y")
-nba.subset <- nba %>%
-  select(all_of(Y))
-formula <- paste("avg_speed ~", paste(colnames(nba.subset), collapse = "+"))
-formula <- as.formula(formula)
+Y.outcome <- c("ws")
 
-dlasso <- rlassoEffects(x = nba.lasso, y = nba.y, index=c(1:12),
-                        method = "partialling out",
-                        I3 = NULL,
-                        post = TRUE)
+Y <- nba.LASSO %>%
+  ungroup %>%
+  select(all_of(Y.outcome))
 
-lassoeff <- rlassoEffect(x = nba.z, y = nba.y, d = nba.d, method = "double selection",
+Y <- as.matrix(Y)
+
+## Finally D is the matrix of inference variable.
+
+D.inference <- c("contract_year")
+
+D <- nba.LASSO %>%
+  ungroup %>%
+  select(all_of(D.inference))
+
+D <- as.matrix(D)
+
+lasso.ws <- rlassoEffect(x = X, y = Y, d = D, method = "double selection",
                          I3 = NULL,
                          post = TRUE)
 
-print(lassoeff)
-summary(lassoeff)
-confint(lassoeff)
-plot(lassoeff)
+print(lasso.ws)
+summary(lasso.ws)
+confint(lasso.ws)
+plot(lasso.ws)
+print(lasso.ws$selection.index)
 
-print(dlasso)
-summary(dlasso)
+## ----------------
 
-confint(dlasso)
-plot(dlasso)
+Y.outcome <- c("ows")
 
-todropa <- c("lg", "team.y", "name", "pos")
+Y <- nba.LASSO %>%
+  ungroup %>%
+  select(all_of(Y.outcome))
 
-nba.a2 <- nba %>%
-  select(-one_of(todropa))
+Y <- as.matrix(Y)
 
-todropt <- c("x", "name", "team.y")
+lasso.ows <- rlassoEffect(x = X, y = Y, d = D, method = "double selection",
+                         I3 = NULL,
+                         post = TRUE)
 
-nba.t2 <- nba %>%
-  select(-one_of(todropt))
+print(lasso.ows)
+summary(lasso.ows)
+confint(lasso.ows)
+plot(lasso.ows)
+print(lasso.ows$selection.index)
 
-todropb <- c("x", "name", "team.y")
+## ----------------
 
-nba.b2 <- nba %>%
-  select(-one_of(todropb))
+Y.outcome <- c("dws")
 
-todropf <- c("name", "lg", "pos", "team.y", "team.x.x", "team.y.y")
+Y <- nba.LASSO %>%
+  ungroup %>%
+  select(all_of(Y.outcome))
 
-nba.f2 <- nba.fullmerged %>%
-  select(-one_of(todropf))
+Y <- as.matrix(Y)
 
-nba.a2 <- nba.a2 %>%
-  filter(team.x != "TOT") %>%
-  group_by(team.x, season) %>%
-  mutate_all(funs(weighted.mean(.,min))) %>%
-  summarize_all(mean)
+lasso.dws <- rlassoEffect(x = X, y = Y, d = D, method = "double selection",
+                          I3 = NULL,
+                          post = TRUE)
 
+print(lasso.dws)
+summary(lasso.dws)
+confint(lasso.dws)
+plot(lasso.dws)
+print(lasso.dws$selection.index)
