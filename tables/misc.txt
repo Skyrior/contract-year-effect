@@ -1,0 +1,45 @@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Fri, Jun 12, 2020 - 7:33:57 AM
+\begin{table}[!htbp] \centering 
+  \caption{Using Dribbles, Touches, and Usage Rate as the Dependent Variable} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & Average Seconds per Dribble & Average Seconds per Touch & Usage Rate \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ Contract Year & $-$0.025 & $-$0.017 & 0.262 \\ 
+  & ($-$0.100, 0.051) & ($-$0.086, 0.052) & ($-$0.229, 0.754) \\ 
+  & p = 0.528 & p = 0.624 & p = 0.297 \\ 
+  & & & \\ 
+ Average Minutes Played & 0.009 & 0.009 & 0.065 \\ 
+  & (0.0004, 0.017) & (0.001, 0.017) & (0.010, 0.120) \\ 
+  & p = 0.041$^{**}$ & p = 0.025$^{**}$ & p = 0.022$^{**}$ \\ 
+  & & & \\ 
+ Current Salary & 0.000 & 0.000 & 0.00000 \\ 
+  & (0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+  & p = 0.049$^{**}$ & p = 0.078$^{*}$ & p = 0.062$^{*}$ \\ 
+  & & & \\ 
+ Constant & 1.320 & 2.210 & 19.300 \\ 
+  & (0.839, 1.800) & (1.780, 2.650) & (16.200, 22.400) \\ 
+  & p = 0.00000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Player Fixed Effects & Yes & Yes & Yes \\ 
+Year Fixed Effects & Yes & Yes & Yes \\ 
+Position Fixed Effects & Yes & Yes & Yes \\ 
+Observations & 820 & 820 & 820 \\ 
+R$^{2}$ & 0.973 & 0.969 & 0.915 \\ 
+Adjusted R$^{2}$ & 0.949 & 0.941 & 0.839 \\ 
+Residual Std. Error (df = 432) & 1.610 & 1.460 & 10.400 \\ 
+F Statistic (df = 387; 432) & 40.100$^{***}$ & 34.600$^{***}$ & 12.000$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+regmisc

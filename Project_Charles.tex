@@ -344,13 +344,13 @@
 	
 	\subsubsection{Fixed effect weighted OLS}
 	
-	Before we discuss our results for the GEE method, let's first examine our results for the fixed effect weighted OLS. We run the fixed effect weighted OLS regression on 16 variables that we believe serve as a proxy for performance. While most of our results do not have statistical significance, we found that the contract year effect is statistically significant when we use win shares as the outcome variable, consistent with our discussion that win shares is the best metric for evaluating performance.
+	Before we discuss our results for the GEE method, let's first examine our results for the fixed effect weighted OLS. We run the fixed effect weighted OLS regression on 16 variables that we believe serve as a proxy for performance. While most of our results do not have statistical significance, such as in Table \ref{regboxout}, we found that the contract year effect is statistically significant when we use win shares as the outcome variable, consistent with our discussion that win shares is the best metric for evaluating performance, in Table \ref{regwinshare}.
 	
 	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:13:02 AM
 	\begin{sidewaystable}[!htbp] \centering 
 		\caption{Using Box Outs as the Dependent Variables} 
-		\label{} 
+		\label{regboxout} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
 			\\[-1.8ex]\hline 
 			\hline \\[-1.8ex] 
@@ -394,7 +394,7 @@
 	% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
 	\begin{sidewaystable}[!htbp] \centering 
 		\caption{Using Win Shares as the Dependent Variables} 
-		\label{}
+		\label{regwinshare}
 		\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 			\\[-1.8ex]\hline 
 			\hline \\[-1.8ex] 
@@ -432,11 +432,116 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{sidewaystable} 
+	\end{sidewaystable}
 
-	\pagebreak
+	\subsubsection{GEE Data}
 	
-	Additional tables and plots are presented in the appendix.
+	The GEE method gives us a smaller error by using the Wald statistic to compute the $p$-value and standard error. As we can see in Table \ref{geewinshare}, we are therefore able to bound the 95\% confidence interval for our coefficients further. Hence, we can see that the GEE method improves statistical significance for datasets with underlying correlated observations and improves statistical power, serving as a method to limit the presence of correlated observations from exaggerating the lack of statistical power of our results. We can see these comparisons in Tables \ref{geelmcomparison}, \ref{geelmcomparisonw}, and \ref{geelmcomparisond}.
+	
+	
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
+	\begin{sidewaystable}[!htbp] \centering 
+		\caption{Using Win Shares as the Dependent Variables} 
+		\label{geewinshare} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & Win Shares & Offensive Win Shares & Defensive Win Shares \\ 
+			\\[-1.8ex] & (1) & (2) & (3)\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 0.401 & 0.282 & 0.102 \\ 
+			& (0.126, 0.676) & (0.0578, 0.507) & ($-$0.0190, 0.223) \\ 
+			& p = 0.0043$^{***}$ & p = 0.0137$^{**}$ & p = 0.09829$^{*}$ \\ 
+			& & & \\ 
+			Average Minutes Played & 0.164 & 0.112 & 0.0522 \\ 
+			& (0.138, 0.191) & (0.0926, 0.131) & (0.0369, 0.0675) \\ 
+			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+			& & & \\ 
+			Current Salary & 0.000 & 0.000 & 0.000 \\ 
+			& ($-$0.000, 0.000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+			& p = 0.163 & p = 0.0801$^{*}$ & p = 0.524 \\ 
+			& & & \\ 
+			Constant & -0.0984 & $-$1.21 & 1.16 \\ 
+			& ($-$1.56, 1.36) & ($-$2.11, $-$0.316) & (0.344, 1.98) \\ 
+			& p = 0.895 & p = 0.0081 & p = 0.005$^{***}$ \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			Player Fixed Effects & Yes & Yes & Yes \\ 
+			Year Fixed Effects & Yes & Yes & Yes \\ 
+			Position Fixed Effects & Yes & Yes & Yes \\ 
+			Number of Clusters & 31 & 31 & 31 \\ 
+			Maximum Cluster Size & 114 & 114 & 114 \\ 
+			Degrees of Freedom & 820 & 820 & 820 \\ 
+			Residual Degrees of Freedom & 432 & 432 & 432 \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{sidewaystable}
+
+	\begin{table}[!htbp]
+		\centering
+		\caption{Comparison of regression results with or without GEE for win shares}
+		\label{geelmcomparison} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from weighted least squares} \\
+			\cmidrule(lr){2-4}
+			Coefficient/GEE & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Regular WOLS, Contract Year & 0.401       & (0.083, 0.719) & $0.014^{**}$       \\
+			WOLS with GEE, Contract Year & 0.401      & (0.126, 0.676)       & $0.0043^{***}$ \\
+			Regular WOLS, Minutes Played & 0.164       & (0.129, 0.200) & $0.000^{***}$ \\
+			WOLS with GEE, Minutes Played & 0.164 & (0.138, 0.191)       & $0.000^{***}$       \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[!htbp]
+		\centering
+		\caption{Comparison of regression results with or without GEE for offensive win shares}
+		\label{geelmcomparisonw} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from weighted least squares} \\
+			\cmidrule(lr){2-4}
+			Coefficient/GEE & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Regular WOLS, Contract Year & 0.282       & (0.049, 0.515) & $0.019^{**}$       \\
+			WOLS with GEE, Contract Year & 0.282      & (0.0578, 0.507)       & $0.0137^{**}$ \\
+			Regular WOLS, Minutes Played & 0.112       & (0.086, 0.138) & $0.000^{***}$ \\
+			WOLS with GEE, Minutes Played & 0.112 & (0.0926, 0.131)       & $0.000^{***}$       \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[!htbp]
+		\centering
+		\caption{Comparison of regression results with or without GEE for defensive win shares}
+		\label{geelmcomparisond} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from weighted least squares} \\
+			\cmidrule(lr){2-4}
+			Coefficient/GEE & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Regular WOLS, Contract Year & 0.102       & ($-$0.039, 0.243) & $0.156$       \\
+			WOLS with GEE, Contract Year & 0.102      & ($-$0.0190, 0.223)       & $0.09829^{*}$ \\
+			Regular WOLS, Minutes Played & 0.0522       & (0.036, 0.068) & $0.000^{***}$ \\
+			WOLS with GEE, Minutes Played & 0.0522 & (0.0369, 0.0675)       & $0.000^{***}$       \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	Additional tables and plots from the weighted OLS regression are presented in the appendix (\ref{sec:tab}). Let us also compare the statistics with and without the GEE method.
+	
+	\pagebreak
 	
 	\subsection{Instrumental variable method}
 	
@@ -446,7 +551,7 @@
 	
 	\section{Conclusion} \label{sec:conclusion}
 	
-	
+	\clearpage
 	
 	\singlespacing
 	\bibliographystyle{abbrvnat}
@@ -546,6 +651,50 @@
 			Adjusted R$^{2}$ & 0.989 & 0.989 & 0.994 \\ 
 			Residual Std. Error (df = 432) & 0.119 & 0.142 & 1,003.000 \\ 
 			F Statistic (df = 387; 432) & 194.000$^{***}$ & 197.000$^{***}$ & 366.000$^{***}$ \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{sidewaystable} 
+
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Date and time: Fri, Jun 12, 2020 - 7:33:56 AM
+	\begin{sidewaystable}[!htbp] \centering 
+		\caption{Using Dribbles, Touches, and Usage Rate as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & Average Seconds per Dribble & Average Seconds per Touch & Usage Rate \\ 
+			\\[-1.8ex] & (1) & (2) & (3)\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & $-$0.025 & $-$0.017 & 0.262 \\ 
+			& ($-$0.100, 0.051) & ($-$0.086, 0.052) & ($-$0.229, 0.754) \\ 
+			& p = 0.528 & p = 0.624 & p = 0.297 \\ 
+			& & & \\ 
+			Average Minutes Played & 0.009 & 0.009 & 0.065 \\ 
+			& (0.0004, 0.017) & (0.001, 0.017) & (0.010, 0.120) \\ 
+			& p = 0.041$^{**}$ & p = 0.025$^{**}$ & p = 0.022$^{**}$ \\ 
+			& & & \\ 
+			Current Salary & 0.000 & 0.000 & 0.00000 \\ 
+			& (0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+			& p = 0.049$^{**}$ & p = 0.078$^{*}$ & p = 0.062$^{*}$ \\ 
+			& & & \\ 
+			Constant & 1.320 & 2.210 & 19.300 \\ 
+			& (0.839, 1.800) & (1.780, 2.650) & (16.200, 22.400) \\ 
+			& p = 0.00000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			Player Fixed Effects & Yes & Yes & Yes \\ 
+			Year Fixed Effects & Yes & Yes & Yes \\ 
+			Position Fixed Effects & Yes & Yes & Yes \\ 
+			Observations & 820 & 820 & 820 \\ 
+			R$^{2}$ & 0.973 & 0.969 & 0.915 \\ 
+			Adjusted R$^{2}$ & 0.949 & 0.941 & 0.839 \\ 
+			Residual Std. Error (df = 432) & 1.610 & 1.460 & 10.400 \\ 
+			F Statistic (df = 387; 432) & 40.100$^{***}$ & 34.600$^{***}$ & 12.000$^{***}$ \\ 
 			\hline 
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 

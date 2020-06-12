@@ -22,6 +22,7 @@ library(stargazer)
 library(fastDummies)
 library(lmtest)
 library(geepack)
+library(broom)
 
 ## -------------------------------------------------------------------------
 ##
@@ -133,22 +134,7 @@ hetero2 <- lm(formula = avg_drib_per_touch ~ contract_year + as.factor(name) + p
 
 bptest(hetero2)
 
-## -------------------------------------------------------------------------
-##
-## Generalized estimating equation
-##
-## -------------------------------------------------------------------------
 
-## we require the data to be sorted by the cluster.
-nba <- nba %>%
-  arrange(team)
-
-gee.ws <- geeglm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-                 + salary_current,
-                 family = gaussian,
-                 data = nba,
-                 weights = nba$min,
-                 id = team)
 
 ## -------------------------------------------------------------------------
 ##
@@ -344,7 +330,7 @@ summary.avgd <- my.summary.lm(summary(reg.avgd),
 
 ## -------------------------------------------------------------------------
 ##
-## Export Fixed Effect OLS as tables (w/ Stargazer)
+## Export Weighted Fixed Effect OLS as tables (w/ Stargazer)
 ##
 ## -------------------------------------------------------------------------
 
@@ -396,52 +382,89 @@ cat(stargazer(reg.avgs, reg.soff, reg.sdef, dep.var.labels = c("Average Speed",
     label = 'regspeed',
     sep = '\n', file = "tables/speed.txt")
 
-cat(stargazer(reg.avgs, reg.soff, reg.sdef, dep.var.labels = c("Average Speed", 
-                                                               "Offensive Speed", "Defensive Speed"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",  "Position",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Speed Metrics as the Dependent Variable"), sep = '\n', file = "tables/speed.txt")
-cat(stargazer(reg.distdef, reg.distoff, reg.distfeet,
-              dep.var.labels = c("Distance: Defensive", "Distance: Offensive", "Distance"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",  "Position",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Distance as the Dependent Variable"), sep = '\n', file = "tables/distdef.txt")
-cat(stargazer(reg.dws, reg.ows, reg.ws, reg.ws48,
-              dep.var.labels = c("Defensive Win Shares", "Offensive Win Shares",
-                                 "Win Shares", "Win Shares per 48 minutes"),
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played",  "Position",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Win Shares as the Dependent Variable"),sep = '\n',  file = "tables/dws.txt")
-cat(stargazer(reg.avgd, dep.var.labels = "Average Seconds per Dribble",
+cat(stargazer(reg.distdef, reg.distoff, reg.distfeet, dep.var.labels = c("Distance: Defensive", "Distance: Offensive", "Distance"),
+              omit = c("name", "season", "pos"),
               covariate.labels = c("Contract Year",
                                    "Average Minutes Played",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Average Seconds per Dribble as the Dependent Variable"), sep = '\n', file = "tables/avgd.txt")
-cat(stargazer(reg.avgt, dep.var.labels = "Average Seconds per Touch",
+                                   "Current Salary"),
+              add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
+                               c("Year Fixed Effects", "Yes", "Yes", "Yes"),
+                               c("Position Fixed Effects", "Yes", "Yes", "Yes")),
+              report = "vcsp*",
+              ci = TRUE,
+              title = "Using Distance as the Dependent Variable"),
+    label = 'regdist',
+    sep = '\n', file = "tables/dist.txt")
+
+cat(stargazer(reg.avgd, reg.avgt, reg.usage, dep.var.labels = c("Average Seconds per Dribble", "Average Seconds per Touch", "Usage Rate"),
+              omit = c("name", "season", "pos"),
               covariate.labels = c("Contract Year",
                                    "Average Minutes Played",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Average Seconds per Touch as the Dependent Variable"), sep = '\n', file = "tables/avgt.txt")
-cat(stargazer(reg.usage, dep.var.labels = "Usage Rate",
-              covariate.labels = c("Contract Year",
-                                   "Average Minutes Played", "Position",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Usage Rate"), sep = '\n', file = "tables/usage.txt")
+                                   "Current Salary"),
+              add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
+                               c("Year Fixed Effects", "Yes", "Yes", "Yes"),
+                               c("Position Fixed Effects", "Yes", "Yes", "Yes")),
+              report = "vcsp*",
+              ci = TRUE,
+              title = "Using Dribbles, Touches, and Usage Rate as the Dependent Variable"),
+    label = 'regmisc',
+    sep = '\n', file = "tables/misc.txt")
+
+## -------------------------------------------------------------------------
+##
+## Plots
+##
+## -------------------------------------------------------------------------
+
+theme_set(theme_bw())
+
+
+
+
+## -------------------------------------------------------------------------
+##
+## Generalized estimating equation
+##
+## -------------------------------------------------------------------------
+
+## we require the data to be sorted by the cluster.
+nba <- nba %>%
+  arrange(team)
+
+gee.ws <- geeglm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+                 + salary_current,
+                 family = gaussian,
+                 data = nba,
+                 weights = nba$min,
+                 id = team)
+summary.geews <- my.summary.lm(summary(gee.ws), 
+                               my.rows=grep("contract_year|min|season|salary_current|Intercept",
+                                            names(coef(gee.ws))))
+gee.ows <- geeglm(formula = ows ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+                 + salary_current,
+                 family = gaussian,
+                 data = nba,
+                 weights = nba$min,
+                 id = team)
+summary.geeows <- my.summary.lm(summary(gee.ows), 
+                               my.rows=grep("contract_year|min|season|salary_current|Intercept",
+                                            names(coef(gee.ows))))
+gee.dws <- geeglm(formula = dws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+                  + salary_current,
+                  family = gaussian,
+                  data = nba,
+                  weights = nba$min,
+                  id = team)
+summary.geedws <- my.summary.lm(summary(gee.dws), 
+                                my.rows=grep("contract_year|min|season|salary_current|Intercept",
+                                             names(coef(gee.dws))))
+gee.usg <- geeglm(formula = usg ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+                  + salary_current,
+                  family = gaussian,
+                  data = nba,
+                  weights = nba$min,
+                  id = team)
+broom::confint_tidy(gee.ws, parm = "contract_year")
 
 ## -------------------------------------------------------------------------
 ##
