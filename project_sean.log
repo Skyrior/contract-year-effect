@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  12 JUN 2020 14:44
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  12 JUN 2020 15:29
 entering extended mode
 **./project_sean.tex
 (project_sean.tex
@@ -915,9 +915,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 840.
 (project_sean.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 840.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 840.
-Package rerunfilecheck Info: File `project_sean.out' has not changed.
-(rerunfilecheck)             Checksum: 7A50E721DB804C4DA8DBC124ABCBBCD2;2066.
 
+
+Package rerunfilecheck Warning: File `project_sean.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `project_sean.out':
+(rerunfilecheck)             Before: 39E885879F23532A8B78D00C5A68967F;2095
+(rerunfilecheck)             After:  7A50E721DB804C4DA8DBC124ABCBBCD2;2066.
 
 LaTeX Warning: There were multiply-defined labels.
 
