@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 15:49
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 15:55
 entering extended mode
 **./Project_Charles.tex
 (Project_Charles.tex
@@ -724,6 +724,15 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 )
 \openout1 = `Project_Charles.aux'.
 
@@ -945,13 +954,13 @@ File: min.png Graphic file (type bmp)
 
 ] [44] [45] [46] [47
 
-] [48] [49] [50] [51] [52] [53] [54]
-[55] [56] [57] [58] [59] [60] [61] [62]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1595.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1595.
- (Project_Charles.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1595.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1595.
+] [48] [49] [50] [51] [52] [53]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1276.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1276.
+
+(Project_Charles.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1276.
 
 
 
@@ -960,20 +969,20 @@ Package rerunfilecheck Warning: File `Project_Charles.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `Project_Charles.out':
-(rerunfilecheck)             Before: 95EA75758308D34ADA814D2A10D3AB87
-(rerunfilecheck)             After:  68E40C6E5C5CD722BB6DD20A7DDB7244.
+(rerunfilecheck)             Before: F648EE5101500B6AF424CE5240AA5F70
+(rerunfilecheck)             After:  D7690E3C02AB15E4AFBB0EE0A2B9786F.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1595.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1276.
  ) 
 Here is how much of TeX's memory you used:
- 26705 strings out of 427748
- 473783 string characters out of 3150980
- 805692 words of memory out of 3000000
- 30499 multiletter control sequences out of 15000+200000
+ 26675 strings out of 427748
+ 473488 string characters out of 3150980
+ 793971 words of memory out of 3000000
+ 30469 multiletter control sequences out of 15000+200000
  543468 words of font info for 87 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 46i,12n,77p,2454b,1708s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 46i,12n,77p,2454b,1710s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project_Charles.pdf (63 pages).
+Output written on Project_Charles.pdf (54 pages).

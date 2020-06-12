@@ -1036,8 +1036,11 @@
 	
 	bptest(hetero2)
 	
+	\end{lstlisting}
 	
+	\subsection{Fixed Effect weighted OLS}
 	
+	\begin{lstlisting}
 	## -------------------------------------------------------------------------
 	##
 	## Fixed Effect OLS: Usage Rate
@@ -1049,269 +1052,50 @@
 	summary.usage <- my.summary.lm(summary(reg.usage), 
 	my.rows=grep("contract_year|min|season|salary_current",
 	names(coef(reg.usage))))
+	\end{lstlisting}
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Defensive Win Shares
-	##
-	## -------------------------------------------------------------------------
+	\subsection{IV instrument regression}
 	
-	reg.dws <- lm(formula = dws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.dws <- my.summary.lm(summary(reg.dws), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.dws))))
+	\begin{lstlisting}
+	ivlmdbo <- ivreg(nba$DEF.Box.Outs ~ nba$contract_year + nba$salary_current
+	+ nba$min + nba$age + nba$pos
+	+ nba$name + nba$season | nba$contract_2018 + nba$salary_current
+	+ nba$min + nba$age + nba$pos
+	+ nba$name + nba$season,
+	weights = nba$min)
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Offensive Win Shares
-	##
-	## -------------------------------------------------------------------------
+	coeftest(ivlmdbo, vcov. = vcovHC, type = "HC1")
 	
-	reg.ows <- lm(formula = ows ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.ows <- my.summary.lm(summary(reg.ows), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.ows))))
+	testiv <- lm(nba$contract_year ~ nba$contract_2018)
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Total Win Shares
-	##
-	## -------------------------------------------------------------------------
+	linearHypothesis(testiv, "nba$contract_2018 = 0", 
+	vcov = vcovHC, type = "HC1")
 	
-	reg.ws <- lm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.ws <- my.summary.lm(summary(reg.ws), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.ws))))
+	ivstrength <- linearHypothesis(testiv, "nba$contract_2018 = 0", 
+	vcov = vcovHC, type = "HC1")
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Distance (feet)
-	##
-	## -------------------------------------------------------------------------
+	summary(ivstrength)
 	
-	reg.distfeet <- lm(formula = dist_feet ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.distfeet <- my.summary.lm(summary(reg.distfeet), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.distfeet))))
+	stargazer(ivstrength)
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Distance (feet): Defensive
-	##
-	## -------------------------------------------------------------------------
+	summary(ivlmbo)
 	
-	reg.distdef <- lm(formula = dist_miles_def ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.distdef <- my.summary.lm(summary(reg.distdef), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.distdef))))
+	stargazer(ivlmbo, type = "latex",
+	title="IV Using Box Outs as the Dependent Variables")
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Distance (feet): Offensive
-	##
-	## -------------------------------------------------------------------------
+	ivlmws48 <- ivreg(nba$ws_48 ~ nba$contract_year + nba$salary_current
+	+ nba$min + nba$age + nba$pos + nba$team
+	+ nba$name + nba$season | nba$contract_2018 + nba$salary_current
+	+ nba$min + nba$age + nba$pos + nba$team
+	+ nba$name + nba$season,
+	weights = nba$min)
 	
-	reg.distoff <- lm(formula = dist_miles_off ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.distoff <- my.summary.lm(summary(reg.distoff), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.distoff))))
+	coeftest(ivlmws48, vcov. = vcovHC, type = "HC1")
+	\end{lstlisting}
 	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Average Speed
-	##
-	## -------------------------------------------------------------------------
+	\subsection{Clustering the data}
 	
-	reg.avgs <- lm(formula = avg_speed ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.avgs <- my.summary.lm(summary(reg.avgs), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.avgs))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Average Speed: Defense
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.sdef <- lm(formula = avg_speed_def ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.sdef <- my.summary.lm(summary(reg.sdef), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.sdef))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Average Speed: Offense
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.soff <- lm(formula = avg_speed_off ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.soff <- my.summary.lm(summary(reg.soff), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.soff))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Win Shares per 48 Mins
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.ws48 <- lm(formula = ws_48 ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.ws48 <- my.summary.lm(summary(reg.ws48), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.ws48))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Box Outs
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.box <- lm(formula = box_outs ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.box <- my.summary.lm(summary(reg.box), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.box))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Off Box Outs
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.obox <- lm(formula = off_box_outs ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.obox <- my.summary.lm(summary(reg.obox), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.obox))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Def Box Outs
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.dbox <- lm(formula = def_box_outs ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.dbox <- my.summary.lm(summary(reg.dbox), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.dbox))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Average Seconds per Touch
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.avgt <- lm(formula = avg_sec_per_touch ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.avgt <- my.summary.lm(summary(reg.avgt), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.avgt))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Fixed Effect OLS: Average Dribbles per Touch
-	##
-	## -------------------------------------------------------------------------
-	
-	reg.avgd <- lm(formula = avg_drib_per_touch ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current, data = nba, weights = nba$min)
-	summary.avgd <- my.summary.lm(summary(reg.avgd), 
-	my.rows=grep("contract_year|min|season|salary_current",
-	names(coef(reg.avgd))))
-	
-	## -------------------------------------------------------------------------
-	##
-	## Export Weighted Fixed Effect OLS as tables (w/ Stargazer)
-	##
-	## -------------------------------------------------------------------------
-	
-	cat(stargazer(reg.dbox, reg.obox, reg.box, dep.var.labels = c("Defensive Box Outs",
-	"Offensive Box Outs",
-	"Box Outs"),
-	omit = c("name", "season", "pos"),
-	covariate.labels = c("Contract Year",
-	"Average Minutes Played",
-	"Current Salary"),
-	add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
-	c("Year Fixed Effects", "Yes", "Yes", "Yes"),
-	c("Position Fixed Effects", "Yes", "Yes", "Yes")),
-	report = "vcsp*",
-	ci = TRUE,
-	title = "Using Box Outs as the Dependent Variables"),
-	label = 'regboxout',
-	sep = '\n', file = "tables/boxout.txt")
-	
-	cat(stargazer(reg.ws, reg.ows, reg.dws, reg.ws48, dep.var.labels = c("Win Shares",
-	"Offensive Win Shares",
-	"Defensive Win Shares",
-	"Win Shares per 48 Minutes"),
-	omit = c("name", "season", "pos"),
-	covariate.labels = c("Contract Year",
-	"Average Minutes Played",
-	"Current Salary"),
-	add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes", "Yes"), 
-	c("Year Fixed Effects", "Yes", "Yes", "Yes", "Yes"),
-	c("Position Fixed Effects", "Yes", "Yes", "Yes", "Yes")),
-	report = "vcsp*",
-	ci = TRUE,
-	title = "Using Win Shares as the Dependent Variables"),
-	label = 'regwinshares',
-	sep = '\n', file = "tables/winshares.txt")
-	
-	cat(stargazer(reg.avgs, reg.soff, reg.sdef, dep.var.labels = c("Average Speed", 
-	"Offensive Speed", "Defensive Speed"),
-	omit = c("name", "season", "pos"),
-	covariate.labels = c("Contract Year",
-	"Average Minutes Played",
-	"Current Salary"),
-	add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
-	c("Year Fixed Effects", "Yes", "Yes", "Yes"),
-	c("Position Fixed Effects", "Yes", "Yes", "Yes")),
-	report = "vcsp*",
-	ci = TRUE,
-	title = "Using Speed Metrics as the Dependent Variable"),
-	label = 'regspeed',
-	sep = '\n', file = "tables/speed.txt")
-	
-	cat(stargazer(reg.distdef, reg.distoff, reg.distfeet, dep.var.labels = c("Distance: Defensive", "Distance: Offensive", "Distance"),
-	omit = c("name", "season", "pos"),
-	covariate.labels = c("Contract Year",
-	"Average Minutes Played",
-	"Current Salary"),
-	add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
-	c("Year Fixed Effects", "Yes", "Yes", "Yes"),
-	c("Position Fixed Effects", "Yes", "Yes", "Yes")),
-	report = "vcsp*",
-	ci = TRUE,
-	title = "Using Distance as the Dependent Variable"),
-	label = 'regdist',
-	sep = '\n', file = "tables/dist.txt")
-	
-	cat(stargazer(reg.avgd, reg.avgt, reg.usage, dep.var.labels = c("Average Seconds per Dribble", "Average Seconds per Touch", "Usage Rate"),
-	omit = c("name", "season", "pos"),
-	covariate.labels = c("Contract Year",
-	"Average Minutes Played",
-	"Current Salary"),
-	add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
-	c("Year Fixed Effects", "Yes", "Yes", "Yes"),
-	c("Position Fixed Effects", "Yes", "Yes", "Yes")),
-	report = "vcsp*",
-	ci = TRUE,
-	title = "Using Dribbles, Touches, and Usage Rate as the Dependent Variable"),
-	label = 'regmisc',
-	sep = '\n', file = "tables/misc.txt")
-	
+	\begin{lstlisting}
 	## -------------------------------------------------------------------------
 	##
 	## Get nba.LASSO
@@ -1331,7 +1115,11 @@
 	mutate_all(funs(weighted.mean(., min))) %>%
 	summarize_all(mean) %>%
 	select_if(~sum(!is.na(.)) > 0)
+	\end{lstlisting}
 	
+	\subsection{General estimating equation}
+	
+	\begin{lstlisting}
 	## -------------------------------------------------------------------------
 	##
 	## Generalized estimating equation
@@ -1356,43 +1144,12 @@
 	broom::confint_tidy(gee.ws, parm = "salary_current")
 	broom::confint_tidy(gee.ws, parm = "(Intercept)")
 	
-	gee.ows <- geeglm(formula = ows ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current,
-	family = gaussian,
-	data = nba,
-	weights = nba$min,
-	id = team)
-	summary.geeows <- my.summary.lm(summary(gee.ows), 
-	my.rows=grep("contract_year|min|season|salary_current|Intercept",
-	names(coef(gee.ows))))
-	broom::confint_tidy(gee.ows, parm = "contract_year")
-	broom::confint_tidy(gee.ows, parm = "min")
-	broom::confint_tidy(gee.ows, parm = "salary_current")
-	broom::confint_tidy(gee.ows, parm = "(Intercept)")
-	
-	gee.dws <- geeglm(formula = dws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current,
-	family = gaussian,
-	data = nba,
-	weights = nba$min,
-	id = team)
-	summary.geedws <- my.summary.lm(summary(gee.dws), 
-	my.rows=grep("contract_year|min|season|salary_current|Intercept",
-	names(coef(gee.dws))))
-	broom::confint_tidy(gee.dws, parm = "contract_year")
-	broom::confint_tidy(gee.dws, parm = "min")
-	broom::confint_tidy(gee.dws, parm = "salary_current")
-	broom::confint_tidy(gee.dws, parm = "(Intercept)")
+	\end{lstlisting}
 	
 	
-	gee.usg <- geeglm(formula = usg ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-	+ salary_current,
-	family = gaussian,
-	data = nba,
-	weights = nba$min,
-	id = team)
-	broom::confint_tidy(gee.ws, parm = "contract_year")
+	\subsection{Double LASSO without instruments}
 	
+	\begin{lstlisting}
 	
 	## -------------------------------------------------------------------------
 	##
@@ -1481,48 +1238,11 @@
 	confint(lasso.ws)
 	plot(lasso.ws)
 	print(lasso.ws$selection.index)
+	\end{lstlisting}
 	
-	## ----------------
+	\subsection{Double LASSO with instruments}
 	
-	Y.outcome <- c("ows")
-	
-	Y <- nba.LASSO %>%
-	ungroup %>%
-	select(all_of(Y.outcome))
-	
-	Y <- as.matrix(Y)
-	
-	lasso.ows <- rlassoEffect(x = X, y = Y, d = D, method = "double selection",
-	I3 = NULL,
-	post = TRUE)
-	
-	print(lasso.ows)
-	summary(lasso.ows)
-	confint(lasso.ows)
-	plot(lasso.ows)
-	print(lasso.ows$selection.index)
-	
-	## ----------------
-	
-	Y.outcome <- c("dws")
-	
-	Y <- nba.LASSO %>%
-	ungroup %>%
-	select(all_of(Y.outcome))
-	
-	Y <- as.matrix(Y)
-	
-	lasso.dws <- rlassoEffect(x = X, y = Y, d = D, method = "double selection",
-	I3 = NULL,
-	post = TRUE)
-	
-	print(lasso.dws)
-	summary(lasso.dws)
-	confint(lasso.dws)
-	plot(lasso.dws)
-	print(lasso.dws$selection.index)
-	
-	
+	\begin{lstlisting}
 	## -------------------------------------------------------------------------
 	##
 	## Double LASSO: IV
@@ -1547,45 +1267,6 @@
 	print(lasso.iv.ws)
 	summary(lasso.iv.ws)
 	confint(lasso.iv.ws)
-	
-	lasso.iv.ows <- rlassoIV(formula = ows ~ height + weight + age +
-	min + f_tr + orb + drb + trb +
-	ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
-	box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
-	touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
-	pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
-	pts_per_post_touch+pts_per_paint_touch + contract_year | height + weight + age +
-	min + f_tr + orb + drb + trb +
-	ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
-	box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
-	touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
-	pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
-	pts_per_post_touch+pts_per_paint_touch + contract_2018,
-	data = nba.LASSO.iv, select.Z = FALSE, select.X = TRUE)
-	
-	print(lasso.iv.ows)
-	summary(lasso.iv.ows)
-	confint(lasso.iv.ows)
-	
-	lasso.iv.dws <- rlassoIV(formula = dws ~ height + weight + age +
-	min + f_tr + orb + drb + trb +
-	ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
-	box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
-	touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
-	pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
-	pts_per_post_touch+pts_per_paint_touch + contract_year | height + weight + age +
-	min + f_tr + orb + drb + trb +
-	ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
-	box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
-	touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
-	pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
-	pts_per_post_touch+pts_per_paint_touch + contract_2018,
-	data = nba.LASSO.iv, select.Z = FALSE, select.X = TRUE)
-	
-	print(lasso.iv.dws)
-	summary(lasso.iv.dws)
-	confint(lasso.iv.dws)
-	
 	\end{lstlisting}
 	
 	

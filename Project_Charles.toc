@@ -29,3 +29,9 @@
 \contentsline {section}{\numberline {B}Figures}{43}{appendix.B}% 
 \contentsline {section}{\numberline {C}Code}{47}{appendix.C}% 
 \contentsline {subsection}{\numberline {C.1}Test for heteroskedasticity}{47}{subsection.C.1}% 
+\contentsline {subsection}{\numberline {C.2}Fixed Effect weighted OLS}{47}{subsection.C.2}% 
+\contentsline {subsection}{\numberline {C.3}IV instrument regression}{47}{subsection.C.3}% 
+\contentsline {subsection}{\numberline {C.4}Clustering the data}{48}{subsection.C.4}% 
+\contentsline {subsection}{\numberline {C.5}General estimating equation}{49}{subsection.C.5}% 
+\contentsline {subsection}{\numberline {C.6}Double LASSO without instruments}{50}{subsection.C.6}% 
+\contentsline {subsection}{\numberline {C.7}Double LASSO with instruments}{52}{subsection.C.7}% 
