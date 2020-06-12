@@ -332,11 +332,11 @@
 	
 	Before we actually employ the double LASSO inference method, however, we need to take care not to use all our variables in the analysis, as several of them are correlated, or literally mean the same thing. For example, a player's offensive win shares is of course, highly correlated with their win shares. We have been hitherto circumspect and sidestepped the issue in our dataset by explicitly choosing our controls, but we now have to carefully look at all covariates in each regression and drop any covariates that serve as a proxy for effort or performance.
 	
-	\subsubsection{Double LASSO LATE}
+	\subsubsection{Double LASSO inference}
 	
-	We follow and outline the strategy in \cite{chernozhukov_high-dimensional_2016-1} for a double LASSO inference method we're going after. We first define our treatment effect as the contract year, $C$. We use the binary instrument identified in the previous section and estimate the local average treatment effect \[
-	\mathbb{E}\left[Y\left(1\right) - Y\left(0\right)\;\vert\; D\left(1\right)> D\left(0\right)\right]
-	\] where $Y\left(1\right)$ is the observed outcome (for example, win shares) depending on whether the player is on a contract year $(1)$ or not $(0)$, and $D$ is the instrument. To do so, we first run a LASSO of $Y$ on $C$, $Z$, and $X$, where $X$ are all the covariates. We then run a LASSO of $C$ and $Z$ on $X$. Finally, we run an OLS estimating the LATE of $Y$ on $C$ using instrument $Z$ and with controls from surviving $X$ from both rounds of LASSO. The standard errors are estimated via bootstrap methods. This is implemented in \textbf{R} with the package \textbf{hdm} using the method \textbf{rlassoLATE}.
+	We follow and outline the strategy in \cite{chernozhukov_high-dimensional_2016-1} for a double LASSO inference method we're going after. Our inference equation is \[
+	y_{it} = d_{it} \alpha + x_{it}'\beta + \epsilon_{it}
+	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$.
 	
 	\section{Results} \label{sec:result}
 	
@@ -346,102 +346,106 @@
 	
 	Before we discuss our results for the GEE method, let's first examine our results for the fixed effect weighted OLS. We run the fixed effect weighted OLS regression on 16 variables that we believe serve as a proxy for performance. While most of our results do not have statistical significance, such as in Table \ref{regboxout}, we found that the contract year effect is statistically significant when we use win shares as the outcome variable, consistent with our discussion that win shares is the best metric for evaluating performance, in Table \ref{regwinshare}.
 	
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-	% Date and time: Fri, Jun 12, 2020 - 7:13:02 AM
-	\begin{sidewaystable}[!htbp] \centering 
-		\caption{Using Box Outs as the Dependent Variables} 
-		\label{regboxout} 
-		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-			\\[-1.8ex]\hline 
-			\hline \\[-1.8ex] 
-			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-			\cline{2-4} 
-			\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Box Outs \\ 
-			\\[-1.8ex] & (1) & (2) & (3)\\ 
-			\hline \\[-1.8ex] 
-			Contract Year & 0.027 & 0.030 & 0.060 \\ 
-			& ($-$0.107, 0.161) & ($-$0.036, 0.096) & ($-$0.113, 0.233) \\ 
-			& p = 0.697 & p = 0.367 & p = 0.500 \\ 
-			& & & \\ 
-			Average Minutes Played & 0.069 & 0.012 & 0.081 \\ 
-			& (0.054, 0.084) & (0.005, 0.020) & (0.062, 0.101) \\ 
-			& p = 0.000$^{***}$ & p = 0.002$^{***}$ & p = 0.000$^{***}$ \\ 
-			& & & \\ 
-			Current Salary & 0.000 & 0.000 & 0.000 \\ 
-			& ($-$0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
-			& p = 0.594 & p = 0.083$^{*}$ & p = 0.312 \\ 
-			& & & \\ 
-			Constant & 0.602 & $-$0.260 & 0.349 \\ 
-			& ($-$0.245, 1.450) & ($-$0.677, 0.156) & ($-$0.743, 1.440) \\ 
-			& p = 0.165 & p = 0.222 & p = 0.532 \\ 
-			& & & \\ 
-			\hline \\[-1.8ex] 
-			Player Fixed Effects & Yes & Yes & Yes \\ 
-			Year Fixed Effects & Yes & Yes & Yes \\ 
-			Position Fixed Effects & Yes & Yes & Yes \\ 
-			Observations & 820 & 820 & 820 \\ 
-			R$^{2}$ & 0.913 & 0.838 & 0.912 \\ 
-			Adjusted R$^{2}$ & 0.835 & 0.693 & 0.833 \\ 
-			Residual Std. Error (df = 432) & 2.840 & 1.400 & 3.660 \\ 
-			F Statistic (df = 387; 432) & 11.700$^{***}$ & 5.770$^{***}$ & 11.500$^{***}$ \\ 
-			\hline 
-			\hline \\[-1.8ex] 
-			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-		\end{tabular} 
-	\end{sidewaystable}
-
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-	% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
-	\begin{sidewaystable}[!htbp] \centering 
-		\caption{Using Win Shares as the Dependent Variables} 
-		\label{regwinshare}
-		\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-			\\[-1.8ex]\hline 
-			\hline \\[-1.8ex] 
-			& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-			\cline{2-5} 
-			\\[-1.8ex] & Win Shares & Offensive Win Shares & Defensive Win Shares & Win Shares per 48 Minutes \\ 
-			\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-			\hline \\[-1.8ex] 
-			Contract Year & 0.401 & 0.282 & 0.102 & 0.003 \\ 
-			& (0.083, 0.719) & (0.049, 0.515) & ($-$0.039, 0.243) & ($-$0.005, 0.011) \\ 
-			& p = 0.014$^{**}$ & p = 0.019$^{**}$ & p = 0.156 & p = 0.445 \\ 
-			& & & & \\ 
-			Average Minutes Played & 0.164 & 0.112 & 0.052 & 0.002 \\ 
-			& (0.129, 0.200) & (0.086, 0.138) & (0.036, 0.068) & (0.001, 0.003) \\ 
-			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.0001$^{***}$ \\ 
-			& & & & \\ 
-			Current Salary & $-$0.00000 & $-$0.00000 & $-$0.000 & $-$0.000 \\ 
-			& ($-$0.00000, 0.000) & ($-$0.00000, $-$0.000) & ($-$0.00000, 0.000) & ($-$0.000, 0.000) \\ 
-			& p = 0.052$^{*}$ & p = 0.035$^{**}$ & p = 0.331 & p = 0.120 \\ 
-			& & & & \\ 
-			Constant & $-$0.098 & $-$1.210 & 1.160 & 0.062 \\ 
-			& ($-$2.110, 1.910) & ($-$2.690, 0.261) & (0.274, 2.050) & (0.012, 0.112) \\ 
-			& p = 0.924 & p = 0.108 & p = 0.011$^{**}$ & p = 0.016$^{**}$ \\ 
-			& & & & \\ 
-			\hline \\[-1.8ex] 
-			Player Fixed Effects & Yes & Yes & Yes & Yes \\ 
-			Year Fixed Effects & Yes & Yes & Yes & Yes \\ 
-			Position Fixed Effects & Yes & Yes & Yes & Yes \\ 
-			Observations & 820 & 820 & 820 & 820 \\ 
-			R$^{2}$ & 0.863 & 0.863 & 0.813 & 0.829 \\ 
-			Adjusted R$^{2}$ & 0.741 & 0.740 & 0.646 & 0.676 \\ 
-			Residual Std. Error (df = 432) & 6.740 & 4.940 & 2.980 & 0.167 \\ 
-			F Statistic (df = 387; 432) & 7.060$^{***}$ & 7.010$^{***}$ & 4.860$^{***}$ & 5.420$^{***}$ \\ 
-			\hline 
-			\hline \\[-1.8ex] 
-			\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-		\end{tabular} 
-	\end{sidewaystable}
+	\begin{landscape}
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+		% Date and time: Fri, Jun 12, 2020 - 7:13:02 AM
+		\begin{table}[!htbp] \centering 
+			\caption{Using Box Outs as the Dependent Variables} 
+			\label{regboxout} 
+			\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+				\\[-1.8ex]\hline 
+				\hline \\[-1.8ex] 
+				& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+				\cline{2-4} 
+				\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Box Outs \\ 
+				\\[-1.8ex] & (1) & (2) & (3)\\ 
+				\hline \\[-1.8ex] 
+				Contract Year & 0.027 & 0.030 & 0.060 \\ 
+				& ($-$0.107, 0.161) & ($-$0.036, 0.096) & ($-$0.113, 0.233) \\ 
+				& p = 0.697 & p = 0.367 & p = 0.500 \\ 
+				& & & \\ 
+				Average Minutes Played & 0.069 & 0.012 & 0.081 \\ 
+				& (0.054, 0.084) & (0.005, 0.020) & (0.062, 0.101) \\ 
+				& p = 0.000$^{***}$ & p = 0.002$^{***}$ & p = 0.000$^{***}$ \\ 
+				& & & \\ 
+				Current Salary & 0.000 & 0.000 & 0.000 \\ 
+				& ($-$0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+				& p = 0.594 & p = 0.083$^{*}$ & p = 0.312 \\ 
+				& & & \\ 
+				Constant & 0.602 & $-$0.260 & 0.349 \\ 
+				& ($-$0.245, 1.450) & ($-$0.677, 0.156) & ($-$0.743, 1.440) \\ 
+				& p = 0.165 & p = 0.222 & p = 0.532 \\ 
+				& & & \\ 
+				\hline \\[-1.8ex] 
+				Player Fixed Effects & Yes & Yes & Yes \\ 
+				Year Fixed Effects & Yes & Yes & Yes \\ 
+				Position Fixed Effects & Yes & Yes & Yes \\ 
+				Observations & 820 & 820 & 820 \\ 
+				R$^{2}$ & 0.913 & 0.838 & 0.912 \\ 
+				Adjusted R$^{2}$ & 0.835 & 0.693 & 0.833 \\ 
+				Residual Std. Error (df = 432) & 2.840 & 1.400 & 3.660 \\ 
+				F Statistic (df = 387; 432) & 11.700$^{***}$ & 5.770$^{***}$ & 11.500$^{***}$ \\ 
+				\hline 
+				\hline \\[-1.8ex] 
+				\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+			\end{tabular} 
+		\end{table}
+		
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+		% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
+		\begin{table}[!htbp] \centering 
+			\caption{Using Win Shares as the Dependent Variables} 
+			\label{regwinshare}
+			\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+				\\[-1.8ex]\hline 
+				\hline \\[-1.8ex] 
+				& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+				\cline{2-5} 
+				\\[-1.8ex] & Win Shares & Offensive Win Shares & Defensive Win Shares & Win Shares per 48 Minutes \\ 
+				\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+				\hline \\[-1.8ex] 
+				Contract Year & 0.401 & 0.282 & 0.102 & 0.003 \\ 
+				& (0.083, 0.719) & (0.049, 0.515) & ($-$0.039, 0.243) & ($-$0.005, 0.011) \\ 
+				& p = 0.014$^{**}$ & p = 0.019$^{**}$ & p = 0.156 & p = 0.445 \\ 
+				& & & & \\ 
+				Average Minutes Played & 0.164 & 0.112 & 0.052 & 0.002 \\ 
+				& (0.129, 0.200) & (0.086, 0.138) & (0.036, 0.068) & (0.001, 0.003) \\ 
+				& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.0001$^{***}$ \\ 
+				& & & & \\ 
+				Current Salary & $-$0.00000 & $-$0.00000 & $-$0.000 & $-$0.000 \\ 
+				& ($-$0.00000, 0.000) & ($-$0.00000, $-$0.000) & ($-$0.00000, 0.000) & ($-$0.000, 0.000) \\ 
+				& p = 0.052$^{*}$ & p = 0.035$^{**}$ & p = 0.331 & p = 0.120 \\ 
+				& & & & \\ 
+				Constant & $-$0.098 & $-$1.210 & 1.160 & 0.062 \\ 
+				& ($-$2.110, 1.910) & ($-$2.690, 0.261) & (0.274, 2.050) & (0.012, 0.112) \\ 
+				& p = 0.924 & p = 0.108 & p = 0.011$^{**}$ & p = 0.016$^{**}$ \\ 
+				& & & & \\ 
+				\hline \\[-1.8ex] 
+				Player Fixed Effects & Yes & Yes & Yes & Yes \\ 
+				Year Fixed Effects & Yes & Yes & Yes & Yes \\ 
+				Position Fixed Effects & Yes & Yes & Yes & Yes \\ 
+				Observations & 820 & 820 & 820 & 820 \\ 
+				R$^{2}$ & 0.863 & 0.863 & 0.813 & 0.829 \\ 
+				Adjusted R$^{2}$ & 0.741 & 0.740 & 0.646 & 0.676 \\ 
+				Residual Std. Error (df = 432) & 6.740 & 4.940 & 2.980 & 0.167 \\ 
+				F Statistic (df = 387; 432) & 7.060$^{***}$ & 7.010$^{***}$ & 4.860$^{***}$ & 5.420$^{***}$ \\ 
+				\hline 
+				\hline \\[-1.8ex] 
+				\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+			\end{tabular} 
+		\end{table}
+	\end{landscape}
+	
 
 	\subsubsection{GEE Data}
 	
 	The GEE method gives us a smaller error by using the Wald statistic to compute the $p$-value and standard error. As we can see in Table \ref{geewinshare}, we are therefore able to bound the 95\% confidence interval for our coefficients further. Hence, we can see that the GEE method improves statistical significance for datasets with underlying correlated observations and improves statistical power, serving as a method to limit the presence of correlated observations from exaggerating the lack of statistical power of our results. We can see these comparisons in Tables \ref{geelmcomparison}, \ref{geelmcomparisonw}, and \ref{geelmcomparisond}.
 	
 	
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	\begin{landscape}
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
-	\begin{sidewaystable}[!htbp] \centering 
+	\begin{table}[!htbp] \centering 
 		\caption{Using Win Shares as the Dependent Variables} 
 		\label{geewinshare} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -480,7 +484,8 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{sidewaystable}
+	\end{table}
+	\end{landscape}
 
 	\begin{table}[!htbp]
 		\centering
@@ -539,13 +544,66 @@
 		\end{tabular}
 	\end{table}
 	
-	Additional tables and plots from the weighted OLS regression are presented in the appendix (\ref{sec:tab}). Let us also compare the statistics with and without the GEE method.
+	Additional tables and plots from the weighted OLS regression are presented in the appendix (\ref{sec:tab}).
 	
 	\pagebreak
 	
 	\subsection{Instrumental variable method}
 	
 	\subsection{Clustered data double LASSO inference method}
+	
+	The clustered data method ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a huge reason why we could not get statistically significant results.
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO inference method with win share as the outcome variable}
+		\label{lassows} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 0.990       & ($-$0.902, 2.88) & $0.31$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\ 
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO inference method with offensive win share as the outcome variable}
+		\label{lassoows} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 0.865       & ($-$0.34, 2.07) & $0.16$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO inference method with defensive win share as the outcome variable}
+		\label{lassodws} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 0.0227       & ($-$0.956, 1) & $0.96$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: None} \\
+		\end{tabular}
+	\end{table}
 	
 	\section{Discussions} \label{sec:discussion}
 	
