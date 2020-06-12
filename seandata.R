@@ -28,3 +28,11 @@ table(ss.height)
 
 height <- ggplot(ss.height, aes(x=height)) + geom_bar() + xlab("Height")
 height
+
+
+ss.age <- subset(data, select = c('age'))
+
+table(ss.age)
+
+age <- ggplot(ss.age, aes(x=age)) + geom_bar() + xlab("age")
+age
