@@ -22,10 +22,8 @@
 \BOOKMARK [3][-]{subsubsection.5.1.2}{GEE\040Data}{subsection.5.1}% 22
 \BOOKMARK [2][-]{subsection.5.2}{Instrumental\040variable\040method}{section.5}% 23
 \BOOKMARK [2][-]{subsection.5.3}{Clustered\040data\040double\040LASSO\040inference\040method}{section.5}% 24
-\BOOKMARK [3][-]{subsubsection.5.3.1}{Double\040LASSO\040without\040instruments}{subsection.5.3}% 25
-\BOOKMARK [3][-]{subsubsection.5.3.2}{Double\040LASSO\040with\040instruments}{subsection.5.3}% 26
-\BOOKMARK [1][-]{section.6}{Discussions}{}% 27
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 28
-\BOOKMARK [1][-]{appendix.A}{Tables}{}% 29
-\BOOKMARK [1][-]{appendix.B}{Figures}{}% 30
-\BOOKMARK [1][-]{appendix.C}{Code}{}% 31
+\BOOKMARK [1][-]{section.6}{Discussions}{}% 25
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 26
+\BOOKMARK [1][-]{appendix.A}{Tables}{}% 27
+\BOOKMARK [1][-]{appendix.B}{Figures}{}% 28
+\BOOKMARK [1][-]{appendix.C}{Code}{}% 29

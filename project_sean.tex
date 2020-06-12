@@ -54,7 +54,7 @@
 		\thispagestyle{empty}
 	\end{titlepage}
 	\pagebreak \newpage
-
+	
 	\tableofcontents
 	
 	\clearpage
@@ -76,18 +76,18 @@
 	At its core, the contract year phenomenon is a principal-agent problem, complicated by incomplete information and time-variant incentives. In other words, a principal pays an agent, where the principal reaps utility as a function of the effort the agent puts in, while the agent reaps utility from the payment. The cost to the principal is the payment, while that to the agent is his/her effort level. Furthermore, principals are unable to observe the effort levels of agents directly, meaning that contracts offered by the principal may be incentive-incompatible. This can then lead to what \cite{alchian_1972} call "shirking" behavior, where an agent works with less effort than agreed upon in the contract. \cite{holmstrom_contracts_1999} further addresses the issue of moral hazard in a principal-agent interaction with imperfect information, and states that "[w]hen the same situation repeats itself over time, the effects of uncertainty tend to be reduced and dysfunctional behavior is more accurately revealed, thus alleviating the problem of moral hazard". However, a major issue with the contract year phenomenon is that principals, holding the expectation of high effort levels, offer long-term contracts, hence not allowing the "same situation" to play out numerous times, but only a few times before the player retires. This is intuitively suboptimal, and in fact, \cite{prendergast_1999} finds that "contracts predicted by the theory" have not been well-confirmed empirically. Thus, on the strategic level, agents on a contract year can engage in ex-ante opportunism, before undertaking ex post opportunism after signing the contract, terminology discussed in \cite{ress_1994}. Namely, agents can first exert a high level of effort in one's contract year - ex ante opportunism - which enables them to sign a long-term contract. However, after signing, the players can now act with ex post opportunism, i.e. in this case putting in minimal effort. The degree to which this effort is minimal depends on an agent's dynamic problem. In other words, they can choose to exert no effort, hence guaranteeing that they never sign a new contract again. Alternatively, they could exert some positive level of effort, such that principals will be willing to give another contract once the agent reaches his next contract year. This is within the scope of the large body of IO literature on reputation.
 	
 	That being said, sports-specific research has yielded conflicting results on opportunistic behavior.
-
-
+	
+	
 	\section{Data} \label{sec:data}
 	
 	\subsection{Data collection}
-
+	
 	The NBA salaries of every player from the 2016-2017 season to the 2019-2020 season were collected from basketballreference.com. Note that basketballreference only displays data for the current season, so to get salary data for 2016-2017 to the 2018-2019 seasons, we utilized web.archive.org. Players were determined to be contract years if they did not have a salary for the following season. Furthermore, panel data of all advanced stats for each active NBA player was scraped from basketballreference.com for every regular season these players played in. Most of the advanced stats are measurements of a player's productivity on the court. These include the age of the player, team the player played for, position the player played for, the number of games the player played for a particular season, average minutes played per game, player efficiency rating, true shooting percentage, three-point attempt rate, free-throw attempt rate, offensive rebound percentage, defensive rebound percentage, total rebound percentage, assist percentage, free throw attempt rate, offensive rebound percentage, defensive rebound percentage, assist percentage, steal percentage, block percentage, turnover percentage, usage percentage, offensive win shares, defensive win shares, win shares, win shares per 48 minutes, offensive box plus/minus, defensive box plus/minus, box plus/minus, and value over replacement player. 
-
+	
 	Another way to measure a player's productivity/effort on the court is with boxout data. In theory, the more a player boxes out opposing players in order to grab rebounds, the more productive that player is to the team. All boxout-related data was collected from stats.nba.com for every player from the 2016-2017 to the 2019-2020 regular season. These include the number of boxouts a player averages per game, number of boxouts on offense a player averages per game, number of boxouts on defense a player averages per game, average number of rebounds the team grabs as a result of a player boxing out, average number of rebounds the player grabs as a result of him boxing out, percentage of times a player boxes out on offensive, percentage of times a player boxes out on defense, the percentage of times the teams grabs a rebound when boxing out, and the percentage of times the player grabs a rebound when boxing out. 
-
+	
 	Another method of measuring a player's value on the court is by using data on how often the player touches the ball. Players who handle the ball more often are typically much more valuable to his team. Data for player touches was collected from stats.nba.com. These include the number of touches a player averages per game, the number of touches the player averages in the front court per game, the percentage of the time the player has the ball when he is on the court, average seconds the player has the ball when he touches it, the average number of dribbles the player takes whenever he touches the ball, the number of points the player scores per touch, the average number of times a player touches the ball in the elbow part of the court, the average number of post-ups a player has per game, the average number of times a player touches the ball in the paint, points per elbow touch, points per post-up, and points per paint touch. 
-
+	
 	Note that when analyzing the data, the datasets for player salary, advanced player stats, boxouts, and touches were merged together by player name. 
 	
 	\subsection{Dependent variables and proxies}
@@ -169,9 +169,9 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
-
+	
 	The Breusch-Pagan test allows us to reject the null hypothesis that the dataset exhibits homoskedastic trends very confidently. Due to this result, we would require a method to tackle the underlying heteroskedasticity of our data.
-
+	
 	\subsubsection{Weighted OLS}
 	
 	A weighted OLS gives us a partial solution to this issue. Because we have reason to believe that observations of players who are given little playtime are of a worse quality than observations of players who are given plenty of playtime, a possible weighting mechanism is to use the minutes they spend per match in order to prioritize the observations of players who spend the most amount of time on the field. There is, of course, an issue of whether players who are given little playtime are different from players who are given plenty of playtime. We will turn to tackle this issue in this next section.
@@ -191,7 +191,7 @@
 	\begin{assumption}
 		$X'WX$ is an invertible matrix.
 	\end{assumption}
-
+	
 	We would have to argue that we do not run into the problem of perfect multi-collinearity. This is a reasonable assumption - we do not believe, for example, that when we weight the players' age and income by the minutes played per game on the field, we obtain a linear relationship between the two. Concerns would arise if we have covariates such as total distance run and speed together. Note that these two covariates may not initially have a linear dependence, until, possibly, when we weight them by minutes played. However, we haven taken care to prevent possible multicollinearity by avoiding using covariates that have some relationship with minutes played, or may relate to another variable after being weighted by minutes played.
 	
 	It is easy to conduct a weighted OLS on $\textbf{R}$. We simply call the function with an additional parameter, $\textbf{weights}$, using our choice of weight, minutes played:
@@ -206,7 +206,7 @@
 	\begin{proposition}
 		The weighted OLS estimator for a regression with $w_i$ as both the weight and a covariate is unbiased, but not necessarily BLUE.
 	\end{proposition}
-
+	
 	A trade-off exists here: it is clear that data from players who have low minutes played should not be weighted as heavily as data from players who have high minutes played. The solution of using a weighted OLS partially tackles the problem of the underlying heteroskedasticity, which prevents the OLS estimator from being BLUE. However, because of the necessity of using minutes played as a control as well, we are forced to use a weighted OLS estimator that is not BLUE. In essence, we are choosing between the lesser of two evils here. We believe that the weighted least squares approach is the superior one because the quality of the variance contributed by players with very low minutes played is unduly large, and the deviation from efficiency of the weighted OLS estimator with the weight as a control should be lower than the deviation from efficiency of the unweighted OLS estimator which puts undue weight on low quality data.
 	
 	\subsection{Heterogeneity}
@@ -249,7 +249,7 @@
 	\begin{assumption}
 		Repeated observations for a subject are independent.
 	\end{assumption}
-
+	
 	The assumption is crucial for the generalized estimating equation method. We argue that this is a somewhat reasonable assumption. Since each season is independent of the previous season because the team performance in the previous season has no bearing on the initial conditions of the current season. For example, the winning team in 2017 does not get any innate advantage (in terms of competition) in 2018. While we obviously do not expect that player performance is completely independent of previous season performance (for example, the player could improve and learn from previous season mistakes), what is key is that the time dependence underlying our model is small enough and also not of key interest to our study of the contract year effect. Furthermore, we stress that, since we're attempting to correct for correlated observations that we believe is most prominent within-cluster, i.e., within-team. Hence, the \emph{subject} in the assumption is emphatically the \emph{team}, not the \emph{player}. Hence, even if player performance is not completely independent, we have good reason to assume that team performance can be approximated as independent across observations. The estimating equation is then \[
 	U\left(\beta\right) = \sum_{i=1}^N \frac{\partial \mu_{it}}{\partial \beta_k} V_i^{-1} \left(Y_i - \mu_i\left(\beta\right)\right)
 	\] where $\mu_{it}$ is the model mean for team $i$ at year $t$, $V_i$ is the variance-covariance matrix, and $\beta_k$ are parameters estimated by the GEE method \citep{diggle_analysis_2002}. We then use the GEE method to re-estimate our weighted OLS model, this time using team as the \textbf{cluster} we're controlling for. The code implementation in \textbf{R} is straightforward:
@@ -292,25 +292,25 @@
 	An alternate approach to solving the correlated observations problem we discussed earlier is to change the unit of analysis. Instead of approaching the question from the player level, we approach it from the team level. This is different from the approach used when we employed the method of generalized estimation equation. We reshape the entire dataset, such that each observation is a team, rather than each cluster being a team. This sidesteps the assumption that we require to argue that a team needs to have independent observations over time, but the reshaping of the dataset will reduce the number of observations from 720 with 71 variables to 90 observations with 65 variables. Hence, we run into the curse of dimensionality problem. The data reshaping code in $\textbf{R}$ is as follows:
 	
 	\begin{lstlisting}
-	 # drop duplicate columns
+	# drop duplicate columns
 	nba.LASSO <- nba %>%
 	select(-"player_y") %>%
 	select(-"season_1") %>%
 	select(-"age_2")
 	
-	 # filter teams that are TOT (meaning they were floating among teams)
+	# filter teams that are TOT (meaning they were floating among teams)
 	
 	nba.LASSO <- nba.LASSO %>%
 	filter(team != "TOT")
 	
-	 # produce weighted mean by team
+	# produce weighted mean by team
 	
 	nba.LASSO <- nba.LASSO %>%
 	group_by(team, season) %>%
 	mutate_all(funs(weighted.mean(.,min))) %>%
 	summarize_all(mean)
 	
-	 # drop columns that aren't meaningful when summed (produces NA)
+	# drop columns that aren't meaningful when summed (produces NA)
 	
 	nba.LASSO <- nba.LASSO %>%
 	select_if(~sum(!is.na(.)) > 0)
@@ -325,7 +325,7 @@
 	\begin{assumption}{``Approximate sparsity".}
 		Only a relatively small number $s = o\left(n\right)$ of the regressors in the data are important for capturing accurately the main features of the regression function. In other words, the number of relevant regressors is much smaller than the sample size.
 	\end{assumption}
-
+	
 	The assumption follows from \cite{belloni_high-dimensional_2014}, and is justified by carefully considering the covariates in our data. We don't have much reason to believe, for instance, that a player's dribbles per touch correlates so significantly with, say, the player's win share.
 	
 	\subsubsection{Pre-selection}
@@ -336,12 +336,7 @@
 	
 	We follow and outline the strategy in \cite{chernozhukov_high-dimensional_2016-1} for a double LASSO inference method we're going after. Our inference equation is \[
 	y_{it} = d_{it} \alpha + x_{it}'\beta + \epsilon_{it}
-	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$. As outlined in the previous section, since contract year could correlate with the error term even at the team level, we can also extend this approach and estimate the causal effect from the contract year effect using instrumental variables. In particular, we utilize the instrumental variables model once again \[
-	\begin{aligned}
-	y_{it} &= \alpha d_{it} + \beta x_{it}' + u_{it} \\
-	d_{it} &= \gamma_0 z_{it} + \gamma x_{it}' + \upsilon_{it}
-	\end{aligned}
-	\] where $d$ is our inference variable once again, and $z_{it}$ is the one-dimensional instrument vector, whether the player was on a contract year in 2018. Since we have one instrument but many potential covariates, we have an issue of low-dimensional instrument and high-dimensional covariates. In this case, as outlined in \cite{chernozhukov_high-dimensional_2016-1}, we partial out the effect of the covariates from the inference variable $d_{it}$, the outcome variable $y_{it}$ and the instrumental variable $z_{it}$ with LASSO. Then, we use the residuals to compute the 2SLS estimator of the coefficient on the inference variable, $\alpha$. Finally, we then perform inference on $\alpha$ using the 2SLS estimator and heteroskedasticity robust standard errors.
+	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$.
 	
 	\section{Results} \label{sec:result}
 	
@@ -441,7 +436,7 @@
 		\end{table}
 	\end{landscape}
 	
-
+	
 	\subsubsection{GEE Data}
 	
 	The GEE method gives us a smaller error by using the Wald statistic to compute the $p$-value and standard error. As we can see in Table \ref{geewinshare}, we are therefore able to bound the 95\% confidence interval for our coefficients further. Hence, we can see that the GEE method improves statistical significance for datasets with underlying correlated observations and improves statistical power, serving as a method to limit the presence of correlated observations from exaggerating the lack of statistical power of our results. We can see these comparisons in Tables \ref{geelmcomparison}, \ref{geelmcomparisonw}, and \ref{geelmcomparisond}.
@@ -449,49 +444,49 @@
 	
 	\begin{landscape}
 		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-	% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
-	\begin{table}[!htbp] \centering 
-		\caption{Using Win Shares as the Dependent Variables} 
-		\label{geewinshare} 
-		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-			\\[-1.8ex]\hline 
-			\hline \\[-1.8ex] 
-			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-			\cline{2-4} 
-			\\[-1.8ex] & Win Shares & Offensive Win Shares & Defensive Win Shares \\ 
-			\\[-1.8ex] & (1) & (2) & (3)\\ 
-			\hline \\[-1.8ex] 
-			Contract Year & 0.401 & 0.282 & 0.102 \\ 
-			& (0.126, 0.676) & (0.0578, 0.507) & ($-$0.0190, 0.223) \\ 
-			& p = 0.0043$^{***}$ & p = 0.0137$^{**}$ & p = 0.09829$^{*}$ \\ 
-			& & & \\ 
-			Average Minutes Played & 0.164 & 0.112 & 0.0522 \\ 
-			& (0.138, 0.191) & (0.0926, 0.131) & (0.0369, 0.0675) \\ 
-			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
-			& & & \\ 
-			Current Salary & 0.000 & 0.000 & 0.000 \\ 
-			& ($-$0.000, 0.000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
-			& p = 0.163 & p = 0.0801$^{*}$ & p = 0.524 \\ 
-			& & & \\ 
-			Constant & -0.0984 & $-$1.21 & 1.16 \\ 
-			& ($-$1.56, 1.36) & ($-$2.11, $-$0.316) & (0.344, 1.98) \\ 
-			& p = 0.895 & p = 0.0081 & p = 0.005$^{***}$ \\ 
-			& & & \\ 
-			\hline \\[-1.8ex] 
-			Player Fixed Effects & Yes & Yes & Yes \\ 
-			Year Fixed Effects & Yes & Yes & Yes \\ 
-			Position Fixed Effects & Yes & Yes & Yes \\ 
-			Number of Clusters & 31 & 31 & 31 \\ 
-			Maximum Cluster Size & 114 & 114 & 114 \\ 
-			Degrees of Freedom & 820 & 820 & 820 \\ 
-			Residual Degrees of Freedom & 432 & 432 & 432 \\ 
-			\hline 
-			\hline \\[-1.8ex] 
-			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-		\end{tabular} 
-	\end{table}
+		% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
+		\begin{table}[!htbp] \centering 
+			\caption{Using Win Shares as the Dependent Variables} 
+			\label{geewinshare} 
+			\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+				\\[-1.8ex]\hline 
+				\hline \\[-1.8ex] 
+				& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+				\cline{2-4} 
+				\\[-1.8ex] & Win Shares & Offensive Win Shares & Defensive Win Shares \\ 
+				\\[-1.8ex] & (1) & (2) & (3)\\ 
+				\hline \\[-1.8ex] 
+				Contract Year & 0.401 & 0.282 & 0.102 \\ 
+				& (0.126, 0.676) & (0.0578, 0.507) & ($-$0.0190, 0.223) \\ 
+				& p = 0.0043$^{***}$ & p = 0.0137$^{**}$ & p = 0.09829$^{*}$ \\ 
+				& & & \\ 
+				Average Minutes Played & 0.164 & 0.112 & 0.0522 \\ 
+				& (0.138, 0.191) & (0.0926, 0.131) & (0.0369, 0.0675) \\ 
+				& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+				& & & \\ 
+				Current Salary & 0.000 & 0.000 & 0.000 \\ 
+				& ($-$0.000, 0.000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+				& p = 0.163 & p = 0.0801$^{*}$ & p = 0.524 \\ 
+				& & & \\ 
+				Constant & -0.0984 & $-$1.21 & 1.16 \\ 
+				& ($-$1.56, 1.36) & ($-$2.11, $-$0.316) & (0.344, 1.98) \\ 
+				& p = 0.895 & p = 0.0081 & p = 0.005$^{***}$ \\ 
+				& & & \\ 
+				\hline \\[-1.8ex] 
+				Player Fixed Effects & Yes & Yes & Yes \\ 
+				Year Fixed Effects & Yes & Yes & Yes \\ 
+				Position Fixed Effects & Yes & Yes & Yes \\ 
+				Number of Clusters & 31 & 31 & 31 \\ 
+				Maximum Cluster Size & 114 & 114 & 114 \\ 
+				Degrees of Freedom & 820 & 820 & 820 \\ 
+				Residual Degrees of Freedom & 432 & 432 & 432 \\ 
+				\hline 
+				\hline \\[-1.8ex] 
+				\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+			\end{tabular} 
+		\end{table}
 	\end{landscape}
-
+	
 	\begin{table}[!htbp]
 		\centering
 		\caption{Comparison of regression results with or without GEE for win shares}
@@ -510,7 +505,7 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
-
+	
 	\begin{table}[!htbp]
 		\centering
 		\caption{Comparison of regression results with or without GEE for offensive win shares}
@@ -529,7 +524,7 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
-
+	
 	\begin{table}[!htbp]
 		\centering
 		\caption{Comparison of regression results with or without GEE for defensive win shares}
@@ -557,9 +552,7 @@
 	
 	\subsection{Clustered data double LASSO inference method}
 	
-	\subsubsection{Double LASSO without instruments}
-	
-	The clustered data method when we do not utilize instruments ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a possible factor in why we could not get statistically significant results.
+	The clustered data method ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a huge reason why we could not get statistically significant results.
 	
 	\begin{table}[!htbp]
 		\centering
@@ -577,7 +570,7 @@
 			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\ 
 		\end{tabular}
 	\end{table}
-
+	
 	\begin{table}[!htbp]
 		\centering
 		\caption{Double LASSO inference method with offensive win share as the outcome variable}
@@ -594,7 +587,7 @@
 			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
 		\end{tabular}
 	\end{table}
-
+	
 	\begin{table}[!htbp]
 		\centering
 		\caption{Double LASSO inference method with defensive win share as the outcome variable}
@@ -611,87 +604,6 @@
 			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: None} \\
 		\end{tabular}
 	\end{table}
-
-	\subsubsection{Double LASSO with instruments}
-	
-	Surprisingly, with the clustered data, and utilizing the instruments we identified during the 2SLS estimation, double LASSO works pretty well and lead to statistically significant results, although this statistical significance is still of a \emph{slightly} lesser degree than that of the GEE weighted least squares approach for win shares, but this statistical significance is of a \emph{slightly} higher degree when it comes to defensive win shares. We compare the two approaches in Table \ref{lassoivvsgee}. The magnitude of the coefficient matters here: with a regular WOLS, we do not correct for the endogenous effect, so the effect is underestimated. Consequently, for regressions where the coefficient gets close to zero, we start to lose statistical power because the confidence interval will start to overlap $0$. However, when we correct for the endogeneity bias with instruments, the coefficient is no longer underestimated in magnitude and increases drastically in magnitude. Hence, even if the error resulting from the curse of dimensionality and the low number of observations is fairly substantial, and even if the magnitude of the confidence interval is fairly high, because the coefficient is further away from zero, our statistical power also gets better. That does not mean, however, the curse of dimensionality faded from existence. It has merely shifted to the problem of the magnitude of the contract year effect being ambiguous. For instance, the 95\% confidence interval for the contract year effect on win share is (2.65, 18.1). It is quite hard to say exactly how strong the contract year effect. We can only demonstrate that the contract year effect exists.
-	
-	\begin{table}[!htbp]
-		\centering
-		\caption{Double LASSO with instruments with win share as the outcome variable}
-		\label{lassoivws} 
-		\rowcolors{4}{}{gray!10}
-		\begin{tabular}{*4c}
-			\toprule
-			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
-			\cmidrule(lr){2-4}
-			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
-			\midrule
-			Contract Year & 10.38       & (2.65, 18.1) & $0.0085$       \\
-			\bottomrule
-			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\ 
-		\end{tabular}
-	\end{table}
-	
-	\begin{table}[!htbp]
-		\centering
-		\caption{Double LASSO with instruments with offensive win share as the outcome variable}
-		\label{lassoivows} 
-		\rowcolors{4}{}{gray!10}
-		\begin{tabular}{*4c}
-			\toprule
-			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
-			\cmidrule(lr){2-4}
-			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
-			\midrule
-			Contract Year & 5.54       & (1.17, 9.91) & $0.013$       \\
-			\bottomrule
-			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
-		\end{tabular}
-	\end{table}
-	
-	\begin{table}[!htbp]
-		\centering
-		\caption{Double LASSO with instruments with defensive win share as the outcome variable}
-		\label{lassoivdws} 
-		\rowcolors{4}{}{gray!10}
-		\begin{tabular}{*4c}
-			\toprule
-			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
-			\cmidrule(lr){2-4}
-			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
-			\midrule
-			Contract Year & 5.86       & (1.22, 10.5) & $0.013$       \\
-			\bottomrule
-			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
-		\end{tabular}
-	\end{table}
-
-	\begin{landscape}
-		\begin{table}[!htbp]
-		\centering
-		\caption{Comparison between double LASSO with instruments and weighted OLS with GEE}
-		\label{lassoivvsgee} 
-		\rowcolors{4}{}{gray!10}
-		\begin{tabular}{*4c}
-			\toprule
-			& \multicolumn{3}{c}{Relevant Statistics} \\
-			\cmidrule(lr){2-4}
-			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
-			\midrule
-			Win Shares: WOLS with GEE, Contract Year & 0.401       & (0.126, 0.675) & $0.0043$       \\
-			Win Shares: Double LASSO with instruments, Contract Year & 10.38       & (2.65, 18.1) & $0.0085$       \\
-			Offensive WS: WOLS with GEE, Contract Year & 0.282       & (0.0578, 0.507) & $0.0137$       \\
-			Offensive WS: Double LASSO with instruments, Contract Year & 5.54       & (1.17, 9.91) & $0.013$       \\
-			Defensive WS: WOLS with GEE, Contract Year & 0.102       & ($-$0.0190, 0.223) & $0.09829$       \\
-			Defensive WS: Double LASSO with instruments, Contract Year & 5.86       & (1.22, 10.5) & $0.013$       \\
-			\bottomrule
-			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
-		\end{tabular}
-	\end{table}
-	\end{landscape}
-
-	\pagebreak
 	
 	\section{Discussions} \label{sec:discussion}
 	
@@ -715,10 +627,9 @@
 	
 	We present all tables for our regression results in this section.
 	
-	\begin{landscape}
-		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:22:29 AM
-	\begin{table}[!htbp] \centering 
+	\begin{sidewaystable}[!htbp] \centering 
 		\caption{Using Speed Metrics as the Dependent Variable} 
 		\label{} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -758,11 +669,11 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{table} 
-
+	\end{sidewaystable} 
+	
 	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:23:55 AM
-	\begin{table}[!htbp] \centering 
+	\begin{sidewaystable}[!htbp] \centering 
 		\caption{Using Distance as the Dependent Variable} 
 		\label{} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -802,11 +713,11 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{table} 
-
+	\end{sidewaystable} 
+	
 	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:33:56 AM
-	\begin{table}[!htbp] \centering 
+	\begin{sidewaystable}[!htbp] \centering 
 		\caption{Using Dribbles, Touches, and Usage Rate as the Dependent Variable} 
 		\label{} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -846,21 +757,67 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{table} 
-	\end{landscape}
+	\end{sidewaystable} 
 	
 	\clearpage
 	
 	\section{Figures} \label{sec:fig}
 	
-	%\begin{figure}[hp]
-	%  \centering
-	%  \includegraphics[width=.6\textwidth]{../fig/placeholder.pdf}
-	%  \caption{Placeholder}
-	%  \label{fig:placeholder}
-	%\end{figure}
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{position.png}
+	  \caption{Position}
+	  \label{fig:Position}
+	\end{figure}
 	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{height.png}
+	  \caption{Height}
+	  \label{fig:Height}
+	\end{figure}	
 	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{age.png}
+	  \caption{Age}
+	  \label{fig:Age}
+	\end{figure}	
+	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{money.png}
+	  \caption{Salary}
+	  \label{fig:Salary}
+	\end{figure}	
+	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{ws.png}
+	  \caption{Win Shares}
+	  \label{fig:Win Shares}
+	\end{figure}	
+	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{ws_48.png}
+	  \caption{Win Shares at 48 min.}
+	  \label{fig:Win Shares at 48 min.}
+	\end{figure}	
+	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{min.png}
+	  \caption{Minutes}
+	  \label{fig:Minutes}
+	\end{figure}	
+	
+	\begin{figure}[hp]
+	  \centering
+	  \includegraphics[width=.6\textwidth]{min.png}
+	  \caption{Minutes}
+	  \label{fig:Minutes}
+	\end{figure}	
 	
 	
 	\clearpage

@@ -124,6 +124,8 @@ my.summary.lm = function (x, digits = max(3L, getOption("digits") - 3L),
 nba <- read.csv("nba.csv")
 nba <- clean_names(nba)
 
+nbaiv <- read.csv("ivnba.csv")
+nbaiv <- clean_names(nbaiv)
 ## -------------------------------------------------------------------------
 ##
 ## Test for heteroskedasticity
@@ -412,14 +414,23 @@ cat(stargazer(reg.avgd, reg.avgt, reg.usage, dep.var.labels = c("Average Seconds
 
 ## -------------------------------------------------------------------------
 ##
-## Plots
+## Get nba.LASSO
 ##
 ## -------------------------------------------------------------------------
 
-theme_set(theme_bw())
+nba.LASSO <- nba %>%
+  filter(team != "TOT") %>%
+  group_by(team, season) %>%
+  mutate_all(funs(weighted.mean(., min))) %>%
+  summarize_all(mean) %>%
+  select_if(~sum(!is.na(.)) > 0)
 
-
-
+nba.LASSO.iv <- nbaiv %>%
+  filter(team != "TOT") %>%
+  group_by(team, season) %>%
+  mutate_all(funs(weighted.mean(., min))) %>%
+  summarize_all(mean) %>%
+  select_if(~sum(!is.na(.)) > 0)
 
 ## -------------------------------------------------------------------------
 ##
@@ -485,7 +496,7 @@ broom::confint_tidy(gee.ws, parm = "contract_year")
 
 ## -------------------------------------------------------------------------
 ##
-## Double LASSO: OWS
+## Double LASSO: WS
 ##
 ## -------------------------------------------------------------------------
 
@@ -610,3 +621,30 @@ summary(lasso.dws)
 confint(lasso.dws)
 plot(lasso.dws)
 print(lasso.dws$selection.index)
+
+
+## -------------------------------------------------------------------------
+##
+## Double LASSO: IV
+##
+## -------------------------------------------------------------------------
+
+lasso.iv.ws <- rlassoIV(formula = ws ~ height + weight + age +
+                        min + f_tr + orb + drb + trb +
+                        ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+                        box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+                        touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+                        pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+                        pts_per_post_touch+pts_per_paint_touch + contract_year | height + weight + age +
+                          min + f_tr + orb + drb + trb +
+                          ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+                          box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+                          touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+                          pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+                          pts_per_post_touch+pts_per_paint_touch + contract_2018,
+                        data = nba.LASSO.iv, select.Z = FALSE, select.X = TRUE)
+
+print(lasso.iv.ws)
+summary(lasso.iv.ws)
+confint(lasso.iv.ws)
+
