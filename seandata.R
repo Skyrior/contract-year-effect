@@ -1,6 +1,10 @@
 rm(list=ls())
 library(plyr)
 library(ggplot2)
+library(hrbrthemes)
+library(dplyr)
+library(tidyr)
+library(viridis)
 
 
 data <- read.csv(file = 'nba.csv')
@@ -36,3 +40,18 @@ table(ss.age)
 
 age <- ggplot(ss.age, aes(x=age)) + geom_bar() + xlab("age")
 age
+
+winshares <- ggplot(data = data) + 
+  geom_density(aes(x=ws), fill="purple", colour="purple", alpha=0.2) + 
+  geom_density(aes(x=ows), fill="red", colour="red", alpha=0.2) +
+  geom_density(aes(x=dws), fill="green", colour="green", alpha=0.2) +
+  geom_text(data=data,aes(x=ws,label="ws"))
+
+winshares
+
+
+winshare_48 <- ggplot(data=data) +
+  geom_density(aes(x=ws_48), fill="blue", colour="blue", alpha=0.2)
+
+winshare_48
+
