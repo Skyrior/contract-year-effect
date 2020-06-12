@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  12 JUN 2020 15:29
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  12 JUN 2020 16:35
 entering extended mode
 **./project_sean.tex
 (project_sean.tex
@@ -581,7 +581,13 @@ LaTeX Warning: Label `' multiply defined.
 LaTeX Warning: Label `' multiply defined.
 
 
-LaTeX Warning: Label `fig:Minutes' multiply defined.
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
 
 )
 \openout1 = `project_sean.aux'.
@@ -696,108 +702,103 @@ File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 ) [0
 
 ]
-(project_sean.toc)
+(project_sean.toc [1])
 \tf@toc=\write5
 \openout5 = `project_sean.toc'.
 
- [1] [2]
+ [2]
 
 Package natbib Warning: Citation `holmstrom_contracts_1999' on page 3 undefined
- on input line 66.
+ on input line 69.
 
 
 Package natbib Warning: Citation `gibbons_1992' on page 3 undefined on input li
-ne 66.
+ne 69.
 
 
 Package natbib Warning: Citation `alchian_1972' on page 3 undefined on input li
-ne 68.
+ne 71.
 
 
 Package natbib Warning: Citation `holmstrom_contracts_1999' on page 3 undefined
- on input line 68.
+ on input line 71.
 
 
 Package natbib Warning: Citation `prendergast_1999' on page 3 undefined on inpu
-t line 68.
+t line 71.
 
 
 Package natbib Warning: Citation `ress_1994' on page 3 undefined on input line 
-68.
+71.
 
 [3
 
 ]
 
 Package natbib Warning: Citation `lehn_1982' on page 4 undefined on input line 
-70.
+73.
 
 
 Package natbib Warning: Citation `scoggins_1993' on page 4 undefined on input l
-ine 70.
+ine 73.
 
 
 Package natbib Warning: Citation `stiroh_2006' on page 4 undefined on input lin
-e 70.
+e 73.
 
 
 Package natbib Warning: Citation `paulsen_2018' on page 4 undefined on input li
-ne 70.
+ne 73.
 
 
 Package natbib Warning: Citation `krautmann_1990' on page 4 undefined on input 
-line 70.
+line 73.
 
 
 Package natbib Warning: Citation `maxcy_2002' on page 4 undefined on input line
- 70.
+ 73.
 
 
 Package natbib Warning: Citation `berri_2007' on page 4 undefined on input line
- 70.
+ 73.
 
 
 Package natbib Warning: Citation `krautmann_2009' on page 4 undefined on input 
-line 70.
+line 73.
 
 
 Package natbib Warning: Citation `ryan_show_2015' on page 4 undefined on input 
-line 70.
+line 73.
 
 [4]
+File: position.png Graphic file (type bmp)
+<position.png>
+File: height.png Graphic file (type bmp)
+<height.png>
+ [5]
+File: age.png Graphic file (type bmp)
+<age.png>
+ [6]
+File: money.png Graphic file (type bmp)
+<money.png>
+ [7]
+File: ws.png Graphic file (type bmp)
+<ws.png>
+ [8]
+File: ws_48.png Graphic file (type bmp)
+<ws_48.png>
+ [9]
+File: min.png Graphic file (type bmp)
+<min.png>
+ [10] [11] [12] [13]
 
-Package natbib Warning: Citation `holmstrom_contracts_1999' on page 5 undefined
- on input line 75.
+Package natbib Warning: Citation `breusch_simple_1979' on page 14 undefined on 
+input line 179.
 
+[14]
 
-Package natbib Warning: Citation `gibbons_1992' on page 5 undefined on input li
-ne 75.
-
-
-Package natbib Warning: Citation `alchian_1972' on page 5 undefined on input li
-ne 76.
-
-
-Package natbib Warning: Citation `holmstrom_contracts_1999' on page 5 undefined
- on input line 76.
-
-
-Package natbib Warning: Citation `prendergast_1999' on page 5 undefined on inpu
-t line 76.
-
-
-Package natbib Warning: Citation `ress_1994' on page 5 undefined on input line 
-76.
-
-[5] [6] [7] [8] [9]
-
-Package natbib Warning: Citation `breusch_simple_1979' on page 10 undefined on 
-input line 120.
-
-[10]
-
-Package natbib Warning: Citation `breusch_simple_1979' on page 11 undefined on 
-input line 128.
+Package natbib Warning: Citation `breusch_simple_1979' on page 15 undefined on 
+input line 187.
 
 (D:\applications\Latex\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
@@ -807,135 +808,137 @@ File: lstlang2.sty 2020/03/24 1.8d listings language file
 )
 (D:\applications\Latex\tex/latex/listings\lstlang3.sty
 File: lstlang3.sty 2020/03/24 1.8d listings language file
-) [11]
+) [15]
 
-Package natbib Warning: Citation `aitken_iv.least_1936' on page 12 undefined on
- input line 179.
+Package natbib Warning: Citation `aitken_iv.least_1936' on page 16 undefined on
+ input line 238.
 
 
-Package natbib Warning: Citation `carroll_transformation_1988' on page 12 undef
-ined on input line 179.
+Package natbib Warning: Citation `carroll_transformation_1988' on page 16 undef
+ined on input line 238.
 
-[12] [13] [14]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 219
+[16] [17] [18]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 278
 .
  (D:\applications\Latex\tex/latex/bbm\ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [15]
+) [19] [20]
 
-Package natbib Warning: Citation `dong_dynamics_2016' on page 16 undefined on i
-nput line 237.
+Package natbib Warning: Citation `dong_dynamics_2016' on page 21 undefined on i
+nput line 296.
 
-[16]
+[21]
 
-Package natbib Warning: Citation `liang_longitudinal_1986' on page 17 undefined
- on input line 247.
-
-[17]
-
-Package natbib Warning: Citation `diggle_analysis_2002' on page 18 undefined on
- input line 255.
-
-[18] [19] [20] [21]
-
-Package natbib Warning: Citation `urminsky_using_2016' on page 22 undefined on 
-input line 323.
+Package natbib Warning: Citation `liang_longitudinal_1986' on page 22 undefined
+ on input line 306.
 
 
-Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 22 und
-efined on input line 323.
+Package natbib Warning: Citation `diggle_analysis_2002' on page 22 undefined on
+ input line 314.
+
+[22] [23] [24] [25] [26]
+
+Package natbib Warning: Citation `urminsky_using_2016' on page 27 undefined on 
+input line 414.
 
 
-Package natbib Warning: Citation `meinshausen_relaxed_2007' on page 22 undefine
-d on input line 323.
+Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 27 und
+efined on input line 414.
 
 
-Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 22 und
-efined on input line 323.
+Package natbib Warning: Citation `meinshausen_relaxed_2007' on page 27 undefine
+d on input line 414.
 
-[22]
 
-Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 23 und
-efined on input line 329.
+Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 27 und
+efined on input line 414.
+
+[27]
+
+Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 28 und
+efined on input line 420.
 
 
 Package natbib Warning: Citation `chernozhukov_high-dimensional_2016-1' on page
- 23 undefined on input line 337.
+ 28 undefined on input line 428.
 
-[23] [24]
+[28]
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 392.
+Package natbib Warning: Citation `chernozhukov_high-dimensional_2016-1' on page
+ 29 undefined on input line 435.
+
+[29] [30]
+
+LaTeX Warning: Float too large for page by 3.47719pt on input line 488.
 
 
-Overfull \hbox (35.7314pt too wide) in paragraph at lines 399--436
+Overfull \hbox (35.7314pt too wide) in paragraph at lines 495--532
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 436.
+LaTeX Warning: Float too large for page by 3.47719pt on input line 532.
 
-[25] [26] [27
-
-
-] [28] [29
+[31] [32] [33
 
 
-] [30]
+] [34] [35
+
+
+]
+Overfull \hbox (18.48506pt too wide) in paragraph at lines 687--715
+ [][] 
+ []
+
+[36] [37] [38] [39] [40
+
+] [41
+
+] [42]
 No file project_sean.bbl.
-[31
+[43
 
 
-] [32] [33] [34]
-File: position.png Graphic file (type bmp)
-<position.png>
-File: height.png Graphic file (type bmp)
-<height.png>
-File: age.png Graphic file (type bmp)
-<age.png>
-File: money.png Graphic file (type bmp)
-<money.png>
-File: ws.png Graphic file (type bmp)
-<ws.png>
-File: ws_48.png Graphic file (type bmp)
-<ws_48.png>
-File: min.png Graphic file (type bmp)
-<min.png>
-File: min.png Graphic file (type bmp)
-<min.png>
- [35
-
-] [36] [37] [38
 
 ]
 
+LaTeX Warning: Float too large for page by 3.47719pt on input line 929.
+
+
+LaTeX Warning: Float too large for page by 3.47719pt on input line 973.
+
+
+LaTeX Warning: Float too large for page by 3.47719pt on input line 1017.
+
+[44] [45] [46] [47
+
+
+
+] [48] [49] [50] [51] [52] [53]
+
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 840.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 840.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1284.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1284.
 (project_sean.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 840.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 840.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1284.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1284.
 
+Package rerunfilecheck Info: File `project_sean.out' has not changed.
+(rerunfilecheck)             Checksum: B5E3A14F621031BE645391450E29A679;2910.
 
-Package rerunfilecheck Warning: File `project_sean.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `project_sean.out':
-(rerunfilecheck)             Before: 39E885879F23532A8B78D00C5A68967F;2095
-(rerunfilecheck)             After:  7A50E721DB804C4DA8DBC124ABCBBCD2;2066.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 840.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1284.
  ) 
 Here is how much of TeX's memory you used:
- 18177 strings out of 414044
- 308261 string characters out of 2898609
- 832338 words of memory out of 3000000
- 35569 multiletter control sequences out of 15000+200000
- 543460 words of font info for 86 fonts, out of 3000000 for 9000
+ 18321 strings out of 414044
+ 309747 string characters out of 2898609
+ 847187 words of memory out of 3000000
+ 35711 multiletter control sequences out of 15000+200000
+ 543468 words of font info for 87 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
- 51i,13n,77p,2451b,1726s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 51i,12n,77p,2451b,1726s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on project_sean.pdf (39 pages).
+Output written on project_sean.pdf (54 pages).
