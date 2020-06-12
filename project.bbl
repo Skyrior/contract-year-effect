@@ -1,4 +1,4 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{14}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,6 +12,14 @@ A.~A. Alchian and H.~Demsetz.
   777--795, 1972.
 \newblock ISSN 00028282.
 \newblock URL \url{http://www.jstor.org/stable/1815199}.
+
+\bibitem[Berri and Krautmann(2006)]{berri_2007}
+D.~J. Berri and A.~C. Krautmann.
+\newblock Shirking on the court: Testing for the incentive effects of
+  guaranteed pay.
+\newblock \emph{Economic Inquiry}, 44\penalty0 (3):\penalty0 536--546, 2006.
+\newblock \doi{10.1093/ei/cbj033}.
+\newblock URL \url{https://onlinelibrary.wiley.com/doi/abs/10.1093/ei/cbj033}.
 
 \bibitem[Gibbons and Murphy(1992)]{gibbons_1992}
 R.~Gibbons and K.~J. Murphy.
@@ -30,6 +38,48 @@ B.~Holmström.
 \newblock ISSN 00346527, 1467937X.
 \newblock URL \url{http://www.jstor.org/stable/2566954}.
 
+\bibitem[Krautmann(1990)]{krautmann_1990}
+A.~C. Krautmann.
+\newblock Shirking or stochastic productivity in major league baseball?
+\newblock \emph{Southern Economic Journal}, 56\penalty0 (4):\penalty0 961--968,
+  1990.
+\newblock ISSN 00384038.
+\newblock URL \url{http://www.jstor.org/stable/1059884}.
+
+\bibitem[Krautmann and Donley(2009)]{krautmann_2009}
+A.~C. Krautmann and T.~D. Donley.
+\newblock Shirking in major league baseball revisited.
+\newblock \emph{Journal of Sports Economics}, 10\penalty0 (3):\penalty0
+  292--304, 2009.
+\newblock \doi{10.1177/1527002508325817}.
+\newblock URL \url{https://doi.org/10.1177/1527002508325817}.
+
+\bibitem[Lehn(1982)]{lehn_1982}
+K.~Lehn.
+\newblock {Property Rights, Risk Sharing, and Player Disability in Major League
+  Baseball}.
+\newblock \emph{Journal of Law and Economics}, 25\penalty0 (2):\penalty0
+  343--366, October 1982.
+\newblock \doi{10.1086/467020}.
+\newblock URL
+  \url{https://ideas.repec.org/a/ucp/jlawec/v25y1982i2p343-66.html}.
+
+\bibitem[Maxcy et~al.(2002)Maxcy, Fort, and Krautmann]{maxcy_2002}
+J.~G. Maxcy, R.~D. Fort, and A.~C. Krautmann.
+\newblock The effectiveness of incentive mechanisms in major league baseball.
+\newblock \emph{Journal of Sports Economics}, 3\penalty0 (3):\penalty0
+  246--255, 2002.
+\newblock \doi{10.1177/1527002502003003002}.
+\newblock URL \url{https://doi.org/10.1177/1527002502003003002}.
+
+\bibitem[Paulsen(2018)]{paulsen_2018}
+R.~J. Paulsen.
+\newblock Contract options and performance: The case of major league baseball.
+\newblock \emph{Atlantic Economic Journal}, 46\penalty0 (4):\penalty0
+  379–388, Dec 2018.
+\newblock ISSN 0197-4254, 1573-9678.
+\newblock \doi{10.1007/s11293-018-9595-5}.
+
 \bibitem[Prendergast(1999)]{prendergast_1999}
 C.~Prendergast.
 \newblock The provision of incentives in firms.
@@ -47,5 +97,27 @@ G.~Ress.
   279--303, 1994.
 \newblock ISSN 09324569.
 \newblock URL \url{http://www.jstor.org/stable/40753040}.
+
+\bibitem[Ryan(2015)]{Ryan_2015}
+J.~Ryan.
+\newblock Show me the money: Examining the validity of the contract year
+  phenomenon in the nba.
+\newblock Apr 2015.
+\newblock URL \url{https://dash.harvard.edu/handle/1/14398539}.
+
+\bibitem[Scoggins(1993)]{scoggins_1993}
+J.~Scoggins.
+\newblock Shirking or stochastic productivity in major league baseball?: A
+  comment.
+\newblock \emph{Southern Economic Journal}, 60:\penalty0 239--40, 07 1993.
+\newblock \doi{10.2307/1059947}.
+
+\bibitem[STIROH(2007)]{stiroh_2006}
+K.~J. STIROH.
+\newblock Playing for keeps: Pay and performance in the nba.
+\newblock \emph{Economic Inquiry}, 45\penalty0 (1):\penalty0 145--161, 2007.
+\newblock \doi{10.1111/j.1465-7295.2006.00004.x}.
+\newblock URL
+  \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1465-7295.2006.00004.x}.
 
 \end{thebibliography}
