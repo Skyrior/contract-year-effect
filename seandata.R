@@ -42,16 +42,28 @@ age <- ggplot(ss.age, aes(x=age)) + geom_bar() + xlab("age")
 age
 
 winshares <- ggplot(data = data) + 
-  geom_density(aes(x=ws), fill="purple", colour="purple", alpha=0.2) + 
-  geom_density(aes(x=ows), fill="red", colour="red", alpha=0.2) +
-  geom_density(aes(x=dws), fill="green", colour="green", alpha=0.2) +
-  geom_text(data=data,aes(x=ws),label="ws")
+  geom_density(aes(x=ws, colour="winshare"), fill="blue", alpha=0.2) + 
+  geom_density(aes(x=ows, colour="offensive ws"), fill="red", alpha=0.2) +
+  geom_density(aes(x=dws, colour="defensive ws"), fill="yellow", alpha=0.2) +
+  scale_colour_manual("type", values = c("yellow","red","blue"))
 
 winshares
 
 
 winshare_48 <- ggplot(data=data) +
-  geom_density(aes(x=ws_48), fill="blue", colour="blue", alpha=0.2)
+  geom_density(aes(x=ws_48), fill="purple", colour="purple", alpha=0.2)
 
 winshare_48
+
+minutes <- ggplot(data = data) + geom_histogram(aes(x=min, colour = "minutes"),
+                                              fill = "green", alpha = 0.4)
+
+minutes
+options(scipen=1000000)
+
+salary <- ggplot(data=data) + 
+  geom_histogram(aes(x=salary_current, colour = "money"), 
+               fill = "grey", alpha = 0.4)
+
+salary
 
