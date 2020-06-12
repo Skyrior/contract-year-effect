@@ -271,13 +271,45 @@
 	
 	For a player’s perspective, consider the following: a mid-tier player, currently in free agency, has only two offers: a low-paying, two-year offer from a contending team, and a high-paying, two-year offer from a bottom-tier team. He would like to win a championship; however, both teams are in the same conference as LeBron, so even if he joins the contending team, the chance is slim that they get to the NBA Finals. However, he knows that LeBron will enter a contract year in two years. As such, he chooses the high-paying offer on the bottom-tier team, then enters free agency at the same time as LeBron, where he can restart the process - and his quest for a championship - based on LeBron’s free agency decision.
 	
-	Thus, consider LeBron’s latest free agency: the summer of 2018. It was known that LeBron was going through great turmoil and conflict on his team at the time, the Cleveland Cavaliers, and hence teams and players knew he was likely to leave. Based on the above argument, we will use an indicator for whether or not one’s contract year is in the 2018 season as an instrumental variable.
+	Thus, consider LeBron’s latest free agency: the summer of 2018. It was widely known that LeBron was going through great turmoil and conflict on his team at the time, the Cleveland Cavaliers, and hence teams and players knew he was likely to leave. Based on the above argument, we will use an indicator for whether or not one had a contract year in the 2018 season as an instrument.
 	
-	\text{Relevance}: It clearly affects whether or not one is currently in a contract year.
+	\textit{Relevance}: It clearly affects whether or not one is currently in a contract year.
 	
-	\text{Exclusion}: It has no direct effect on a player’s outcome stats, such as usage rate; it only affects outcomes through the contract year phenomenon.
+	\textit{Exclusion}: It has no direct effect on a player’s outcome stats; it only affects outcomes through the contract year phenomenon.
+	
+	\textit{Exogeneity}: Anything that affects a player's outcome variables that was not controlled for will not be influenced by LeBron James' contract year status.
 	
 	Thus, this instrument provides an exogenous change in contract structure that affects contract year status.
+	
+	
+	
+	We test for instrument strength, finding that the F-Statistic is 85.207.
+	
+	\begin{table}[!htbp] \centering 
+		\caption{Test for Instrument Strength} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} \\ 
+			\hline \\[-1.8ex] 
+			Df & 1 & 1.000   \\ 
+			F & 1 & 85.207   \\ 
+			Pr(\textgreater F) & 1 & 0.000  \\ 
+			\hline \\[-1.8ex] 
+		\end{tabular} 
+	\end{table} 
+	
+	Thus, our instrumental variables model is as follows:
+	
+	\begin{align}
+	y_i & = \alpha d_i + \beta x_i' + \epsilon_i\\
+	d_i & = \gamma z_i' + \delta x_i' + \nu_i,
+	\end{align}
+	
+	where $d_i$ is our endogenous regressor (in this case, whether or not one is on a contract year), $x_i$ is our vector of control variables, and $z_i$ is our instrument. We have that $\mathbb{E}[\epsilon_i x_i'] = \mathbb{E}[\epsilon_i z_i'] = \mathbb{E}[\nu_i x_i'] = \mathbb{E}[\nu_i z_i'] = 0$, but $\mathbb{E}[\epsilon_i \nu_i] = 0$, implying endogeneity bias.
+	
+	In this case, we only consider two sets of outcome variables: box outs and win shares. These are policy-relevant outcome variables for teams, as they provide metrics of a player's performance, and hence may lead to endogeneity bias.
 	
 	\subsection{Clustering data}
 	
@@ -548,6 +580,74 @@
 	\pagebreak
 	
 	\subsection{Instrumental variable method}
+	
+	In the IV method, we do not find any significant results. However, the IV regression gives us a large increase in the effect of a contract year on defensive win shares and total win shares, as opposed to the standard fixed effects regression. 
+	
+	\begin{table}[!htbp] \centering 
+		\caption{IV with Box Outs as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & \multicolumn{3}{c}{Box Out Metrics} \\ 
+			\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Total Box Outs\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 10.407 & 1.384 & 6.731 \\ 
+			& (11.072) & (1.058) & (5.391) \\ 
+			& & & \\ 
+			Current Salary & 0.00000 & 0.00000 & 0.00000 \\ 
+			& (0.00000) & (0.00000) & (0.00000) \\ 
+			& & & \\ 
+			Average Minutes Played & 0.184 & 0.023$^{*}$ & 0.137$^{**}$ \\ 
+			& (0.134) & (0.012) & (0.060) \\ 
+			& & & \\ 
+			Age & $-$1.386 & $-$0.266$^{**}$ & $-$1.186$^{**}$ \\ 
+			& (1.117) & (0.108) & (0.524) \\ 
+			& & & \\ 
+			Constant & 20.805 & 3.832$^{**}$ & 17.835$^{**}$ \\ 
+			& (16.143) & (1.511) & (7.149) \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
+	
+	\begin{table}[!htbp] \centering 
+		\caption{IV with Win Shares as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-5} 
+			\\[-1.8ex] & \multicolumn{4}{c}{Win Share Metrics} \\ 
+			\\[-1.8ex] & Defensive WS & Offensive WS & Total WS & WS Per 48 Minutes\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 4.273 & $-$0.457 & 3.719 & $-$0.169 \\ 
+			& (3.700) & (1.524) & (3.948) & (0.145) \\ 
+			& & & & \\ 
+			Current Salary & 0.00000 & $-$0.00000 & 0.00000 & $-$0.000 \\ 
+			& (0.00000) & (0.00000) & (0.00000) & (0.000) \\ 
+			& & & & \\ 
+			Average Minutes Played & 0.094$^{**}$ & 0.102$^{***}$ & 0.194$^{***}$ & 0.0005 \\ 
+			& (0.040) & (0.019) & (0.042) & (0.002) \\ 
+			& & & & \\ 
+			Age & $-$0.536 & $-$0.182 & $-$0.708$^{*}$ & 0.012 \\ 
+			& (0.358) & (0.162) & (0.378) & (0.014) \\ 
+			& & & & \\ 
+			Constant & 6.682 & 2.862 & 9.561$^{*}$ & $-$0.011 \\ 
+			& (4.817) & (2.305) & (5.103) & (0.190) \\ 
+			& & & & \\ 
+			\hline \\[-1.8ex] 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
 	
 	\subsection{Clustered data double LASSO inference method}
 	

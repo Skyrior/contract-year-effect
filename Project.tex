@@ -263,7 +263,7 @@
 	With this GEE method applied onto our weighted least squares model, we are finally able to correct for the three main challenges that we have discussed: heterogeneity, heteroskedasticity, and correlated observations.
 	
 	\subsection{IV Strategy}
-		There is potential endogeneity bias between the outcome variable and the contract year dummy variable. Namely, not only could being on a contract year affect a player’s outcome stats, but a player’s outcome stats could affect whether a player is on a contract year. For example, a worse player may be given shorter-term contracts, since general managers would be less inclined to keep him on the roster in the long-run, meaning he is more likely to be in a contract year in general. As such, to solve this we would like an instrument that affects whether or not one is in a contract year in the current year, but has no direct effect on a player’s outcome variables.
+	There is potential endogeneity bias between the outcome variable and the contract year dummy variable. Namely, not only could being on a contract year affect a player’s outcome stats, but a player’s outcome stats could affect whether a player is on a contract year. For example, a worse player may be given shorter-term contracts, since general managers would be less inclined to keep him on the roster in the long-run, meaning he is more likely to be in a contract year in general. As such, to solve this we would like an instrument that affects whether or not one is in a contract year in the current year, but has no direct effect on a player’s outcome variables.
 	
 	To do this, we consider the effect of LeBron James’ free agency decisions. LeBron James is a superstar in contention for the greatest player of all time, and as such his free agency decisions can shape the landscape of the entire NBA. For example, between 2011-2018, LeBron made the NBA Finals every year, out of the Eastern Conference, meaning that other Eastern teams and players did not simply plan as they normally would have due to his dominance. While Western entities competed and planned almost as usual, those in the East often chose to not compete, and instead “tank”; if a mid-tier team team decided that it could not compete against LeBron’s team, it would often choose to “blow it up” and plan for a future without LeBron, as opposed to trying to upgrade and face LeBron in the playoffs (for an example of this, look at the 2015 Hawks, and how they traded/let their star players go in order to quickly rebuild).
 	
@@ -276,40 +276,40 @@
 	\textit{Relevance}: It clearly affects whether or not one is currently in a contract year.
 	
 	\textit{Exclusion}: It has no direct effect on a player’s outcome stats; it only affects outcomes through the contract year phenomenon.
-
+	
 	\textit{Exogeneity}: Anything that affects a player's outcome variables that was not controlled for will not be influenced by LeBron James' contract year status.
 	
 	Thus, this instrument provides an exogenous change in contract structure that affects contract year status.
-
-
-
-We test for instrument strength, finding that the F-Statistic is 85.207.
-
-\begin{table}[!htbp] \centering 
-  \caption{Test for Instrument Strength} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} \\ 
-\hline \\[-1.8ex] 
-Df & 1 & 1.000   \\ 
-F & 1 & 85.207   \\ 
-Pr(\textgreater F) & 1 & 0.000  \\ 
-\hline \\[-1.8ex] 
-\end{tabular} 
-\end{table} 
-
-Thus, our instrumental variables model is as follows:
-
-\begin{align}
-y_i & = \alpha d_i + \beta x_i' + \epsilon_i\\
-d_i & = \gamma z_i' + \delta x_i' + \nu_i,
-\end{align}
-
-where $d_i$ is our endogenous regressor (in this case, whether or not one is on a contract year), $x_i$ is our vector of control variables, and $z_i$ is our instrument. We have that $\mathbb{E}[\epsilon_i x_i'] = \mathbb{E}[\epsilon_i z_i'] = \mathbb{E}[\nu_i x_i'] = \mathbb{E}[\nu_i z_i'] = 0$, but $\mathbb{E}[\epsilon_i \nu_i] = 0$, implying endogeneity bias.
-
-In this case, we only consider two sets of outcome variables: box outs and win shares. These are policy-relevant outcome variables for teams, as they provide metrics of a player's performance, and hence may lead to endogeneity bias.
+	
+	
+	
+	We test for instrument strength, finding that the F-Statistic is 85.207.
+	
+	\begin{table}[!htbp] \centering 
+		\caption{Test for Instrument Strength} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} \\ 
+			\hline \\[-1.8ex] 
+			Df & 1 & 1.000   \\ 
+			F & 1 & 85.207   \\ 
+			Pr(\textgreater F) & 1 & 0.000  \\ 
+			\hline \\[-1.8ex] 
+		\end{tabular} 
+	\end{table} 
+	
+	Thus, our instrumental variables model is as follows:
+	
+	\begin{align}
+	y_i & = \alpha d_i + \beta x_i' + \epsilon_i\\
+	d_i & = \gamma z_i' + \delta x_i' + \nu_i,
+	\end{align}
+	
+	where $d_i$ is our endogenous regressor (in this case, whether or not one is on a contract year), $x_i$ is our vector of control variables, and $z_i$ is our instrument. We have that $\mathbb{E}[\epsilon_i x_i'] = \mathbb{E}[\epsilon_i z_i'] = \mathbb{E}[\nu_i x_i'] = \mathbb{E}[\nu_i z_i'] = 0$, but $\mathbb{E}[\epsilon_i \nu_i] = 0$, implying endogeneity bias.
+	
+	In this case, we only consider two sets of outcome variables: box outs and win shares. These are policy-relevant outcome variables for teams, as they provide metrics of a player's performance, and hence may lead to endogeneity bias.
 	
 	\subsection{Clustering data}
 	
@@ -580,73 +580,74 @@ In this case, we only consider two sets of outcome variables: box outs and win s
 	\pagebreak
 	
 	\subsection{Instrumental variable method}
+	
 	In the IV method, we do not find any significant results. However, the IV regression gives us a large increase in the effect of a contract year on defensive win shares and total win shares, as opposed to the standard fixed effects regression. 
-
-\begin{table}[!htbp] \centering 
-  \caption{IV with Box Outs as the Dependent Variable} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{Box Out Metrics} \\ 
-\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Total Box Outs\\ 
-\hline \\[-1.8ex] 
- Contract Year & 10.407 & 1.384 & 6.731 \\ 
-  & (11.072) & (1.058) & (5.391) \\ 
-  & & & \\ 
- Current Salary & 0.00000 & 0.00000 & 0.00000 \\ 
-  & (0.00000) & (0.00000) & (0.00000) \\ 
-  & & & \\ 
- Average Minutes Played & 0.184 & 0.023$^{*}$ & 0.137$^{**}$ \\ 
-  & (0.134) & (0.012) & (0.060) \\ 
-  & & & \\ 
- Age & $-$1.386 & $-$0.266$^{**}$ & $-$1.186$^{**}$ \\ 
-  & (1.117) & (0.108) & (0.524) \\ 
-  & & & \\ 
- Constant & 20.805 & 3.832$^{**}$ & 17.835$^{**}$ \\ 
-  & (16.143) & (1.511) & (7.149) \\ 
-  & & & \\ 
-\hline \\[-1.8ex] 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
-\begin{table}[!htbp] \centering 
-  \caption{IV with Win Shares as the Dependent Variable} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & \multicolumn{4}{c}{Win Share Metrics} \\ 
-\\[-1.8ex] & Defensive WS & Offensive WS & Total WS & WS Per 48 Minutes\\ 
-\hline \\[-1.8ex] 
- Contract Year & 4.273 & $-$0.457 & 3.719 & $-$0.169 \\ 
-  & (3.700) & (1.524) & (3.948) & (0.145) \\ 
-  & & & & \\ 
- Current Salary & 0.00000 & $-$0.00000 & 0.00000 & $-$0.000 \\ 
-  & (0.00000) & (0.00000) & (0.00000) & (0.000) \\ 
-  & & & & \\ 
- Average Minutes Played & 0.094$^{**}$ & 0.102$^{***}$ & 0.194$^{***}$ & 0.0005 \\ 
-  & (0.040) & (0.019) & (0.042) & (0.002) \\ 
-  & & & & \\ 
- Age & $-$0.536 & $-$0.182 & $-$0.708$^{*}$ & 0.012 \\ 
-  & (0.358) & (0.162) & (0.378) & (0.014) \\ 
-  & & & & \\ 
- Constant & 6.682 & 2.862 & 9.561$^{*}$ & $-$0.011 \\ 
-  & (4.817) & (2.305) & (5.103) & (0.190) \\ 
-  & & & & \\ 
-\hline \\[-1.8ex] 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
+	
+	\begin{table}[!htbp] \centering 
+		\caption{IV with Box Outs as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & \multicolumn{3}{c}{Box Out Metrics} \\ 
+			\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Total Box Outs\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 10.407 & 1.384 & 6.731 \\ 
+			& (11.072) & (1.058) & (5.391) \\ 
+			& & & \\ 
+			Current Salary & 0.00000 & 0.00000 & 0.00000 \\ 
+			& (0.00000) & (0.00000) & (0.00000) \\ 
+			& & & \\ 
+			Average Minutes Played & 0.184 & 0.023$^{*}$ & 0.137$^{**}$ \\ 
+			& (0.134) & (0.012) & (0.060) \\ 
+			& & & \\ 
+			Age & $-$1.386 & $-$0.266$^{**}$ & $-$1.186$^{**}$ \\ 
+			& (1.117) & (0.108) & (0.524) \\ 
+			& & & \\ 
+			Constant & 20.805 & 3.832$^{**}$ & 17.835$^{**}$ \\ 
+			& (16.143) & (1.511) & (7.149) \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
+	
+	\begin{table}[!htbp] \centering 
+		\caption{IV with Win Shares as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-5} 
+			\\[-1.8ex] & \multicolumn{4}{c}{Win Share Metrics} \\ 
+			\\[-1.8ex] & Defensive WS & Offensive WS & Total WS & WS Per 48 Minutes\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 4.273 & $-$0.457 & 3.719 & $-$0.169 \\ 
+			& (3.700) & (1.524) & (3.948) & (0.145) \\ 
+			& & & & \\ 
+			Current Salary & 0.00000 & $-$0.00000 & 0.00000 & $-$0.000 \\ 
+			& (0.00000) & (0.00000) & (0.00000) & (0.000) \\ 
+			& & & & \\ 
+			Average Minutes Played & 0.094$^{**}$ & 0.102$^{***}$ & 0.194$^{***}$ & 0.0005 \\ 
+			& (0.040) & (0.019) & (0.042) & (0.002) \\ 
+			& & & & \\ 
+			Age & $-$0.536 & $-$0.182 & $-$0.708$^{*}$ & 0.012 \\ 
+			& (0.358) & (0.162) & (0.378) & (0.014) \\ 
+			& & & & \\ 
+			Constant & 6.682 & 2.862 & 9.561$^{*}$ & $-$0.011 \\ 
+			& (4.817) & (2.305) & (5.103) & (0.190) \\ 
+			& & & & \\ 
+			\hline \\[-1.8ex] 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
 	
 	\subsection{Clustered data double LASSO inference method}
 	
@@ -957,52 +958,52 @@ In this case, we only consider two sets of outcome variables: box outs and win s
 	
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{position.png}
-	  \caption{Position}
-	  \label{fig:Position}
+		\centering
+		\includegraphics[width=\textwidth]{position.png}
+		\caption{Position}
+		\label{fig:Position}
 	\end{figure}
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{height.png}
-	  \caption{Height}
-	  \label{fig:Height}
+		\centering
+		\includegraphics[width=\textwidth]{height.png}
+		\caption{Height}
+		\label{fig:Height}
 	\end{figure}	
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{age.png}
-	  \caption{Age}
-	  \label{fig:Age}
+		\centering
+		\includegraphics[width=\textwidth]{age.png}
+		\caption{Age}
+		\label{fig:Age}
 	\end{figure}	
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{money.png}
-	  \caption{Salary}
-	  \label{fig:Salary}
+		\centering
+		\includegraphics[width=\textwidth]{money.png}
+		\caption{Salary}
+		\label{fig:Salary}
 	\end{figure}	
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{ws.png}
-	  \caption{Win Shares}
-	  \label{fig:Win Shares}
+		\centering
+		\includegraphics[width=\textwidth]{ws.png}
+		\caption{Win Shares}
+		\label{fig:Win Shares}
 	\end{figure}	
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{ws_48.png}
-	  \caption{Win Shares at 48 min.}
-	  \label{fig:Win Shares at 48 min.}
+		\centering
+		\includegraphics[width=\textwidth]{ws_48.png}
+		\caption{Win Shares at 48 min.}
+		\label{fig:Win Shares at 48 min.}
 	\end{figure}	
 	
 	\begin{figure}[hp]
-	  \centering
-	  \includegraphics[width=\textwidth]{min.png}
-	  \caption{Minutes}
-	  \label{fig:Minutes}
+		\centering
+		\includegraphics[width=\textwidth]{min.png}
+		\caption{Minutes}
+		\label{fig:Minutes}
 	\end{figure}	
 	
 	
