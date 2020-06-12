@@ -29,3 +29,9 @@
 \BOOKMARK [1][-]{appendix.B}{Figures}{}% 29
 \BOOKMARK [1][-]{appendix.C}{Code}{}% 30
 \BOOKMARK [2][-]{subsection.C.1}{Test\040for\040heteroskedasticity}{appendix.C}% 31
+\BOOKMARK [2][-]{subsection.C.2}{Fixed\040Effect\040weighted\040OLS}{appendix.C}% 32
+\BOOKMARK [2][-]{subsection.C.3}{IV\040instrument\040regression}{appendix.C}% 33
+\BOOKMARK [2][-]{subsection.C.4}{Clustering\040the\040data}{appendix.C}% 34
+\BOOKMARK [2][-]{subsection.C.5}{General\040estimating\040equation}{appendix.C}% 35
+\BOOKMARK [2][-]{subsection.C.6}{Double\040LASSO\040without\040instruments}{appendix.C}% 36
+\BOOKMARK [2][-]{subsection.C.7}{Double\040LASSO\040with\040instruments}{appendix.C}% 37
