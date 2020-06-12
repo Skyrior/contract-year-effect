@@ -93,7 +93,6 @@
 	\subsection{Dependent variables and proxies}
 	
 	To analyze the impact of a player playing during a contract year on his productivity on the court, we used the following functional form:
-	
 	\[
 	\begin{aligned}
 	Production_{it} = a_1*ContractYear_{it} + a_2*Age_{it} + a_3*Minutes_{it} + a_4*Salary_{it}  \\
@@ -101,7 +100,7 @@
 	\end{aligned}
 	\]
 	
-	$ContractYear$ is a variable that takes on the value of 1 if the player is playing in a contract year; 0 otherwise. $Age$ is the player's age on February 1st of the season. $Minutes$ is the average number of minutes a player averages per game. $Salary$ is the amount of money (in USD) a player is paid that season. Note that since only data from three seasons were analyzed, the effect of inflation will be marginal, at best. In addition to controlling for individual and season fixed effects, position fixed effects were also controlled for. This is because it is possible for some positions to be more valuable than others. For example, teams generally value big men/centers, so it is possible that these players can get longer contracts, so they will be less likely to be on a contract year. Furthermore, centers generally are more productive and/or valuable on the court (i.e. are responsible for grabbing many rebounds and scoring many points in the paint). 
+	The regressions are all weighted least squares by minutes played. This is because we do not want a superstar player who averages around 40 minutes per game to be weighted the same as another NBA player who barely gets any playing time. $ContractYear$ is a variable that takes on the value of 1 if the player is playing in a contract year; 0 otherwise. $Age$ is the player's age on February 1st of the season. $Minutes$ is the average number of minutes a player averages per game. $Salary$ is the amount of money (in USD) a player is paid that season. Note that since only data from three seasons were analyzed, the effect of inflation will be marginal, at best. In addition to controlling for individual and season fixed effects, position fixed effects were also controlled for. This is because it is possible for some positions to be more valuable than others. For example, teams generally value big men/centers, so it is possible that these players can get longer contracts, so they will be less likely to be on a contract year. Furthermore, centers generally are more productive and/or valuable on the court (i.e. are responsible for grabbing many rebounds and scoring many points in the paint). 
 	
 	We used 16 different variables as proxies of a player's productivity: usage rate, total win shares, win shares per 48 minutes, defensive win shares, offensive win shares, average total distance moved per game (in miles), average distance moved per game on defense (in miles), average distance moved per game on offense (in miles), average speed on the court (in miles per hour), average speed on defense (in miles per hour), average speed on offense (in miles per hour), average seconds per touch, average dribbles per touch, average box outs per game, average offensive box outs per game, and average defensive box outs per game. 
 	
