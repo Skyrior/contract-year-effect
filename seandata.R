@@ -45,7 +45,7 @@ winshares <- ggplot(data = data) +
   geom_density(aes(x=ws), fill="purple", colour="purple", alpha=0.2) + 
   geom_density(aes(x=ows), fill="red", colour="red", alpha=0.2) +
   geom_density(aes(x=dws), fill="green", colour="green", alpha=0.2) +
-  geom_text(data=data,aes(x=ws,label="ws"))
+  geom_text(data=data,aes(x=ws),label="ws")
 
 winshares
 
