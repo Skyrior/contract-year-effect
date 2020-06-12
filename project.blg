@@ -3,48 +3,58 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: project.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: abbrvnat.bst
+Illegal, another \bibstyle command---line 46 of file project.aux
+ : \bibstyle
+ :          {abbrvnat}
+I'm skipping whatever remains of this command
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 Database file #1: citation.bib
+I was expecting a `,' or a `}'---line 141 of file citation.bib
+ : 
+ : @article{berri_2007,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "dong_dynamics_2016"
-You've used 1 entry,
+Warning--empty journal in Ryan_2015
+You've used 14 entries,
             2773 wiz_defined-function locations,
-            603 strings with 4816 characters,
-and the built_in function-call counts, 451 in all, are:
-= -- 44
-> -- 10
-< -- 1
-+ -- 4
-- -- 3
-* -- 34
-:= -- 75
-add.period$ -- 5
-call.type$ -- 1
-change.case$ -- 4
-chr.to.int$ -- 1
-cite$ -- 2
-duplicate$ -- 20
-empty$ -- 41
-format.name$ -- 4
-if$ -- 89
+            721 strings with 7543 characters,
+and the built_in function-call counts, 6050 in all, are:
+= -- 602
+> -- 204
+< -- 13
++ -- 74
+- -- 60
+* -- 488
+:= -- 947
+add.period$ -- 68
+call.type$ -- 14
+change.case$ -- 62
+chr.to.int$ -- 14
+cite$ -- 29
+duplicate$ -- 280
+empty$ -- 549
+format.name$ -- 82
+if$ -- 1277
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 15
-num.names$ -- 4
-pop$ -- 5
+missing$ -- 14
+newline$ -- 104
+num.names$ -- 56
+pop$ -- 83
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 48
 quote$ -- 0
-skip$ -- 14
+skip$ -- 192
 stack$ -- 0
-substring$ -- 27
-swap$ -- 1
+substring$ -- 315
+swap$ -- 18
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 11
-warning$ -- 0
-while$ -- 5
+type$ -- 154
+warning$ -- 1
+while$ -- 60
 width$ -- 0
-write$ -- 24
-(There was 1 warning)
+write$ -- 239
+(There were 2 error messages)

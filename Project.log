@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  11 JUN 2020 14:46
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  11 JUN 2020 19:12
 entering extended mode
 **./Project.tex
 (Project.tex
@@ -575,44 +575,44 @@ File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 ) [0
 
 ] [1]
-[2]
+[2] [3] [4]
 
-Package natbib Warning: Citation `dong_dynamics_2016' on page 3 undefined on in
-put line 74.
+Package natbib Warning: Citation `dong_dynamics_2016' on page 5 undefined on in
+put line 79.
 
-[3]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 81.
+[5]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 86.
 
  (D:\applications\Latex\tex/latex/bbm\ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [4] (Project.bbl) [5]
-[6
+) (Project.bbl [6] [7])
+[8] [9
 
-] [7
+] [10
 
 ]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 130.
-[8
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
+[11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 130.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
  (Project.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 130.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 130.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 135.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 135.
 Package rerunfilecheck Info: File `Project.out' has not changed.
 (rerunfilecheck)             Checksum: 214D5763E1E28DE3234102810BC92CFB;625.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 130.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 135.
  ) 
 Here is how much of TeX's memory you used:
- 15299 strings out of 414044
- 271097 string characters out of 2898609
- 594289 words of memory out of 3000000
- 32763 multiletter control sequences out of 15000+200000
+ 15338 strings out of 414044
+ 271862 string characters out of 2898609
+ 602710 words of memory out of 3000000
+ 32802 multiletter control sequences out of 15000+200000
  542730 words of font info for 79 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
- 51i,11n,46p,1425b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 51i,11n,46p,2446b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project.pdf (9 pages).
+Output written on Project.pdf (12 pages).
