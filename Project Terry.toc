@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Literature Review}{4}{section.2}%
+\contentsline {section}{\numberline {3}Data}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Data collection}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Dependent variables and proxies}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Model and Analysis}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Heteroskedasticity}{9}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Breusch-Pagan test}{9}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Weighted OLS}{11}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Heterogeneity}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Correlated observations and within team (cluster) dependence}{15}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Generalized estimating equation}{16}{subsubsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.4}IV Strategy}{18}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Clustering data}{21}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Correlated observations}{21}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Double LASSO inference selection}{22}{subsubsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.3}Pre-selection}{23}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Double LASSO inference}{23}{subsubsection.4.5.4}%
+\contentsline {section}{\numberline {5}Results}{24}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Generalized estimating equation method}{24}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Fixed effect weighted OLS}{24}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}GEE Data}{27}{subsubsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.2}Instrumental variable method}{30}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Clustered data double LASSO inference method}{30}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Discussions}{32}{section.6}%
+\contentsline {section}{\numberline {7}Conclusion}{32}{section.7}%
+\contentsline {section}{\numberline {A}Tables}{33}{appendix.A}%
+\contentsline {section}{\numberline {B}Figures}{37}{appendix.B}%
+\contentsline {section}{\numberline {C}Code}{38}{appendix.C}%
