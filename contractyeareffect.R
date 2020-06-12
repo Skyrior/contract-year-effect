@@ -21,6 +21,7 @@ library(ggplot2)
 library(stargazer)
 library(fastDummies)
 library(lmtest)
+library(geepack)
 
 ## -------------------------------------------------------------------------
 ##
@@ -127,6 +128,27 @@ nba <- clean_names(nba)
 ## Test for heteroskedasticity
 ##
 ## -------------------------------------------------------------------------
+
+hetero2 <- lm(formula = avg_drib_per_touch ~ contract_year + as.factor(name) + pos + as.factor(season) +salary_current, data = nba)
+
+bptest(hetero2)
+
+## -------------------------------------------------------------------------
+##
+## Generalized estimating equation
+##
+## -------------------------------------------------------------------------
+
+## we require the data to be sorted by the cluster.
+nba <- nba %>%
+  arrange(team)
+
+gee.ws <- geeglm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+                 + salary_current,
+                 family = gaussian,
+                 data = nba,
+                 weights = nba$min,
+                 id = team)
 
 ## -------------------------------------------------------------------------
 ##
@@ -329,12 +351,51 @@ summary.avgd <- my.summary.lm(summary(reg.avgd),
 cat(stargazer(reg.dbox, reg.obox, reg.box, dep.var.labels = c("Defensive Box Outs",
                                                               "Offensive Box Outs",
                                                               "Box Outs"),
+              omit = c("name", "season", "pos"),
               covariate.labels = c("Contract Year",
                                    "Average Minutes Played",
-                                   "Current Salary"), omit = c("name", "year"),
-              add.lines = list(c("Player Fixed Effects", "Yes"), 
-                               c("Year Fixed Effects", "Yes")),
-              title="Using Box Outs as the Dependent Variables"), sep = '\n', file = "tables/boxout.txt")
+                                   "Current Salary"),
+              add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
+                               c("Year Fixed Effects", "Yes", "Yes", "Yes"),
+                               c("Position Fixed Effects", "Yes", "Yes", "Yes")),
+              report = "vcsp*",
+              ci = TRUE,
+              title = "Using Box Outs as the Dependent Variables"),
+    label = 'regboxout',
+    sep = '\n', file = "tables/boxout.txt")
+
+cat(stargazer(reg.ws, reg.ows, reg.dws, reg.ws48, dep.var.labels = c("Win Shares",
+                                                              "Offensive Win Shares",
+                                                              "Defensive Win Shares",
+                                                              "Win Shares per 48 Minutes"),
+              omit = c("name", "season", "pos"),
+              covariate.labels = c("Contract Year",
+                                   "Average Minutes Played",
+                                   "Current Salary"),
+              add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes", "Yes"), 
+                               c("Year Fixed Effects", "Yes", "Yes", "Yes", "Yes"),
+                               c("Position Fixed Effects", "Yes", "Yes", "Yes", "Yes")),
+              report = "vcsp*",
+              ci = TRUE,
+              title = "Using Win Shares as the Dependent Variables"),
+    label = 'regwinshares',
+    sep = '\n', file = "tables/winshares.txt")
+
+cat(stargazer(reg.avgs, reg.soff, reg.sdef, dep.var.labels = c("Average Speed", 
+                                                               "Offensive Speed", "Defensive Speed"),
+              omit = c("name", "season", "pos"),
+              covariate.labels = c("Contract Year",
+                                   "Average Minutes Played",
+                                   "Current Salary"),
+              add.lines = list(c("Player Fixed Effects", "Yes", "Yes", "Yes"), 
+                               c("Year Fixed Effects", "Yes", "Yes", "Yes"),
+                               c("Position Fixed Effects", "Yes", "Yes", "Yes")),
+              report = "vcsp*",
+              ci = TRUE,
+              title = "Using Speed Metrics as the Dependent Variable"),
+    label = 'regspeed',
+    sep = '\n', file = "tables/speed.txt")
+
 cat(stargazer(reg.avgs, reg.soff, reg.sdef, dep.var.labels = c("Average Speed", 
                                                                "Offensive Speed", "Defensive Speed"),
               covariate.labels = c("Contract Year",
@@ -386,29 +447,32 @@ cat(stargazer(reg.usage, dep.var.labels = "Usage Rate",
 ##
 ## Grouping it up by teams
 ##
-## To prevent heterogeneity of inter-correlation of players
+## For tackling correlated observations
 ##
 ## -------------------------------------------------------------------------
 
-todropa <- c("lg", "team.y", "name", "pos")
+# drop duplicate columns
+nba.LASSO <- nba %>%
+  select(-"player_y") %>%
+  select(-"season_1") %>%
+  select(-"age_2")
 
-nba.a2 <- nba %>%
-  select(-one_of(todropa))
+# filter teams that are TOT (meaning they were floating among teams)
 
-todropt <- c("x", "name", "team.y")
-  
-nba.t2 <- nba %>%
-  select(-one_of(todropt))
+nba.LASSO <- nba.LASSO %>%
+  filter(team != "TOT")
 
-todropb <- c("x", "name", "team.y")
+# produce weighted mean by team
 
-nba.b2 <- nba %>%
-  select(-one_of(todropb))
+nba.LASSO <- nba.LASSO %>%
+  group_by(team, season) %>%
+  mutate_all(funs(weighted.mean(.,min))) %>%
+  summarize_all(mean)
 
-todropf <- c("name", "lg", "pos", "team.y", "team.x.x", "team.y.y")
+# drop columns that aren't meaningful when summed (produces NA)
 
-nba.f2 <- nba.fullmerged %>%
-  select(-one_of(todropf))
+nba.LASSO <- nba.LASSO %>%
+  select_if(~sum(!is.na(.)) > 0)
 
 nba.a2 <- nba.a2 %>%
   filter(team.x != "TOT") %>%

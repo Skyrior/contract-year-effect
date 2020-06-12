@@ -8,6 +8,7 @@
 \usepackage[tableposition=above]{caption}
 \usepackage{pifont}
 \usepackage{float}
+\usepackage{rotating}
 
 \setcitestyle{authoryear,open={(},close={)}}
 
@@ -31,17 +32,19 @@
 
 \geometry{left=1.0in,right=1.0in,top=1.0in,bottom=1.0in}
 
+\definecolor{mauve}{rgb}{0.2, 0.5, 0.478}
+
 \begin{document}
 	
 	\begin{titlepage}
-		\title{Contract Year Effect in the NBA\thanks{We would like to thank Dr. Hortaçsu and Francisco del Villar Ortiz Mena for their unique insights.}}
-		\author{Changhao Shi\thanks{University of Chicago} \and Jonathan Liu\thanks{University of Chicago} \and Terry II Culpepper\thanks{University of Chicago} \and Sean Choi\thanks{University of Chicago}}
+		\title{Contract Year Effect in the NBA\thanks{We would like to thank Professor Hortaçsu and Francisco del Villar Ortiz Mena for their invaluable insights.}}
+		\author{Changhao Shi\thanks{University of Chicago, The College, Economics} \and Jonathan Liu\thanks{University of Chicago, The College, Economics} \and Terry II Culpepper\thanks{University of Chicago, The College, Economics} \and Sean Choi\thanks{University of Chicago, The College, Economics}}
 		\date{\today}
 		\maketitle
 		\begin{abstract}
-			\noindent We investigate whether being in a contract year has an effect on NBA players by motivating them to put in more effort on playing. We use player statistics such as distance covered on the field per minute as a proxy for effort. We tackle three main challenges arising from the data: lack of a good proxy for effort, inter-correlation of effort between players, and player-specific effects on player statistics and outcomes. Using an OLS regression controlling for individual fixed effects and a double LASSO regression, we found that being in a contract year has no statistically significant impact on various measures of player effort. \\
+			\noindent We investigate whether being in a contract year has an effect on NBA player performance, with proxies such as win shares. Data is collected with custom scrapers on basketball websites and we evaluate the underlying theory of the data and how well they serve as proxies for performance. Existing heteroskedasticity, heterogeneity of players, and correlated observations drive our approach to tackle the issues individually with an array of methods. We use an IV regression controlling for possible endogenous effects. Subsequently, we employ a generalized estimating equation on a generalized weighted OLS to tackle the issue of correlated observations in addition to the issue of heteroskedasticity and heterogeneity. We also use a double LASSO inference method to tackle the curse of dimensionality problem that we encounter along an alternate approach to solving the correlated observations problem. The results we get show that the contract year has a mildly statistically significant effect on player performance, but not on most other measures of player performance. Furthermore, we compare the three approaches and demonstrate the usefulness of tackling underlying heteroskedastic, heterogeneous, and correlated observational trends in the data for inference and statistical power. \\
 			\vspace{0in}\\
-			\noindent\textbf{Keywords:} Sports Economics, Athletes, Contracts\\
+			\noindent\textbf{Keywords:} Sports Economics, Athletes, Contracts, NBA\\
 			\vspace{0in}\\
 			\noindent\textbf{JEL Codes:} Z20, Z22 \\
 			
@@ -52,6 +55,7 @@
 	\end{titlepage}
 	\pagebreak \newpage
 
+	\tableofcontents
 	
 	\doublespacing
 	
@@ -135,7 +139,8 @@
 		stringstyle=\color{mauve},
 		breaklines=true,
 		breakatwhitespace=true,
-		tabsize=3
+		tabsize=3,
+		otherkeywords = \#
 	}
 	
 	\begin{lstlisting}
@@ -187,9 +192,79 @@
 
 	We would have to argue that we do not run into the problem of perfect multi-collinearity. This is a reasonable assumption - we do not believe, for example, that when we weight the players' age and income by the minutes played per game on the field, we obtain a linear relationship between the two. Concerns would arise if we have covariates such as total distance run and speed together. Note that these two covariates may not initially have a linear dependence, until, possibly, when we weight them by minutes played. However, we haven taken care to prevent possible multicollinearity by avoiding using covariates that have some relationship with minutes played, or may relate to another variable after being weighted by minutes played.
 	
-	\subsection{Inter-correlation of observations}
+	It is easy to conduct a weighted OLS on $\textbf{R}$. We simply call the function with an additional parameter, $\textbf{weights}$, using our choice of weight, minutes played:
 	
-	\subsection{Player fixed effects}
+	\begin{lstlisting}
+	reg.ws <- lm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+	+ salary_current, data = nba, weights = nba$min)
+	\end{lstlisting}
+	
+	Finally, we use minutes played as a control once again, because the function of using minutes played as a \emph{weight} is because we think it is a good proxy for the underlying heteroskedasticity of the data, but at the same time, minutes played as a \emph{covariate} is also important as it will affect outcomes such as win shares. For instance, since win share is a measure of the amount of wins a player contributes to the team, it is natural to assume that the minutes played per match of a player will contribute to their win share. Therefore, we use minutes played as both a covariate and also the weight. We can show that the weighted OLS estimator remains unbiased if we assume that minutes played approximates the inverse of the variance-covariance matrix; however we cannot guarantee that the estimator still retains properties such as the BLUE property. We state this as a proposition:
+	
+	\begin{proposition}
+		The weighted OLS estimator for a regression with $w_i$ as both the weight and a covariate is unbiased, but not necessarily BLUE.
+	\end{proposition}
+
+	A trade-off exists here: it is clear that data from players who have low minutes played should not be weighted as heavily as data from players who have high minutes played. The solution of using a weighted OLS partially tackles the problem of the underlying heteroskedasticity, which prevents the OLS estimator from being BLUE. However, because of the necessity of using minutes played as a control as well, we are forced to use a weighted OLS estimator that is not BLUE. In essence, we are choosing between the lesser of two evils here. We believe that the weighted least squares approach is the superior one because the quality of the variance contributed by players with very low minutes played is unduly large, and the deviation from efficiency of the weighted OLS estimator with the weight as a control should be lower than the deviation from efficiency of the unweighted OLS estimator which puts undue weight on low quality data.
+	
+	\subsection{Heterogeneity}
+	
+	Player performance cannot be directly observed, and existing metrics such as distance covered on the field per minute may only be loosely correlated with player performance. For example, a player may specialize in 3-point throws and so roughly run the same amount of distance but attempt more 3-point shots per game. Another player may perform by running longer each game to gain tactical advantage on a field. It is also possible that the player's performance fails to translate into an observable metric; for example, he might put in effort into team-building exercises and coordinate much more on the field.
+	
+	What is even worse is that the qualities of the players we have discussed that produces this heterogeneity cannot be observed. For example, their preferred playstyle, their cooperative attitude, and so on, are not something that we can observe in our data. These omitted variables, or rather, omitted fixed effects, that exhibit heterogeneity are therefore something we need to control for.
+	
+	To control for fixed effects, we add indicator variables for players or teams as a covariate. This, along with the existing controls, gives us the regression model \[
+	y_{it} = \sum_{j=1}^N \alpha_j \mathbbm{1}\left\lbrace i= j \right\rbrace + \mathbbm{1}\left\lbrace i_t\in \mathrm{Contract} \right\rbrace\beta + c_{it}'\gamma + u_{it}
+	\] where $y_{it}$ is the outcome player statistics for player $i$ in time period $t$, $\mathbbm{1}\left\lbrace i= j \right\rbrace$ is the indicator variable for players, $\mathbbm{1}\left\lbrace i_t\in \mathrm{Contract} \right\rbrace$ is the indicator variable for whether a player is in a contract year in a given time period, and $c_{it}$ are various controls, such as age and current salary. The identifying assumption is then that unobservable effects soaked up by the individual indicator variable that simultaneously affect the outcome player statistics and the explanatory variable and covariates are time-invariant. In other words, \[
+	\mathrm{Cov}\left(x_{i1}, u_{it}\right) = \dots = \mathrm{Cov}\left(x_{iT}, u_{it}\right) = 0,
+	\] where $x$ includes both the explanatory variable and the controls. This assumption is innocuous enough in this context. We don't expect unobserved characteristics (omitted variables) of an individual to change dramatically across years that also affect whether a given player is in a contract year. For example, a player may get married and be very happy that year. This would cause him to play better, therefore increasing his performance and we will see a change in his player statistics. However it is unlikely that it will affect whether he is in a given contract year, as that aspect largely depends on how many years ago the player signed the contract.
+	
+	The implementation in $\textbf{R}$ is straightforward. We simply add a dummy variable for the player's name.
+	
+	\begin{lstlisting}
+	reg.ws <- lm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+	+ salary_current, data = nba, weights = nba$min)
+	\end{lstlisting}
+	
+	\subsection{Correlated observations and within team (cluster) dependence}
+	
+	The performance put in by a particular player may also correlate with other players' performance. Since basketball is a team game, effort or performance put in by one player may synergize with effort or performance put in by other players. In general we expect observations to correlate strongly within-team.
+	
+	Let us start by examining how effort could correlate between observations. We can look at this issue game-theoretically. Consider the standard public goods game, and let $y_i$ be the energy of the player $i$ devoted to the match, out of a total of $1$ endowed unit of energy. The payoff function for player $i$ can be thought of as \[
+	\Pi_i = \left(1 - y_i\right) + \alpha \sum_{j} y_j
+	\] where $0<\alpha<1$. The payoff here could represent the probability of winning a match. The sum of the players' effort correlates positively with the expected probability of winning a match. When $\alpha<1$, the Nash equilibrium of this game is for all players to invest $0$ energy into the match. However, when factoring in social norms, we expect players to fall into two categories. Based on empirical evidence, players will either put in more of their endowment when others put in more, or put in less when others put in more \citep{dong_dynamics_2016}. This stylized game theoretical model and the empirical or experimental outcomes of human behavior shows that correlated observations with respect to effort is a significant issue that we need to address.
+	
+	Furthermore, performance could also correlate between observations. For example, win share is a metric that estimates the contribution of a player to their \emph{team}. While the win share of all players of a team does not exactly necessarily add up to the number of wins of a team (there is some more nuance than this), it does so approximately, which means that my increase in win share, all else equal, is your decrease in win share.
+	
+	This makes estimating the contract year effect more difficult, as the outcome variable of an individual correlates with that of other individuals. Furthermore, this correlation is ex-ante unknown. While we may have some idea of the direction of the correlation, having some precise sense of its magnitude is difficult.
+	
+	The first issue with correlated observations is that the OLS estimator is no longer efficient, and once again, loses the BLUE property. The second issue builds on the first, which is, once again, that an undue loss in statistical power can lead to bad inference results. The final issue is that we have very little intuition as to a possible functional form for the correlation between our outcomes.
+	
+	\subsubsection{Generalized estimating equation}
+	
+	\cite{liang_longitudinal_1986} studied an extension of generalized linear models and introduced a class of estimating equations that give consistent estimates of regression parameters and their variance even under observations with unknown correlations. We use this method as one of our approaches in tackling the issue of correlated observations. However, we will require an assumption.
+	
+	\begin{assumption}
+		Repeated observations for a subject are independent.
+	\end{assumption}
+
+	The assumption is crucial for the generalized estimating equation method. We argue that this is a somewhat reasonable assumption. Since each season is independent of the previous season because the team performance in the previous season has no bearing on the initial conditions of the current season. For example, the winning team in 2017 does not get any innate advantage (in terms of competition) in 2018. While we obviously do not expect that player performance is completely independent of previous season performance (for example, the player could improve and learn from previous season mistakes), what is key is that the time dependence underlying our model is small enough and also not of key interest to our study of the contract year effect. Furthermore, we stress that, since we're attempting to correct for correlated observations that we believe is most prominent within-cluster, i.e., within-team. Hence, the \emph{subject} in the assumption is emphatically the \emph{team}, not the \emph{player}. Hence, even if player performance is not completely independent, we have good reason to assume that team performance can be approximated as independent across observations. The estimating equation is then \[
+	U\left(\beta\right) = \sum_{i=1}^N \frac{\partial \mu_{it}}{\partial \beta_k} V_i^{-1} \left(Y_i - \mu_i\left(\beta\right)\right)
+	\] where $\mu_{it}$ is the model mean for team $i$ at year $t$, $V_i$ is the variance-covariance matrix, and $\beta_k$ are parameters estimated by the GEE method \citep{diggle_analysis_2002}. We then use the GEE method to re-estimate our weighted OLS model, this time using team as the \textbf{cluster} we're controlling for. The code implementation in \textbf{R} is straightforward:
+	
+	\begin{lstlisting}
+	nba <- nba %>%
+	arrange(team)
+	
+	gee.ws <- geeglm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+	+ salary_current,
+	family = gaussian,
+	data = nba,
+	weights = nba$min,
+	id = team)
+	\end{lstlisting}
+	
+	With this GEE method applied onto our weighted least squares model, we are finally able to correct for the three main challenges that we have discussed: heterogeneity, heteroskedasticity, and correlated observations.
 	
 	\subsection{IV Strategy}
 	There is potential endogeneity bias between the outcome variable and the contract year dummy variable. Namely, not only could being on a contract year affect a player’s outcome stats, but a player’s outcome stats could affect whether a player is on a contract year. For example, a worse player may be given shorter-term contracts, since general managers would be less inclined to keep him on the roster in the long-run, meaning he is more likely to be in a contract year in general. As such, to solve this we would like an instrument that affects whether or not one is in a contract year in the current year, but has no direct effect on a player’s outcome variables.
@@ -208,31 +283,162 @@
 	
 	Thus, this instrument provides an exogenous change in contract structure that affects contract year status.
 	
-	\subsection{Team fixed effects}
+	\subsection{Clustering data}
 	
-	\subsection{Curse of dimensionality and double LASSO}
+	\subsubsection{Correlated observations}
 	
-	Challenges in estimating the contract year effect fall under three categories. Firstly, player effort cannot be observed, and existing metrics such as distance covered on the field per minute may only be loosely correlated with player effort. For example, a player may put in effort by perfecting 3-point throws and so roughly run the same amount of distance but attempt more 3-point shots per game. Another player may put in effort by running longer each game to gain tactical advantage on a field. It is also possible that the player's effort fails to translate into an observable metric; for example, he might put in effort into team-building exercises and coordinate much more on the field. This also brings us to the next challenge. The effort put in by a particular player may also correlate with other players' performance. Since basketball is a team game, effort put in by one player may synergize with effort put in by other players. We can also look at this issue game-theoretically. Consider the standard public goods game, and let $y_i$ be the energy of the player $i$ devoted to the match, out of a total of $1$ endowed unit of energy. The payoff function for player $i$ can be thought of as \[
-	\Pi_i = \left(1 - y_i\right) + \alpha \sum_{j} y_j
-	\] where $0<\alpha<1$. The sum of the players' effort correlates positively with the expected probability of winning a match. When $\alpha<1$, the Nash equilibrium of this game is for all players to invest $0$ energy into the match. However, when factoring in social norms, we expect players to fall into two categories. Based on empirical evidence, players will either put in more of their endowment when others put in more, or put in less when others put in more \citep{dong_dynamics_2016}. Regardless, this makes estimating the contract year effect more difficult, as the effort devoted by an individual correlates with the effort of other individuals. Furthermore, this correlation is ex-ante unknown. The final challenge lies in the heterogeneity in different individuals. Even if we assume that the first two challenges are resolved, and that all players reflect their effort by pursuing, for instance, more three-point shots per minute, underlying unobserved parameters such as player skill and talent, player psychology during matches, and the correlation of the contract year effect with other covariates such as current salary means that individual fixed effects cannot be ignored.
+	An alternate approach to solving the correlated observations problem we discussed earlier is to change the unit of analysis. Instead of approaching the question from the player level, we approach it from the team level. This is different from the approach used when we employed the method of generalized estimation equation. We reshape the entire dataset, such that each observation is a team, rather than each cluster being a team. This sidesteps the assumption that we require to argue that a team needs to have independent observations over time, but the reshaping of the dataset will reduce the number of observations from 720 with 71 variables to 90 observations with 65 variables. Hence, we run into the curse of dimensionality problem. The data reshaping code in $\textbf{R}$ is as follows:
 	
-	To counteract the first challenge, we run multiple regressions with different outcome variables, such as player distance traveled per minute on the field and three point shot percentage. This partially circumvents the issue that proxies could be loosely correlated with player effort by looking at how being on a contract year affects a wide range of player statistics, instead of an individual measurement. To counteract the second challenge, we have to assume that the underlying correlation between players due to effort is homogeneous across teams. Then we can estimate the contract year effect on teams by looking at how many members are in a contract year and look at team level statistics. Finally, to counteract the third challenge, we control for fixed effects in our regression by adding indicator variables for players or teams as a covariate.
+	\begin{lstlisting}
+	 # drop duplicate columns
+	nba.LASSO <- nba %>%
+	select(-"player_y") %>%
+	select(-"season_1") %>%
+	select(-"age_2")
 	
-	\subsection{Controlling for Fixed Effects} 
+	 # filter teams that are TOT (meaning they were floating among teams)
 	
-	To control for fixed effects (omitted variables of an individual), we add indicator variables for players or teams as a covariate. This, along with the existing controls, gives us the regression model \[
-	y_{it} = \sum_{j=1}^N \alpha_j \mathbbm{1}\left\lbrace i= j \right\rbrace + \mathbbm{1}\left\lbrace i_t\in \mathrm{Contract} \right\rbrace\beta + c_{it}'\gamma + u_{it}
-	\] where $y_{it}$ is the outcome player statistics for player $i$ in time period $t$, $\mathbbm{1}\left\lbrace i= j \right\rbrace$ is the indicator variable for players, $\mathbbm{1}\left\lbrace i_t\in \mathrm{Contract} \right\rbrace$ is the indicator variable for whether a player is in a contract year in a given time period, and $c_{it}$ are various controls, such as age and current salary. The identifying assumption is then that unobservable effects soaked up by the individual indicator variable that simultaneously affect the outcome player statistics and the explanatory variable and covariates are time-invariant. In other words, \[
-	\mathrm{Cov}\left(x_{i1}, u_{it}\right) = \dots = \mathrm{Cov}\left(x_{iT}, u_{it}\right) = 0,
-	\] where $x$ includes both the explanatory variable and the controls. This assumption is innocuous enough in this context. We don't expect unobserved characteristics (omitted variables) of an individual to change dramatically across years that also affect whether a given player is in a contract year. For example, a player may get married and be very happy that year. This would cause him to play better, therefore increasing his performance and we will see a change in his player statistics. However it is unlikely that it will affect whether he is in a given contract year, as that aspect largely depends on how many years ago the player signed the contract.
+	nba.LASSO <- nba.LASSO %>%
+	filter(team != "TOT")
+	
+	 # produce weighted mean by team
+	
+	nba.LASSO <- nba.LASSO %>%
+	group_by(team, season) %>%
+	mutate_all(funs(weighted.mean(.,min))) %>%
+	summarize_all(mean)
+	
+	 # drop columns that aren't meaningful when summed (produces NA)
+	
+	nba.LASSO <- nba.LASSO %>%
+	select_if(~sum(!is.na(.)) > 0)
+	\end{lstlisting}
+	
+	The curse of dimensionality problem, however, need not mean that we rapidly lose statistical power because our number of parameters in our regression model increases exponentially with the number of variables we have, since, for instance, we're not taking interaction terms with all variables. Our issue herein is a huge loss in statistical power and a corresponding huge increase in the variance of any regression we would run. That is to say, even a linear increase in our variance can be devastating when we only have 90 observations. Additionally, if we continue controlling for team fixed effects, this could get ugly very quickly.
+	
+	\subsubsection{Double LASSO inference selection}
+	
+	Our approach to tackling the curse of dimensionality problem is to employ the double LASSO-OLS and double LASSO-IV method described in \cite{urminsky_using_2016} based on \cite{belloni_high-dimensional_2014}. The double LASSO method serves as a tool for inference and inference selection by dropping spurious covariates that may not directly affect the data. However, in contrast with LASSO, we also attempt to ensure that we are not dropping covariates that have a small effect on the outcome variable despite being correlated significantly with the remaining covariates. That is, we want to ensure that we do not inadvertently introduce an omitted variable bias when selecting inference variables. We note that other methods, such as relaxed LASSO proposed by \cite{meinshausen_relaxed_2007} addresses some of the issues with only conducting a single LASSO (for example, a relaxed LASSO addresses the issue of computational complexity when the dimension of the dataset becomes very high, and also leads to a consistent variable selection under a prediction-optimal choice of the penalty parameters). However, the advantage of methods based on \cite{belloni_high-dimensional_2014}'s is that it is heteroskedasticity robust, with possibly non-Gaussian disturbances (which we have implicitly assumed in our GEE model), and therefore addresses the underlying heteroskedasticity of our dataset. Furthermore, the coefficient of the final OLS after the double inference is also consistent. However, we need one assumption.
+	
+	\begin{assumption}{``Approximate sparsity".}
+		Only a relatively small number $s = o\left(n\right)$ of the regressors in the data are important for capturing accurately the main features of the regression function. In other words, the number of relevant regressors is much smaller than the sample size.
+	\end{assumption}
+
+	The assumption follows from \cite{belloni_high-dimensional_2014}, and is justified by carefully considering the covariates in our data. We don't have much reason to believe, for instance, that a player's dribbles per touch correlates so significantly with, say, the player's win share.
+	
+	\subsubsection{Pre-selection}
+	
+	Before we actually employ the double LASSO inference method, however, we need to take care not to use all our variables in the analysis, as several of them are correlated, or literally mean the same thing. For example, a player's offensive win shares is of course, highly correlated with their win shares. We have been hitherto circumspect and sidestepped the issue in our dataset by explicitly choosing our controls, but we now have to carefully look at all covariates in each regression and drop any covariates that serve as a proxy for effort or performance.
+	
+	\subsubsection{Double LASSO LATE}
+	
+	We follow and outline the strategy in \cite{chernozhukov_high-dimensional_2016-1} for a double LASSO inference method we're going after. We first define our treatment effect as the contract year, $C$. We use the binary instrument identified in the previous section and estimate the local average treatment effect \[
+	\mathbb{E}\left[Y\left(1\right) - Y\left(0\right)\;\vert\; D\left(1\right)> D\left(0\right)\right]
+	\] where $Y\left(1\right)$ is the observed outcome (for example, win shares) depending on whether the player is on a contract year $(1)$ or not $(0)$, and $D$ is the instrument. To do so, we first run a LASSO of $Y$ on $C$, $Z$, and $X$, where $X$ are all the covariates. We then run a LASSO of $C$ and $Z$ on $X$. Finally, we run an OLS estimating the LATE of $Y$ on $C$ using instrument $Z$ and with controls from surviving $X$ from both rounds of LASSO. The standard errors are estimated via bootstrap methods. This is implemented in \textbf{R} with the package \textbf{hdm} using the method \textbf{rlassoLATE}.
 	
 	\section{Results} \label{sec:result}
 	
-	\subsection{Player fixed effects}
+	\subsection{Generalized estimating equation method}
 	
-	\subsection{Team fixed effects}
+	\subsubsection{Fixed effect weighted OLS}
 	
-	\subsection{Double LASSO}
+	Before we discuss our results for the GEE method, let's first examine our results for the fixed effect weighted OLS. We run the fixed effect weighted OLS regression on 16 variables that we believe serve as a proxy for performance. While most of our results do not have statistical significance, we found that the contract year effect is statistically significant when we use win shares as the outcome variable, consistent with our discussion that win shares is the best metric for evaluating performance.
+	
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Date and time: Fri, Jun 12, 2020 - 7:13:02 AM
+	\begin{sidewaystable}[!htbp] \centering 
+		\caption{Using Box Outs as the Dependent Variables} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Box Outs \\ 
+			\\[-1.8ex] & (1) & (2) & (3)\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 0.027 & 0.030 & 0.060 \\ 
+			& ($-$0.107, 0.161) & ($-$0.036, 0.096) & ($-$0.113, 0.233) \\ 
+			& p = 0.697 & p = 0.367 & p = 0.500 \\ 
+			& & & \\ 
+			Average Minutes Played & 0.069 & 0.012 & 0.081 \\ 
+			& (0.054, 0.084) & (0.005, 0.020) & (0.062, 0.101) \\ 
+			& p = 0.000$^{***}$ & p = 0.002$^{***}$ & p = 0.000$^{***}$ \\ 
+			& & & \\ 
+			Current Salary & 0.000 & 0.000 & 0.000 \\ 
+			& ($-$0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+			& p = 0.594 & p = 0.083$^{*}$ & p = 0.312 \\ 
+			& & & \\ 
+			Constant & 0.602 & $-$0.260 & 0.349 \\ 
+			& ($-$0.245, 1.450) & ($-$0.677, 0.156) & ($-$0.743, 1.440) \\ 
+			& p = 0.165 & p = 0.222 & p = 0.532 \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			Player Fixed Effects & Yes & Yes & Yes \\ 
+			Year Fixed Effects & Yes & Yes & Yes \\ 
+			Position Fixed Effects & Yes & Yes & Yes \\ 
+			Observations & 820 & 820 & 820 \\ 
+			R$^{2}$ & 0.913 & 0.838 & 0.912 \\ 
+			Adjusted R$^{2}$ & 0.835 & 0.693 & 0.833 \\ 
+			Residual Std. Error (df = 432) & 2.840 & 1.400 & 3.660 \\ 
+			F Statistic (df = 387; 432) & 11.700$^{***}$ & 5.770$^{***}$ & 11.500$^{***}$ \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{sidewaystable}
+
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Date and time: Fri, Jun 12, 2020 - 7:15:13 AM
+	\begin{sidewaystable}[!htbp] \centering 
+		\caption{Using Win Shares as the Dependent Variables} 
+		\label{}
+		\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-5} 
+			\\[-1.8ex] & Win Shares & Offensive Win Shares & Defensive Win Shares & Win Shares per 48 Minutes \\ 
+			\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 0.401 & 0.282 & 0.102 & 0.003 \\ 
+			& (0.083, 0.719) & (0.049, 0.515) & ($-$0.039, 0.243) & ($-$0.005, 0.011) \\ 
+			& p = 0.014$^{**}$ & p = 0.019$^{**}$ & p = 0.156 & p = 0.445 \\ 
+			& & & & \\ 
+			Average Minutes Played & 0.164 & 0.112 & 0.052 & 0.002 \\ 
+			& (0.129, 0.200) & (0.086, 0.138) & (0.036, 0.068) & (0.001, 0.003) \\ 
+			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.0001$^{***}$ \\ 
+			& & & & \\ 
+			Current Salary & $-$0.00000 & $-$0.00000 & $-$0.000 & $-$0.000 \\ 
+			& ($-$0.00000, 0.000) & ($-$0.00000, $-$0.000) & ($-$0.00000, 0.000) & ($-$0.000, 0.000) \\ 
+			& p = 0.052$^{*}$ & p = 0.035$^{**}$ & p = 0.331 & p = 0.120 \\ 
+			& & & & \\ 
+			Constant & $-$0.098 & $-$1.210 & 1.160 & 0.062 \\ 
+			& ($-$2.110, 1.910) & ($-$2.690, 0.261) & (0.274, 2.050) & (0.012, 0.112) \\ 
+			& p = 0.924 & p = 0.108 & p = 0.011$^{**}$ & p = 0.016$^{**}$ \\ 
+			& & & & \\ 
+			\hline \\[-1.8ex] 
+			Player Fixed Effects & Yes & Yes & Yes & Yes \\ 
+			Year Fixed Effects & Yes & Yes & Yes & Yes \\ 
+			Position Fixed Effects & Yes & Yes & Yes & Yes \\ 
+			Observations & 820 & 820 & 820 & 820 \\ 
+			R$^{2}$ & 0.863 & 0.863 & 0.813 & 0.829 \\ 
+			Adjusted R$^{2}$ & 0.741 & 0.740 & 0.646 & 0.676 \\ 
+			Residual Std. Error (df = 432) & 6.740 & 4.940 & 2.980 & 0.167 \\ 
+			F Statistic (df = 387; 432) & 7.060$^{***}$ & 7.010$^{***}$ & 4.860$^{***}$ & 5.420$^{***}$ \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{sidewaystable} 
+
+	\pagebreak
+	
+	Additional tables and plots are presented in the appendix.
+	
+	\subsection{Instrumental variable method}
+	
+	\subsection{Clustered data double LASSO inference method}
 	
 	\section{Discussions} \label{sec:discussion}
 	
@@ -250,15 +456,103 @@
 	
 	\onehalfspacing
 	
-	\section*{Tables} \label{sec:tab}
-	\addcontentsline{toc}{section}{Tables}
+	\appendix
 	
+	\section{Tables} \label{sec:tab}
 	
+	We present all tables for our regression results in this section.
+	
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Date and time: Fri, Jun 12, 2020 - 7:22:29 AM
+	\begin{sidewaystable}[!htbp] \centering 
+		\caption{Using Speed Metrics as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & Average Speed & Offensive Speed & Defensive Speed \\ 
+			\\[-1.8ex] & (1) & (2) & (3)\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & $-$0.006 & $-$0.009 & $-$0.009 \\ 
+			& ($-$0.022, 0.011) & ($-$0.038, 0.021) & ($-$0.031, 0.014) \\ 
+			& p = 0.502 & p = 0.555 & p = 0.444 \\ 
+			& & & \\ 
+			Average Minutes Played & $-$0.005 & $-$0.005 & $-$0.007 \\ 
+			& ($-$0.007, $-$0.003) & ($-$0.009, $-$0.002) & ($-$0.010, $-$0.005) \\ 
+			& p = 0.00000$^{***}$ & p = 0.002$^{***}$ & p = 0.00000$^{***}$ \\ 
+			& & & \\ 
+			Current Salary & 0.000 & 0.000 & $-$0.000 \\ 
+			& ($-$0.000, 0.000) & ($-$0.000, 0.000) & ($-$0.000, $-$0.000) \\ 
+			& p = 0.716 & p = 0.506 & p = 0.006$^{***}$ \\ 
+			& & & \\ 
+			Constant & 4.590 & 5.070 & 4.220 \\ 
+			& (4.490, 4.700) & (4.890, 5.260) & (4.080, 4.360) \\ 
+			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			Player Fixed Effects & Yes & Yes & Yes \\ 
+			Year Fixed Effects & Yes & Yes & Yes \\ 
+			Position Fixed Effects & Yes & Yes & Yes \\ 
+			Observations & 820 & 820 & 820 \\ 
+			R$^{2}$ & 0.936 & 0.872 & 0.898 \\ 
+			Adjusted R$^{2}$ & 0.880 & 0.758 & 0.806 \\ 
+			Residual Std. Error (df = 432) & 0.351 & 0.625 & 0.472 \\ 
+			F Statistic (df = 387; 432) & 16.500$^{***}$ & 7.630$^{***}$ & 9.780$^{***}$ \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{sidewaystable} 
+
+	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	% Date and time: Fri, Jun 12, 2020 - 7:23:55 AM
+	\begin{sidewaystable}[!htbp] \centering 
+		\caption{Using Distance as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & Distance: Defensive & Distance: Offensive & Distance \\ 
+			\\[-1.8ex] & (1) & (2) & (3)\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & $-$0.004 & $-$0.001 & $-$24.800 \\ 
+			& ($-$0.009, 0.002) & ($-$0.008, 0.005) & ($-$72.200, 22.500) \\ 
+			& p = 0.183 & p = 0.722 & p = 0.305 \\ 
+			& & & \\ 
+			Average Minutes Played & 0.033 & 0.039 & 379.000 \\ 
+			& (0.032, 0.034) & (0.038, 0.039) & (373.000, 384.000) \\ 
+			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+			& & & \\ 
+			Current Salary & $-$0.000 & 0.000 & 0.00000 \\ 
+			& ($-$0.000, 0.000) & (0.000, 0.000) & ($-$0.00000, 0.00001) \\ 
+			& p = 0.233 & p = 0.002$^{***}$ & p = 0.095$^{*}$ \\ 
+			& & & \\ 
+			Constant & $-$0.0003 & 0.057 & 291.000 \\ 
+			& ($-$0.036, 0.035) & (0.015, 0.099) & ($-$7.550, 590.000) \\ 
+			& p = 0.988 & p = 0.009$^{***}$ & p = 0.057$^{*}$ \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			Player Fixed Effects & Yes & Yes & Yes \\ 
+			Year Fixed Effects & Yes & Yes & Yes \\ 
+			Position Fixed Effects & Yes & Yes & Yes \\ 
+			Observations & 820 & 820 & 820 \\ 
+			R$^{2}$ & 0.994 & 0.994 & 0.997 \\ 
+			Adjusted R$^{2}$ & 0.989 & 0.989 & 0.994 \\ 
+			Residual Std. Error (df = 432) & 0.119 & 0.142 & 1,003.000 \\ 
+			F Statistic (df = 387; 432) & 194.000$^{***}$ & 197.000$^{***}$ & 366.000$^{***}$ \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{sidewaystable} 
 	
 	\clearpage
 	
-	\section*{Figures} \label{sec:fig}
-	\addcontentsline{toc}{section}{Figures}
+	\section{Figures} \label{sec:fig}
 	
 	%\begin{figure}[hp]
 	%  \centering
@@ -272,8 +566,19 @@
 	
 	\clearpage
 	
-	\section*{Appendix A. Placeholder} \label{sec:appendixa}
-	\addcontentsline{toc}{section}{Appendix A}
+	\section{Code} \label{sec:code}
+	
+	%\begin{figure}[hp]
+	%  \centering
+	%  \includegraphics[width=.6\textwidth]{../fig/placeholder.pdf}
+	%  \caption{Placeholder}
+	%  \label{fig:placeholder}
+	%\end{figure}
+	
+	
+	
+	
+	\clearpage
 	
 	
 \end{document}
