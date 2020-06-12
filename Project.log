@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 09:56
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 09:58
 entering extended mode
 **./Project.tex
 (Project.tex
@@ -914,25 +914,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 793.
  (Project.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 793.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 793.
+Package rerunfilecheck Info: File `Project.out' has not changed.
+(rerunfilecheck)             Checksum: 39E885879F23532A8B78D00C5A68967F.
 
-
-Package rerunfilecheck Warning: File `Project.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Project.out':
-(rerunfilecheck)             Before: BCA8E58C96A0633DCB0DE4422CEE628E
-(rerunfilecheck)             After:  39E885879F23532A8B78D00C5A68967F.
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 793.
  ) 
 Here is how much of TeX's memory you used:
- 26503 strings out of 427748
- 471504 string characters out of 3150980
- 779396 words of memory out of 3000000
- 30304 multiletter control sequences out of 15000+200000
+ 26500 strings out of 427748
+ 471489 string characters out of 3150980
+ 779704 words of memory out of 3000000
+ 30301 multiletter control sequences out of 15000+200000
  543468 words of font info for 87 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  46i,13n,77p,2446b,1710s stack positions out of 5000i,500n,10000p,200000b,50000s

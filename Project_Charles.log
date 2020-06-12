@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 09:56
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 09:58
 entering extended mode
 **./Project_Charles.tex
 (Project_Charles.tex
@@ -925,7 +925,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 793.
 Here is how much of TeX's memory you used:
  26500 strings out of 427748
  471633 string characters out of 3150980
- 779649 words of memory out of 3000000
+ 779760 words of memory out of 3000000
  30301 multiletter control sequences out of 15000+200000
  543468 words of font info for 87 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
