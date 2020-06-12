@@ -7,6 +7,8 @@
 ##
 ## The raw file can be downloaded at 
 ## https://github.com/Skyrior/contract-year-effect/blob/master/player_stats.csv
+## The cleaned+merged file can be downloaded at
+## https://github.com/Skyrior/contract-year-effect/blob/master/nba.csv
 ##
 ## -------------------------------------------------------------------------
 
@@ -18,6 +20,7 @@ library(hdm) ## for double lasso
 library(ggplot2)
 library(stargazer)
 library(fastDummies)
+library(lmtest)
 
 ## -------------------------------------------------------------------------
 ##
@@ -112,137 +115,18 @@ my.summary.lm = function (x, digits = max(3L, getOption("digits") - 3L),
 
 ## -------------------------------------------------------------------------
 ##
-## Cleaning
-##
-## Remember to set working directory to source file location.
+## Data Import
 ##
 ## -------------------------------------------------------------------------
 
-data <- read.csv("player_stats.csv", header = TRUE)
-contract.year <- read.csv("contractyeardata.csv", header = TRUE)
-boxout <- read.csv("boxouts.csv", header = TRUE)
-touches <- read.csv("touches.csv", header = TRUE)
-
-## Removes NA
-
-cleaned <- na.omit(data)
-cboxout <- na.omit(boxout)
-ctouches <- na.omit(touches)
-contract.year$Salary.Current <- as.numeric(gsub('[$]', '', contract.year$Salary.Current))
-contract.year$Salary.Next <- as.numeric(gsub('[$]', '', contract.year$Salary.Next))
-
-## Note that N/A on next year salary is still valid data! They simply
-## do not have a contract signed yet.
-
-contract.year$Salary.Next[is.na(contract.year$Salary.Next)] <- 0
-cleaned.contract <- na.omit(contract.year)
-
-## 1. Removes trailing and leading whitespace, 
-## 2. Replace inner whitespaces with underscores,
-## 3. Replace dots with underscores.
-## 4. Removes weird chars.
-
-cleaned <- cleaned %>%
-  clean_names() %>%
-  rename_all(~str_replace_all(.,"\\.","_")) %>%
-  mutate(name = str_trim(name)) %>%
-  mutate(name = str_replace_all(name, "[^[:alnum:] ]", "")) %>%
-  mutate(name = str_replace(name, " ", "_"))
-
-cleaned.contract <- cleaned.contract %>%
-  clean_names() %>%
-  rename_all(~str_replace_all(.,"\\.","_")) %>%
-  mutate(player = str_trim(player)) %>%
-  mutate(player = str_replace_all(player, "[^[:alnum:] ]", "")) %>%
-  mutate(player = str_replace(player, " ", "_"))
-
-cboxout <- cboxout %>%
-  clean_names() %>%
-  rename_all(~str_replace_all(.,"\\.","_")) %>%
-  mutate(player = str_trim(player)) %>%
-  mutate(player = str_replace_all(player, "[^[:alnum:] ]", "")) %>%
-  mutate(player = str_replace(player, " ", "_"))
-
-ctouches <- ctouches %>%
-  clean_names() %>%
-  rename_all(~str_replace_all(.,"\\.","_")) %>%
-  mutate(player = str_trim(player)) %>%
-  mutate(player = str_replace_all(player, "[^[:alnum:] ]", "")) %>%
-  mutate(player = str_replace(player, " ", "_"))
-
-## Removes duplicates
-
-cleaned <- unique(cleaned)
-cleaned.contract <- unique(cleaned.contract)
-cboxout <- unique(cboxout)
-ctouches <- unique(ctouches)
-
-## Subsets data with no player floating between teams
-
-cleaned.notot <- cleaned %>%
-  filter(team != "TOT")
+nba <- read.csv("nba.csv")
+nba <- clean_names(nba)
 
 ## -------------------------------------------------------------------------
 ##
-## Merging the Dataset
-##
-## We proceed to merge the two datasets together.
+## Test for heteroskedasticity
 ##
 ## -------------------------------------------------------------------------
-
-names(cleaned.contract)[names(cleaned.contract) == 'player'] <- 'name'
-names(cleaned.contract)[names(cleaned.contract) == 'year'] <- 'season'
-names(cboxout)[names(cboxout) == 'player'] <- 'name'
-names(cboxout)[names(cboxout) == 'year'] <- 'season'
-names(ctouches)[names(ctouches) == 'player'] <- 'name'
-names(ctouches)[names(ctouches) == 'year'] <- 'season'
-cleaned$season <- as.numeric(str_replace(cleaned$season, "-\\d+", ""))
-cleaned$season <- cleaned$season + 1
-cleaned$season <- as.factor(cleaned$season)
-cleaned.contract$season <- as.factor(cleaned.contract$season)
-cboxout$season <- as.factor(cboxout$season)
-ctouches$season <- as.factor(ctouches$season)
-
-## Merges contract and advanced stats
-
-nba.advancedstats <- left_join(cleaned, cleaned.contract, by = c("name", "season"))
-nba.advancedstats <- na.omit(nba.advancedstats)
-
-write.csv(nba.advancedstats, file = "nbaadvancedstats.csv")
-
-## Merges contract and boxout
-
-nba.boxout <- left_join(cleaned.contract, cboxout, by = c("name", "season"))
-nba.boxout <- na.omit(nba.boxout)
-
-write.csv(nba.boxout, file = "nbaboxout.csv")
-
-## Merges contract and touch
-
-nba.touch <- left_join(cleaned.contract, ctouches, by = c("name", "season"))
-nba.touch <- na.omit(nba.touch)
-
-write.csv(nba.touch, file = "nbatouches.csv")
-
-## Full merged merges all 4 datasets.
-
-nba.fullmerged <- left_join(cleaned, cleaned.contract, by = c("name", "season"))
-nba.fullmerged <- left_join(nba.fullmerged, cboxout, by = c("name", "season"))
-nba.fullmerged <- left_join(nba.fullmerged, ctouches, by = c("name", "season"))
-nba.fullmerged <- na.omit(nba.fullmerged)
-
-write.csv(nba.all, file = "nbaall.csv")
-
-## Drop duplicate columns. Note: this includes duplicates due to
-## different units etc.
-
-drop.col <- c("gp", "dist_feet", "dist_miles_off", "dist_miles_def", "avg_speed_off",
-          "avg_speed_def", "salary_next")
-nba <- nba %>% select(-one_of(drop.col))
-
-## Export our current dataframe as CSV.
-
-write.csv(nba, file = "nba.csv")
 
 ## -------------------------------------------------------------------------
 ##
@@ -251,7 +135,7 @@ write.csv(nba, file = "nba.csv")
 ## -------------------------------------------------------------------------
 
 reg.usage <- lm(formula = usg ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-              + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+              + salary_current, data = nba, weights = nba$min)
 summary.usage <- my.summary.lm(summary(reg.usage), 
                              my.rows=grep("contract_year|min|season|salary_current",
                                           names(coef(reg.usage))))
@@ -263,7 +147,7 @@ summary.usage <- my.summary.lm(summary(reg.usage),
 ## -------------------------------------------------------------------------
 
 reg.dws <- lm(formula = dws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-               + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+               + salary_current, data = nba, weights = nba$min)
 summary.dws <- my.summary.lm(summary(reg.dws), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.dws))))
@@ -275,7 +159,7 @@ summary.dws <- my.summary.lm(summary(reg.dws),
 ## -------------------------------------------------------------------------
 
 reg.ows <- lm(formula = ows ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-              + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+              + salary_current, data = nba, weights = nba$min)
 summary.ows <- my.summary.lm(summary(reg.ows), 
                              my.rows=grep("contract_year|min|season|salary_current",
                                           names(coef(reg.ows))))
@@ -287,7 +171,7 @@ summary.ows <- my.summary.lm(summary(reg.ows),
 ## -------------------------------------------------------------------------
 
 reg.ws <- lm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-              + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+              + salary_current, data = nba, weights = nba$min)
 summary.ws <- my.summary.lm(summary(reg.ws), 
                              my.rows=grep("contract_year|min|season|salary_current",
                                           names(coef(reg.ws))))
@@ -299,7 +183,7 @@ summary.ws <- my.summary.lm(summary(reg.ws),
 ## -------------------------------------------------------------------------
 
 reg.distfeet <- lm(formula = dist_feet ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-             + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+             + salary_current, data = nba, weights = nba$min)
 summary.distfeet <- my.summary.lm(summary(reg.distfeet), 
                             my.rows=grep("contract_year|min|season|salary_current",
                                          names(coef(reg.distfeet))))
@@ -311,7 +195,7 @@ summary.distfeet <- my.summary.lm(summary(reg.distfeet),
 ## -------------------------------------------------------------------------
 
 reg.distdef <- lm(formula = dist_miles_def ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-                   + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+                   + salary_current, data = nba, weights = nba$min)
 summary.distdef <- my.summary.lm(summary(reg.distdef), 
                                   my.rows=grep("contract_year|min|season|salary_current",
                                                names(coef(reg.distdef))))
@@ -323,7 +207,7 @@ summary.distdef <- my.summary.lm(summary(reg.distdef),
 ## -------------------------------------------------------------------------
 
 reg.distoff <- lm(formula = dist_miles_off ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-                  + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+                  + salary_current, data = nba, weights = nba$min)
 summary.distoff <- my.summary.lm(summary(reg.distoff), 
                                  my.rows=grep("contract_year|min|season|salary_current",
                                               names(coef(reg.distoff))))
@@ -335,7 +219,7 @@ summary.distoff <- my.summary.lm(summary(reg.distoff),
 ## -------------------------------------------------------------------------
 
 reg.avgs <- lm(formula = avg_speed ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-               + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+               + salary_current, data = nba, weights = nba$min)
 summary.avgs <- my.summary.lm(summary(reg.avgs), 
                              my.rows=grep("contract_year|min|season|salary_current",
                                           names(coef(reg.avgs))))
@@ -347,7 +231,7 @@ summary.avgs <- my.summary.lm(summary(reg.avgs),
 ## -------------------------------------------------------------------------
 
 reg.sdef <- lm(formula = avg_speed_def ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-               + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+               + salary_current, data = nba, weights = nba$min)
 summary.sdef <- my.summary.lm(summary(reg.sdef), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.sdef))))
@@ -359,7 +243,7 @@ summary.sdef <- my.summary.lm(summary(reg.sdef),
 ## -------------------------------------------------------------------------
 
 reg.soff <- lm(formula = avg_speed_off ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-               + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+               + salary_current, data = nba, weights = nba$min)
 summary.soff <- my.summary.lm(summary(reg.soff), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.soff))))
@@ -371,7 +255,7 @@ summary.soff <- my.summary.lm(summary(reg.soff),
 ## -------------------------------------------------------------------------
 
 reg.ws48 <- lm(formula = ws_48 ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
-               + salary_current, data = nba.advancedstats, weights = nba.advancedstats$min)
+               + salary_current, data = nba, weights = nba$min)
 summary.ws48 <- my.summary.lm(summary(reg.ws48), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.ws48))))
@@ -382,8 +266,8 @@ summary.ws48 <- my.summary.lm(summary(reg.ws48),
 ##
 ## -------------------------------------------------------------------------
 
-reg.box <- lm(formula = box_outs ~ contract_year + min.y + as.factor(name) + as.factor(season) 
-               + salary_current, data = nba.boxout, weights = nba.boxout$min.y)
+reg.box <- lm(formula = box_outs ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+               + salary_current, data = nba, weights = nba$min)
 summary.box <- my.summary.lm(summary(reg.box), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.box))))
@@ -394,8 +278,8 @@ summary.box <- my.summary.lm(summary(reg.box),
 ##
 ## -------------------------------------------------------------------------
 
-reg.obox <- lm(formula = off_box_outs ~ contract_year + min.y + as.factor(name) + as.factor(season) 
-              + salary_current, data = nba.boxout, weights = nba.boxout$min.y)
+reg.obox <- lm(formula = off_box_outs ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+              + salary_current, data = nba, weights = nba$min)
 summary.obox <- my.summary.lm(summary(reg.obox), 
                              my.rows=grep("contract_year|min|season|salary_current",
                                           names(coef(reg.obox))))
@@ -406,8 +290,8 @@ summary.obox <- my.summary.lm(summary(reg.obox),
 ##
 ## -------------------------------------------------------------------------
 
-reg.dbox <- lm(formula = def_box_outs ~ contract_year + min.y + as.factor(name) + as.factor(season) 
-               + salary_current, data = nba.boxout, weights = nba.boxout$min.y)
+reg.dbox <- lm(formula = def_box_outs ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+               + salary_current, data = nba, weights = nba$min)
 summary.dbox <- my.summary.lm(summary(reg.dbox), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.dbox))))
@@ -418,8 +302,8 @@ summary.dbox <- my.summary.lm(summary(reg.dbox),
 ##
 ## -------------------------------------------------------------------------
 
-reg.avgt <- lm(formula = avg_sec_per_touch ~ contract_year + min.y + as.factor(name) + as.factor(season) 
-               + salary_current, data = nba.touch, weights = nba.touch$min.y)
+reg.avgt <- lm(formula = avg_sec_per_touch ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+               + salary_current, data = nba, weights = nba$min)
 summary.avgt <- my.summary.lm(summary(reg.avgt), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.avgt))))
@@ -430,8 +314,8 @@ summary.avgt <- my.summary.lm(summary(reg.avgt),
 ##
 ## -------------------------------------------------------------------------
 
-reg.avgd <- lm(formula = avg_drib_per_touch ~ contract_year + min.y + as.factor(name) + as.factor(season) 
-               + salary_current, data = nba.touch, weights = nba.touch$min.y)
+reg.avgd <- lm(formula = avg_drib_per_touch ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+               + salary_current, data = nba, weights = nba$min)
 summary.avgd <- my.summary.lm(summary(reg.avgd), 
                               my.rows=grep("contract_year|min|season|salary_current",
                                            names(coef(reg.avgd))))
@@ -508,17 +392,17 @@ cat(stargazer(reg.usage, dep.var.labels = "Usage Rate",
 
 todropa <- c("lg", "team.y", "name", "pos")
 
-nba.a2 <- nba.advancedstats %>%
+nba.a2 <- nba %>%
   select(-one_of(todropa))
 
 todropt <- c("x", "name", "team.y")
   
-nba.t2 <- nba.touch %>%
+nba.t2 <- nba %>%
   select(-one_of(todropt))
 
 todropb <- c("x", "name", "team.y")
 
-nba.b2 <- nba.boxout %>%
+nba.b2 <- nba %>%
   select(-one_of(todropb))
 
 todropf <- c("name", "lg", "pos", "team.y", "team.x.x", "team.y.y")
@@ -785,17 +669,17 @@ plot(dlasso)
 
 todropa <- c("lg", "team.y", "name", "pos")
 
-nba.a2 <- nba.advancedstats %>%
+nba.a2 <- nba %>%
   select(-one_of(todropa))
 
 todropt <- c("x", "name", "team.y")
 
-nba.t2 <- nba.touch %>%
+nba.t2 <- nba %>%
   select(-one_of(todropt))
 
 todropb <- c("x", "name", "team.y")
 
-nba.b2 <- nba.boxout %>%
+nba.b2 <- nba %>%
   select(-one_of(todropb))
 
 todropf <- c("name", "lg", "pos", "team.y", "team.x.x", "team.y.y")

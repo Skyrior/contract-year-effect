@@ -1,0 +1,14 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Project_Charles.aux
+The style file: abbrvnat.bst
+Illegal, another \bibstyle command---line 45 of file Project_Charles.aux
+ : \bibstyle
+ :          {abbrvnat}
+I'm skipping whatever remains of this command
+Database file #1: citations_charles.bib
+Warning--I didn't find a database entry for "holmstrom_contracts_1999"
+Warning--I didn't find a database entry for "gibbons_1992"
+Warning--I didn't find a database entry for "alchian_1972"
+Warning--I didn't find a database entry for "prendergast_1999"
+Warning--I didn't find a database entry for "ress_1994"
+Warning--I didn't find a database entry for "dong_dynamics_2016"
+(There was 1 error message)

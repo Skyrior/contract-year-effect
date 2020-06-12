@@ -1,0 +1,36 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aitken(1936)]{aitken_iv.least_1936}
+A.~C. Aitken.
+\newblock {IV}.—{On} {Least} {Squares} and {Linear} {Combination} of
+  {Observations}.
+\newblock \emph{Proceedings of the Royal Society of Edinburgh}, 55:\penalty0
+  42--48, 1936.
+\newblock ISSN 0370-1646.
+\newblock \doi{10.1017/S0370164600014346}.
+\newblock URL
+  \url{https://www.cambridge.org/core/journals/proceedings-of-the-royal-society-of-edinburgh/article/ivon-least-squares-and-linear-combination-of-observations/7106C26F19F2EBF75BCEE7FA285780B9}.
+
+\bibitem[Breusch and Pagan(1979)]{breusch_simple_1979}
+T.~S. Breusch and A.~R. Pagan.
+\newblock A {Simple} {Test} for {Heteroscedasticity} and {Random} {Coefficient}
+  {Variation}.
+\newblock \emph{Econometrica}, 47\penalty0 (5):\penalty0 1287--1294, 1979.
+\newblock ISSN 0012-9682.
+\newblock \doi{10.2307/1911963}.
+\newblock URL \url{https://www.jstor.org/stable/1911963}.
+
+\bibitem[Carroll and Ruppert(1988)]{carroll_transformation_1988}
+R.~J. Carroll and D.~Ruppert.
+\newblock \emph{Transformation and {Weighting} in {Regression}}.
+\newblock Springer US, Boston, MA, 1988.
+\newblock ISBN 9780412014215 9781489928733.
+\newblock \doi{10.1007/978-1-4899-2873-3}.
+\newblock URL \url{http://link.springer.com/10.1007/978-1-4899-2873-3}.
+
+\end{thebibliography}
