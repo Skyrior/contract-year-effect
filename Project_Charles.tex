@@ -84,7 +84,7 @@
 		\caption{Position}
 		\label{fig:Position}
 	\end{figure}
-
+	
 	Height could also influence a player's effectiveness on the field, and taller players may gain an advantage, all else equal.
 	
 	\begin{figure}[H]
@@ -93,7 +93,7 @@
 		\caption{Height}
 		\label{fig:Height}
 	\end{figure}
-
+	
 	Age may impact their performance too. Because players decrease in energy over an age of 30, they may start focusing on other aspects of the game that maximizes their performance given their energy constraints, which can skew the results.
 	
 	\begin{figure}[H]
@@ -102,7 +102,7 @@
 		\caption{Age}
 		\label{fig:Age}
 	\end{figure}
-
+	
 	We also expect salary to correlate with the player's performance; that is, we expect, in general, that better players receive a higher salary. In the data, unfortunately we see a strong skew where a few players receive significantly higher salary than the modal salary.
 	
 	\begin{figure}[H]
@@ -111,7 +111,7 @@
 		\caption{Salary}
 		\label{fig:Salary}
 	\end{figure}
-
+	
 	Finally, we will be using win shares as our main metric of evaluating performance. Note that win shares for most players cluster around 0 to 1, so a coefficient of win share that is around 0 to 1 will actually be significant; that is, a player who goes from 0 win share to 0.5 win share may literally be eclipsing 50\% of the players.	
 	
 	\begin{figure}[H]
@@ -127,7 +127,7 @@
 		\caption{Win Shares at 48 min.}
 		\label{fig:Win Shares at 48 min.}
 	\end{figure}
-
+	
 	The last relevant environmental data we require is the minutes played per game for players. Vitally, since many of the performance metrics we are using increases with minutes played (for example, the more minutes you play for your team, of course the more win shares you bring for the team), we need to control for and weight our regression by it.	
 	
 	\begin{figure}[H]
@@ -141,7 +141,7 @@
 	
 	\subsection{Data collection}
 	
-	The NBA salaries of every player from the 2016-2017 season to the 2019-2020 season were collected from basketballreference.com. Note that basketballreference only displays data for the current season, so to get salary data for 2016-2017 to the 2018-2019 seasons, we utilized web.archive.org. Players were determined to be contract years if they did not have a salary for the following season. Furthermore, panel data of all advanced stats for each active NBA player was scraped from basketballreference.com for every regular season these players played in. Most of the advanced stats are measurements of a player's productivity on the court. These include the age of the player, team the player played for, position the player played for, the number of games the player played for a particular season, average minutes played per game, player efficiency rating, true shooting percentage, three-point attempt rate, free-throw attempt rate, offensive rebound percentage, defensive rebound percentage, total rebound percentage, assist percentage, free throw attempt rate, offensive rebound percentage, defensive rebound percentage, assist percentage, steal percentage, block percentage, turnover percentage, usage percentage, offensive win shares, defensive win shares, win shares, win shares per 48 minutes, offensive box plus/minus, defensive box plus/minus, box plus/minus, and value over replacement player. 
+	The NBA salaries of every player from the 2016-2017 season to the 2019-2020 season were collected from basketballreference.com. Note that basketballreference only displays data for the current season, so to get salary data for 2016-2017 to the 2018-2019 seasons, we utilized web.archive.org. Players were determined to be contract years if they did not have a salary for the following season. Furthermore, panel data of all advanced stats for each active NBA player was scraped from basketballreference.com for every regular season these players played in. Most of the advanced stats are measurements of a player's productivity on the court. These include the age of the player, team the player played for, position the player played for, the number of games the player played for a particular season, average minutes played per game, player efficiency rating, true shooting percentage, three-point attempt rate, free-throw attempt rate, offensive rebound percentage, defensive rebound percentage, total rebound percentage, assist percentage, free throw attempt rate, offensive rebound percentage, defensive rebound percentage, assist percentage, steal percentage, block percentage, turnover percentage, usage percentage, offensive win shares, defensive win shares, win shares, win shares per 48 minutes, offensive box plus/minus, defensive box plus/minus, box plus/minus, and value over replacement player. For a description of the covariates in our data, visit the Appendix \ref{sec:datadesc}.
 	
 	Another way to measure a player's productivity/effort on the court is with boxout data. In theory, the more a player boxes out opposing players in order to grab rebounds, the more productive that player is to the team. All boxout-related data was collected from stats.nba.com for every player from the 2016-2017 to the 2019-2020 regular season. These include the number of boxouts a player averages per game, number of boxouts on offense a player averages per game, number of boxouts on defense a player averages per game, average number of rebounds the team grabs as a result of a player boxing out, average number of rebounds the player grabs as a result of him boxing out, percentage of times a player boxes out on offensive, percentage of times a player boxes out on defense, the percentage of times the teams grabs a rebound when boxing out, and the percentage of times the player grabs a rebound when boxing out. 
 	
@@ -852,9 +852,19 @@
 	
 	\pagebreak
 	
-	\section{Discussions} \label{sec:discussion}
-	
 	\section{Conclusion} \label{sec:conclusion}
+	
+	\subsection{Empirical Strategy}
+	
+	We have utilized three methods of data analysis to investigate the contract year effect: weighted OLS regression (with GEE standard errors), instrumental variable inference, and double LASSO. The different methods illustrate the importance of tackling underlying characteristics of the data to improve statistical power and inference power. For example, underlying heteroskedasticity causes the OLS estimator to be inefficient. To solve this issue, we utilized a weight matrix that we assume approximates the inverse of the variance-covariance matrix, namely minutes played (on the diagonal of the weight matrix). Furthermore, to tackle the issue of underlying heterogeneity, we controlled for fixed effects. Finally, the issue of correlated observations also unduly increases the error of our results, and cause inefficiency. To approach an efficient estimator once again, we apply the generalized estimating equation method, and as we can see from our results, this decreased the variation and increased statistical power, (i.e., our $p$-value drops), and reduced the boundaries of the 95\% confidence interval. This illustrates that proactively accounting for underlying biases and issues with the data can help improve the inferential power that we can derive from our data analysis results.
+	
+	Conversely, in our instrumental variable analysis, we failed to find results with statistical significance; however, the coefficients from the two stage least squares are significantly different from the coefficients from our weighted OLS with GEE. This demonstrates that accounting for endogeneity bias need not always lead to higher statistical power. Indeed, it may sometimes decrease it, especially if the real causal effect is lower than what we would have inferred without an instrument.
+	
+	Additionally, we also tackled the issue of correlated observations from another angle, namely that of reducing the data set into clusters (i.e. we group all observations at the team and season level, and substituted the weighted mean of all players in that team in that season for our covariates). This drastically decreases the number of observations and causes us to run into the issue of the curse of dimensionality. To address this shortcoming, we employed a double LASSO inference method, but failed to find results with high statistical power. On the contrary, when utilizing the instrument that we have used previously, and using the double LASSO inference method accounting for the instrument, we found results that have a high statistical power.
+	
+	The three approaches demonstrate that many tradeoffs exist when conducting statistical and econometric analyses of data that contains many distortions and effects that are difficult to tease apart. It is important to stress that our weighted OLS with GEE estimator was ultimately not BLUE, i.e., it wasn't efficient. We had to make compromises when using minutes played as both a control and as a weight, but we believed that the alternative, not using a weight at all, will lead to a worse outcome. There is also a tradeoff between inferential power and statistical power. We noticed that the IV regression need not lead to higher statistical power. A weak instrument may also simply distort the statistical results even further. Finally, a tradeoff also exists, as we have seen, between double LASSO with instruments and a weighted OLS with GEE. When the coefficient for a variable under a weighted OLS with GEE is close to zero, the double LASSO with instruments performs better and have higher statistical power because it determines a casual effect that is far from zero. Conversely, if the coefficient for the variable is already somewhat far from zero, then the double LASSO with instruments need not perform better as it is subject to the problem of decreasing statistical power due to clustering the data. We also note that the double LASSO with instruments produce results that have questionable magnitudes. Note that in Figure \ref{fig:Win Shares}, we see that most players have a win share of around 0 to 1. To claim that the contract year effect will push players to increase their win share by 5 or even 10 is quite alarming indeed. We have reason to believe that the real causal effect may be somewhere at the lower end of the 95\% confidence interval. Indeed, the wide confidence interval from the double LASSO with instruments method demonstrate that this particular method need not tell us an informative assessment of the magnitude of the contract year effect; the best we can claim confidently is that it \emph{exists}.
+	
+	\subsection{Conclusion}
 	
 	Overall, we find that being on a contract year marginally, at best, increases an NBA player's production on the court. When running weighted least squares, while the effect of being on the contract year was not significant for most of the proxies for player production, the effect was significantly positive when using win shares and offensive win shares as the dependent variable. Surprisingly, the effect of contract year was much less significant when using defensive win shares as the proxy. This can indicate that players on contract years tend to perform better offensively. One possibility is that players on contract years feel more pressured to make an impact on the offensive end than the defensive end of the court. Perhaps it is much easier to notice a player's efforts on offense than on defense. After all, it is very easy to see if scoring more often and/or facilitating the offense directly leading to buckets. However, it might be difficult to notice a player playing better defense. For example, it is possible for opposing players to score despite solid defense. In those instances, it is much easier to notice the brilliant offense as opposed to the strong defense. As a result, when players are on the final year of their contracts, they decide to give much more effort on offense as opposed to on defense. 
 	
@@ -1016,6 +1026,72 @@
 			\end{tabular} 
 		\end{table} 
 	\end{landscape}
+	
+	\clearpage
+	
+	\section{Data Description} \label{sec:datadesc}
+	
+	\begin{lstlisting}
+	Age - The player's age on Feburary 1 of the season
+	Tm - Team
+	Lg - League
+	Pos - Position
+	G - Games Played in the season
+	MP - Minutes Played
+	PER - Player efficiency rating:
+	A measure of per-minute production standardized such that the league average is 15.
+	TS - True shooting percentage:
+	A measure of shooting efficiency that takes into account 2-point field goals, 3-point field goals, and free throws.
+	x3p\_ar - 3-point attempt rate:
+	Percentage of FG attempts from 3-point range
+	f\_tr - Free Throw attempt rate:
+	Number of FT Attempts per FG attempt
+	orb - Offensive Rebound percentage:
+	An estimate of the percentage of available offensive rebounds a player grabbed while he was on the floor.
+	drb - Defensive Rebound percentage:
+	An estimate of the percentage of available defensive rebounds a player grabbed while he was on the floor.
+	trb - Total Rebound percentage:
+	An estimate of the percentage of available rebounds a player grabbed while he was on the floor.
+	ast - Assist percentage:
+	An estimate of the percentage of teammate field goals a player assisted while he was on the floor.
+	stl - Steal percentage:
+	An estimate of the percentage of opponent possessions that end with a steal by the player while he was on the floor.
+	blk - Block percentage:
+	An estimate of the percentage of opponent two-point field goal attempts blocked by the player while he was on teh floor.
+	tov - Turnover percentage:
+	An estimate of turnovers committed per 100 plays.
+	usg - Usage percentage:
+	An estimate of the percentage of team plays used by a player while he was on the floor.
+	ows - Offensive win shares:
+	An estimate of the number of wins contributed by a player due to his offense.
+	dws - Defensive win shares:
+	An estimate of the number of wins contributed by a player due to his defense.
+	ws - Win shares:
+	An estimate of the number of wins contributed by a player.
+	ws\_48 - Win Shares per 48 minutes:
+	An estimate of the number of wins contributed by a player per 48 minutes (league average is approximately .100)
+	obpm - Offensive Box Plus/Minus
+	A box score estimate of the offensive points per 100 possessions a player contributed above a league-average player, translated to an average team.
+	dbpm - Defensive Box Plus/Minus
+	A box score estimate of the defensive points per 100 possessions a player contributed above a league-average player, translated to an average team.
+	bpm - Box Plus/Minus
+	A box score estimate of the points per 100 possessions a player contributed above a league-average player, translated to an average team.
+	vorp - Value over Replacement Player
+	A box score estimate of the points per 100 TEAM possessions that a player contributed above a replacement-level (-2.0) player, translated to an average team and prorated to an 82-game season. Multiply by 2.70 to convert to wins over replacement.
+	min - Minutes played per game
+	dist\_miles - Distance in miles
+	dist\_miles\_off - Offensive per distance in miles
+	dist\_miles\_def - Defensive per distance in miles
+	avg\_speed - Average Speed
+	avg\_speed\_off - Average Speed offensive
+	avg\_speed\_def - Average Speed defensive
+	rk - Rank
+	salary\_current - Current Salary
+	salary\_next - Next year Salary
+	Note: normalized to zero if the player does not have a contract in the next year.
+	contract\_year - Whether a player is on a contract year
+	\end{lstlisting}
+	
 	
 	\clearpage
 	
