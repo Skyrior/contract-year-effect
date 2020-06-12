@@ -62,15 +62,80 @@
 	\doublespacing
 	
 	
-	\section{Introduction and Literature Review} \label{sec:introduction}
+	\section{Introduction} \label{sec:introduction}
+	
+	\subsection{Introduction and Literature Review}
+	
 	There has been numerous news articles highlighting the contract year phenomenon, a phenomenon where the athletes perform at a high level before their free agency than previous years, but once they sign we observe a drop in performance back to previous levels. Bismack Biyombo, Raef LaFrentz, and Luol Deng are just few of the many examples of this phenomenon. However, when watching the NBA, one finds that superstars such as Kobe Bryant, LeBron James, and Michael Jordan are not subject to the contract year phenomenon. This can be attributed to career concerns, as written by \cite{holmstrom_contracts_1999} and \cite{gibbons_1992}. Such superstars play not simply to maximize their paychecks, but also to win championships, improve their legacies, and enter the conversation for greatest player of all time. However, many other players do not face the same career concerns, and hence may simply seek to maximize paychecks for minimal effort, forming the basis of the contract year phenomenon.
 	
 	At its core, the contract year phenomenon is a principal-agent problem, complicated by incomplete information and time-variant incentives. In other words, a principal pays an agent, where the principal reaps utility as a function of the effort the agent puts in, while the agent reaps utility from the payment. The cost to the principal is the payment, while that to the agent is his/her effort level. Furthermore, principals are unable to observe the effort levels of agents directly, meaning that contracts offered by the principal may be incentive-incompatible. This can then lead to what \cite{alchian_1972} call "shirking" behavior, where an agent works with less effort than agreed upon in the contract. \cite{holmstrom_contracts_1999} further addresses the issue of moral hazard in a principal-agent interaction with imperfect information, and states that "[w]hen the same situation repeats itself over time, the effects of uncertainty tend to be reduced and dysfunctional behavior is more accurately revealed, thus alleviating the problem of moral hazard". However, a major issue with the contract year phenomenon is that principals, holding the expectation of high effort levels, offer long-term contracts, hence not allowing the "same situation" to play out numerous times, but only a few times before the player retires. This is intuitively suboptimal, and in fact, \cite{prendergast_1999} finds that "contracts predicted by the theory" have not been well-confirmed empirically. Thus, on the strategic level, agents on a contract year can engage in ex-ante opportunism, before undertaking ex post opportunism after signing the contract, terminology discussed in \cite{ress_1994}. Namely, agents can first exert a high level of effort in one's contract year - ex ante opportunism - which enables them to sign a long-term contract. However, after signing, the players can now act with ex post opportunism, i.e. in this case putting in minimal effort. The degree to which this effort is minimal depends on an agent's dynamic problem. In other words, they can choose to exert no effort, hence guaranteeing that they never sign a new contract again. Alternatively, they could exert some positive level of effort, such that principals will be willing to give another contract once the agent reaches his next contract year. This is within the scope of the large body of IO literature on reputation.
 	
 	That being said, sports-specific research has yielded conflicting results on opportunistic behavior. \cite{lehn_1982}, \cite{scoggins_1993}, \cite{stiroh_2006}, and \cite{paulsen_2018} find evidence of the aforementioned opportunistic behavior. However, \cite{krautmann_1990}, \cite{maxcy_2002}, \cite{berri_2007}, \cite{krautmann_2009} attempt to explain the differing results by arguing that the test one uses to determine shirking affects whether or not one does find such behavior. In addition, \cite{ryan_show_2015} finds that multiple studies eliminates players who fail to acquire a new contract. This creates survivorship bias, as such players are likely to have systematically lower metrics of effort in contract years, and hence coefficients estimating the contract year phenomenon may be biased upwards.
 	
-	Studies on the contract year phenomenon have used performance-based metrics, such as one's Player Efficiency Rating (PER, a statistic meant to measure a basketball player's per-minute performance while adjusting for the number of opportunities he has to perform), in order to estimate the impact of contract years on performance. We look at some such statistics, but instead of focusing on those, we would instead like to focus on other metrics that we believe are more closely related to effort level. This is because at the NBA level, simply exerting more effort may not be enough for many players who want to improve their performance: they face not only a talent barrier, but also a speed barrier during in-game action, where the game moves quickly and is mostly continuous. This means that the effect of effort on performance could be completely outweighed by the need to think quickly and have extremely fast reactions. This is in contrast to a sport like baseball, where a player could exert more effort by practicing his batting more, and such effort can be demonstrated relatively clearly during in-game performance due to the slow, discrete nature of the game. We go more into detail of the exact statistics in the following section.
+	Studies on the contract year phenomenon have used performance-based metrics, such as one's Player Efficiency Rating (PER, a statistic meant to measure a basketball player's per-minute performance while adjusting for the number of opportunities he has to perform), in order to estimate the impact of contract years on performance. We look at some such statistics, but instead of focusing on those, we would instead like to focus on other metrics that we believe are more closely related to effort level. This is because at the NBA level, simply exerting more effort may not be enough for many players who want to improve their performance: they face not only a talent barrier, but also a speed barrier during in-game action, where the game moves quickly and is mostly continuous. This means that the effect of effort on performance could be completely outweighed by the need to think quickly and have extremely fast reactions. This is in contrast to a sport like baseball, where a player could exert more effort by practicing his batting more, and such effort can be demonstrated relatively clearly during in-game performance due to the slow, discrete nature of the game.
 	
+	\subsection{Environment}
+	
+	Summary statistics of the environment could illuminate potential controls that we need to use for our data analysis. The first issue is that players are grouped into different positions. In general, we would expect that players play within the constraints and objectives of their positions. For example, players with position C are center will have more control over the defense, and will generally be near the basket. Owing to its position at the center, they will therefore have more opportunity to help the team's defense and so have a higher defensive win share. To make sure that our data is not skewed towards one type of player, we examine the summary statistics of our environment.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{position.png}
+		\caption{Position}
+		\label{fig:Position}
+	\end{figure}
+
+	Height could also influence a player's effectiveness on the field, and taller players may gain an advantage, all else equal.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{height.png}
+		\caption{Height}
+		\label{fig:Height}
+	\end{figure}
+
+	Age may impact their performance too. Because players decrease in energy over an age of 30, they may start focusing on other aspects of the game that maximizes their performance given their energy constraints, which can skew the results.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{age.png}
+		\caption{Age}
+		\label{fig:Age}
+	\end{figure}
+
+	We also expect salary to correlate with the player's performance; that is, we expect, in general, that better players receive a higher salary. In the data, unfortunately we see a strong skew where a few players receive significantly higher salary than the modal salary.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{money.png}
+		\caption{Salary}
+		\label{fig:Salary}
+	\end{figure}
+
+	Finally, we will be using win shares as our main metric of evaluating performance. Note that win shares for most players cluster around 0 to 1, so a coefficient of win share that is around 0 to 1 will actually be significant; that is, a player who goes from 0 win share to 0.5 win share may literally be eclipsing 50\% of the players.	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{ws.png}
+		\caption{Win Shares}
+		\label{fig:Win Shares}
+	\end{figure}	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{ws_48.png}
+		\caption{Win Shares at 48 min.}
+		\label{fig:Win Shares at 48 min.}
+	\end{figure}
+
+	The last relevant environmental data we require is the minutes played per game for players. Vitally, since many of the performance metrics we are using increases with minutes played (for example, the more minutes you play for your team, of course the more win shares you bring for the team), we need to control for and weight our regression by it.	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{min.png}
+		\caption{Minutes}
+		\label{fig:Minutes}
+	\end{figure}
 	
 	\section{Data} \label{sec:data}
 	
@@ -951,63 +1016,6 @@
 			\end{tabular} 
 		\end{table} 
 	\end{landscape}
-	
-	\clearpage
-	
-	\section{Figures} \label{sec:fig}
-	
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{position.png}
-		\caption{Position}
-		\label{fig:Position}
-	\end{figure}
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{height.png}
-		\caption{Height}
-		\label{fig:Height}
-	\end{figure}	
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{age.png}
-		\caption{Age}
-		\label{fig:Age}
-	\end{figure}	
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{money.png}
-		\caption{Salary}
-		\label{fig:Salary}
-	\end{figure}	
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{ws.png}
-		\caption{Win Shares}
-		\label{fig:Win Shares}
-	\end{figure}	
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{ws_48.png}
-		\caption{Win Shares at 48 min.}
-		\label{fig:Win Shares at 48 min.}
-	\end{figure}	
-	
-	\begin{figure}[hp]
-		\centering
-		\includegraphics[width=\textwidth]{min.png}
-		\caption{Minutes}
-		\label{fig:Minutes}
-	\end{figure}	
-	
-	
-	
 	
 	\clearpage
 	
