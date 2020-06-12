@@ -63,20 +63,79 @@
 	
 	
 	\section{Introduction} \label{sec:introduction}
+	
+	\subsection{Introduction and Literature Review}
+	
 	There has been numerous news articles highlighting the contract year phenomenon, a phenomenon where the athletes perform at a high level before their free agency than previous years, but once they sign we observe a drop in performance back to previous levels. Bismack Biyombo, Raef LaFrentz, and Luol Deng are just few of the many examples of this phenomenon. However, when watching the NBA, one finds that superstars such as Kobe Bryant, LeBron James, and Michael Jordan are not subject to the contract year phenomenon. This can be attributed to career concerns, as written by \cite{holmstrom_contracts_1999} and \cite{gibbons_1992}. Such superstars play not simply to maximize their paychecks, but also to win championships, improve their legacies, and enter the conversation for greatest player of all time. However, many other players do not face the same career concerns, and hence may simply seek to maximize paychecks for minimal effort, forming the basis of the contract year phenomenon.
 	
 	At its core, the contract year phenomenon is a principal-agent problem, complicated by incomplete information and time-variant incentives. In other words, a principal pays an agent, where the principal reaps utility as a function of the effort the agent puts in, while the agent reaps utility from the payment. The cost to the principal is the payment, while that to the agent is his/her effort level. Furthermore, principals are unable to observe the effort levels of agents directly, meaning that contracts offered by the principal may be incentive-incompatible. This can then lead to what \cite{alchian_1972} call "shirking" behavior, where an agent works with less effort than agreed upon in the contract. \cite{holmstrom_contracts_1999} further addresses the issue of moral hazard in a principal-agent interaction with imperfect information, and states that "[w]hen the same situation repeats itself over time, the effects of uncertainty tend to be reduced and dysfunctional behavior is more accurately revealed, thus alleviating the problem of moral hazard". However, a major issue with the contract year phenomenon is that principals, holding the expectation of high effort levels, offer long-term contracts, hence not allowing the "same situation" to play out numerous times, but only a few times before the player retires. This is intuitively suboptimal, and in fact, \cite{prendergast_1999} finds that "contracts predicted by the theory" have not been well-confirmed empirically. Thus, on the strategic level, agents on a contract year can engage in ex-ante opportunism, before undertaking ex post opportunism after signing the contract, terminology discussed in \cite{ress_1994}. Namely, agents can first exert a high level of effort in one's contract year - ex ante opportunism - which enables them to sign a long-term contract. However, after signing, the players can now act with ex post opportunism, i.e. in this case putting in minimal effort. The degree to which this effort is minimal depends on an agent's dynamic problem. In other words, they can choose to exert no effort, hence guaranteeing that they never sign a new contract again. Alternatively, they could exert some positive level of effort, such that principals will be willing to give another contract once the agent reaches his next contract year. This is within the scope of the large body of IO literature on reputation.
 	
 	That being said, sports-specific research has yielded conflicting results on opportunistic behavior. \cite{lehn_1982}, \cite{scoggins_1993}, \cite{stiroh_2006}, and \cite{paulsen_2018} find evidence of the aforementioned opportunistic behavior. However, \cite{krautmann_1990}, \cite{maxcy_2002}, \cite{berri_2007}, \cite{krautmann_2009} attempt to explain the differing results by arguing that the test one uses to determine shirking affects whether or not one does find such behavior. In addition, \cite{ryan_show_2015} finds that multiple studies eliminates players who fail to acquire a new contract. This creates survivorship bias, as such players are likely to have systematically lower metrics of effort in contract years, and hence coefficients estimating the contract year phenomenon may be biased upwards.
 	
-	Studies on the contract year phenomenon have used performance-based metrics, such as one's Player Efficiency Rating (PER, a statistic meant to measure a basketball player's per-minute performance while adjusting for the number of opportunities he has to perform), in order to estimate the impact of contract years on performance. We look at some such statistics, but instead of focusing on those, we would instead like to focus on other metrics that we believe are more closely related to effort level. This is because at the NBA level, simply exerting more effort may not be enough for many players who want to improve their performance: they face not only a talent barrier, but also a speed barrier during in-game action, where the game moves quickly and is mostly continuous. This means that the effect of effort on performance could be completely outweighed by the need to think quickly and have extremely fast reactions. This is in contrast to a sport like baseball, where a player could exert more effort by practicing his batting more, and such effort can be demonstrated relatively clearly during in-game performance due to the slow, discrete nature of the game. We go more into detail of the exact statistics in the following section.
+	Studies on the contract year phenomenon have used performance-based metrics, such as one's Player Efficiency Rating (PER, a statistic meant to measure a basketball player's per-minute performance while adjusting for the number of opportunities he has to perform), in order to estimate the impact of contract years on performance. We look at some such statistics, but instead of focusing on those, we would instead like to focus on other metrics that we believe are more closely related to effort level. This is because at the NBA level, simply exerting more effort may not be enough for many players who want to improve their performance: they face not only a talent barrier, but also a speed barrier during in-game action, where the game moves quickly and is mostly continuous. This means that the effect of effort on performance could be completely outweighed by the need to think quickly and have extremely fast reactions. This is in contrast to a sport like baseball, where a player could exert more effort by practicing his batting more, and such effort can be demonstrated relatively clearly during in-game performance due to the slow, discrete nature of the game.
 	
-	\section{Literature Review} \label{sec:literature}
-	When watching the NBA, one finds that superstars such as Kobe Bryant, LeBron James, and Michael Jordan are not subject to the contract year phenomenon. This can be attributed to career concerns, as written by \cite{holmstrom_contracts_1999} and \cite{gibbons_1992}. Such superstars play not simply to maximize their paychecks, but also to win championships, improve their legacies, and enter the conversation for greatest player of all time. However, many other players do not face the same career concerns, and hence may simply seek to maximize paychecks for minimal effort, forming the basis of the contract year phenomenon.
-	At its core, the contract year phenomenon is a principal-agent problem, complicated by incomplete information and time-variant incentives. In other words, a principal pays an agent, where the principal reaps utility as a function of the effort the agent puts in, while the agent reaps utility from the payment. The cost to the principal is the payment, while that to the agent is his/her effort level. Furthermore, principals are unable to observe the effort levels of agents directly, meaning that contracts offered by the principal may be incentive-incompatible. This can then lead to what \cite{alchian_1972} call "shirking" behavior, where an agent works with less effort than agreed upon in the contract. \cite{holmstrom_contracts_1999} further addresses the issue of moral hazard in a principal-agent interaction with imperfect information, and states that "[w]hen the same situation repeats itself over time, the effects of uncertainty tend to be reduced and dysfunctional behavior is more accurately revealed, thus alleviating the problem of moral hazard". However, a major issue with the contract year phenomenon is that principals, holding the expectation of high effort levels, offer long-term contracts, hence not allowing the "same situation" to play out numerous times, but only a few times before the player retires. This is intuitively suboptimal, and in fact, \cite{prendergast_1999} finds that "contracts predicted by the theory" have not been well-confirmed empirically. Thus, on the strategic level, agents on a contract year can engage in ex-ante opportunism, before undertaking ex post opportunism after signing the contract, terminology discussed in \cite{ress_1994}. Namely, agents can first exert a high level of effort in one's contract year - ex ante opportunism - which enables them to sign a long-term contract. However, after signing, the players can now act with ex post opportunism, i.e. in this case putting in minimal effort. The degree to which this effort is minimal depends on an agent's dynamic problem. In other words, they can choose to exert no effort, hence guaranteeing that they never sign a new contract again. Alternatively, they could exert some positive level of effort, such that principals will be willing to give another contract once the agent reaches his next contract year. This is within the scope of the large body of IO literature on reputation.
+	\subsection{Environment}
 	
-	That being said, sports-specific research has yielded conflicting results on opportunistic behavior.
+	Summary statistics of the environment could illuminate potential controls that we need to use for our data analysis. The first issue is that players are grouped into different positions. In general, we would expect that players play within the constraints and objectives of their positions. For example, players with position C are center will have more control over the defense, and will generally be near the basket. Owing to its position at the center, they will therefore have more opportunity to help the team's defense and so have a higher defensive win share. To make sure that our data is not skewed towards one type of player, we examine the summary statistics of our environment.
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{position.png}
+		\caption{Position}
+		\label{fig:Position}
+	\end{figure}
+	
+	Height could also influence a player's effectiveness on the field, and taller players may gain an advantage, all else equal.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{height.png}
+		\caption{Height}
+		\label{fig:Height}
+	\end{figure}
+	
+	Age may impact their performance too. Because players decrease in energy over an age of 30, they may start focusing on other aspects of the game that maximizes their performance given their energy constraints, which can skew the results.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{age.png}
+		\caption{Age}
+		\label{fig:Age}
+	\end{figure}
+	
+	We also expect salary to correlate with the player's performance; that is, we expect, in general, that better players receive a higher salary. In the data, unfortunately we see a strong skew where a few players receive significantly higher salary than the modal salary.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{money.png}
+		\caption{Salary}
+		\label{fig:Salary}
+	\end{figure}
+	
+	Finally, we will be using win shares as our main metric of evaluating performance. Note that win shares for most players cluster around 0 to 1, so a coefficient of win share that is around 0 to 1 will actually be significant; that is, a player who goes from 0 win share to 0.5 win share may literally be eclipsing 50\% of the players.	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{ws.png}
+		\caption{Win Shares}
+		\label{fig:Win Shares}
+	\end{figure}	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{ws_48.png}
+		\caption{Win Shares at 48 min.}
+		\label{fig:Win Shares at 48 min.}
+	\end{figure}
+	
+	The last relevant environmental data we require is the minutes played per game for players. Vitally, since many of the performance metrics we are using increases with minutes played (for example, the more minutes you play for your team, of course the more win shares you bring for the team), we need to control for and weight our regression by it.	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{min.png}
+		\caption{Minutes}
+		\label{fig:Minutes}
+	\end{figure}
 	
 	\section{Data} \label{sec:data}
 	
@@ -282,40 +341,40 @@
 	\textit{Relevance}: It clearly affects whether or not one is currently in a contract year.
 	
 	\textit{Exclusion}: It has no direct effect on a player’s outcome stats; it only affects outcomes through the contract year phenomenon.
-
+	
 	\textit{Exogeneity}: Anything that affects a player's outcome variables that was not controlled for will not be influenced by LeBron James' contract year status.
 	
 	Thus, this instrument provides an exogenous change in contract structure that affects contract year status.
-
-
-
-We test for instrument strength, finding that the F-Statistic is 85.207.
-
-\begin{table}[!htbp] \centering 
-  \caption{Test for Instrument Strength} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} \\ 
-\hline \\[-1.8ex] 
-Df & 1 & 1.000   \\ 
-F & 1 & 85.207   \\ 
-Pr(\textgreater F) & 1 & 0.000  \\ 
-\hline \\[-1.8ex] 
-\end{tabular} 
-\end{table} 
-
-Thus, our instrumental variables model is as follows:
-
-\begin{align}
-y_i & = \alpha d_i + \beta x_i' + \epsilon_i\\
-d_i & = \gamma z_i' + \delta x_i' + \nu_i,
-\end{align}
-
-where $d_i$ is our endogenous regressor (in this case, whether or not one is on a contract year), $x_i$ is our vector of control variables, and $z_i$ is our instrument. We have that $\mathbb{E}[\epsilon_i x_i'] = \mathbb{E}[\epsilon_i z_i'] = \mathbb{E}[\nu_i x_i'] = \mathbb{E}[\nu_i z_i'] = 0$, but $\mathbb{E}[\epsilon_i \nu_i] = 0$, implying endogeneity bias.
-
-In this case, we only consider two sets of outcome variables: box outs and win shares. These are policy-relevant outcome variables for teams, as they provide metrics of a player's performance, and hence may lead to endogeneity bias.
+	
+	
+	
+	We test for instrument strength, finding that the F-Statistic is 85.207.
+	
+	\begin{table}[!htbp] \centering 
+		\caption{Test for Instrument Strength} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} \\ 
+			\hline \\[-1.8ex] 
+			Df & 1 & 1.000   \\ 
+			F & 1 & 85.207   \\ 
+			Pr(\textgreater F) & 1 & 0.000  \\ 
+			\hline \\[-1.8ex] 
+		\end{tabular} 
+	\end{table} 
+	
+	Thus, our instrumental variables model is as follows:
+	
+	\begin{align}
+	y_i & = \alpha d_i + \beta x_i' + \epsilon_i\\
+	d_i & = \gamma z_i' + \delta x_i' + \nu_i,
+	\end{align}
+	
+	where $d_i$ is our endogenous regressor (in this case, whether or not one is on a contract year), $x_i$ is our vector of control variables, and $z_i$ is our instrument. We have that $\mathbb{E}[\epsilon_i x_i'] = \mathbb{E}[\epsilon_i z_i'] = \mathbb{E}[\nu_i x_i'] = \mathbb{E}[\nu_i z_i'] = 0$, but $\mathbb{E}[\epsilon_i \nu_i] = 0$, implying endogeneity bias.
+	
+	In this case, we only consider two sets of outcome variables: box outs and win shares. These are policy-relevant outcome variables for teams, as they provide metrics of a player's performance, and hence may lead to endogeneity bias.
 	
 	\subsection{Clustering data}
 	
@@ -368,7 +427,12 @@ In this case, we only consider two sets of outcome variables: box outs and win s
 	
 	We follow and outline the strategy in \cite{chernozhukov_high-dimensional_2016-1} for a double LASSO inference method we're going after. Our inference equation is \[
 	y_{it} = d_{it} \alpha + x_{it}'\beta + \epsilon_{it}
-	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$.
+	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$. As outlined in the previous section, since contract year could correlate with the error term even at the team level, we can also extend this approach and estimate the causal effect from the contract year effect using instrumental variables. In particular, we utilize the instrumental variables model once again \[
+	\begin{aligned}
+	y_{it} &= \alpha d_{it} + \beta x_{it}' + u_{it} \\
+	d_{it} &= \gamma_0 z_{it} + \gamma x_{it}' + \upsilon_{it}
+	\end{aligned}
+	\] where $d$ is our inference variable once again, and $z_{it}$ is the one-dimensional instrument vector, whether the player was on a contract year in 2018. Since we have one instrument but many potential covariates, we have an issue of low-dimensional instrument and high-dimensional covariates. In this case, as outlined in \cite{chernozhukov_high-dimensional_2016-1}, we partial out the effect of the covariates from the inference variable $d_{it}$, the outcome variable $y_{it}$ and the instrumental variable $z_{it}$ with LASSO. Then, we use the residuals to compute the 2SLS estimator of the coefficient on the inference variable, $\alpha$. Finally, we then perform inference on $\alpha$ using the 2SLS estimator and heteroskedasticity robust standard errors.
 	
 	\section{Results} \label{sec:result}
 	
@@ -581,80 +645,80 @@ In this case, we only consider two sets of outcome variables: box outs and win s
 	\pagebreak
 	
 	\subsection{Instrumental variable method}
-
-In the IV method, we do not find any significant results. However, the IV regression gives us a large increase in the effect of a contract year on defensive win shares and total win shares, as opposed to the standard fixed effects regression. 
-
-\begin{table}[!htbp] \centering 
-  \caption{IV with Box Outs as the Dependent Variable} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{Box Out Metrics} \\ 
-\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Total Box Outs\\ 
-\hline \\[-1.8ex] 
- Contract Year & 10.407 & 1.384 & 6.731 \\ 
-  & (11.072) & (1.058) & (5.391) \\ 
-  & & & \\ 
- Current Salary & 0.00000 & 0.00000 & 0.00000 \\ 
-  & (0.00000) & (0.00000) & (0.00000) \\ 
-  & & & \\ 
- Average Minutes Played & 0.184 & 0.023$^{*}$ & 0.137$^{**}$ \\ 
-  & (0.134) & (0.012) & (0.060) \\ 
-  & & & \\ 
- Age & $-$1.386 & $-$0.266$^{**}$ & $-$1.186$^{**}$ \\ 
-  & (1.117) & (0.108) & (0.524) \\ 
-  & & & \\ 
- Constant & 20.805 & 3.832$^{**}$ & 17.835$^{**}$ \\ 
-  & (16.143) & (1.511) & (7.149) \\ 
-  & & & \\ 
-\hline \\[-1.8ex] 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
-\begin{table}[!htbp] \centering 
-  \caption{IV with Win Shares as the Dependent Variable} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & \multicolumn{4}{c}{Win Share Metrics} \\ 
-\\[-1.8ex] & Defensive WS & Offensive WS & Total WS & WS Per 48 Minutes\\ 
-\hline \\[-1.8ex] 
- Contract Year & 4.273 & $-$0.457 & 3.719 & $-$0.169 \\ 
-  & (3.700) & (1.524) & (3.948) & (0.145) \\ 
-  & & & & \\ 
- Current Salary & 0.00000 & $-$0.00000 & 0.00000 & $-$0.000 \\ 
-  & (0.00000) & (0.00000) & (0.00000) & (0.000) \\ 
-  & & & & \\ 
- Average Minutes Played & 0.094$^{**}$ & 0.102$^{***}$ & 0.194$^{***}$ & 0.0005 \\ 
-  & (0.040) & (0.019) & (0.042) & (0.002) \\ 
-  & & & & \\ 
- Age & $-$0.536 & $-$0.182 & $-$0.708$^{*}$ & 0.012 \\ 
-  & (0.358) & (0.162) & (0.378) & (0.014) \\ 
-  & & & & \\ 
- Constant & 6.682 & 2.862 & 9.561$^{*}$ & $-$0.011 \\ 
-  & (4.817) & (2.305) & (5.103) & (0.190) \\ 
-  & & & & \\ 
-\hline \\[-1.8ex] 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
 	
-
+	In the IV method, we do not find any significant results. However, the IV regression gives us a large increase in the effect of a contract year on defensive win shares and total win shares, as opposed to the standard fixed effects regression. 
+	
+	\begin{table}[!htbp] \centering 
+		\caption{IV with Box Outs as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-4} 
+			\\[-1.8ex] & \multicolumn{3}{c}{Box Out Metrics} \\ 
+			\\[-1.8ex] & Defensive Box Outs & Offensive Box Outs & Total Box Outs\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 10.407 & 1.384 & 6.731 \\ 
+			& (11.072) & (1.058) & (5.391) \\ 
+			& & & \\ 
+			Current Salary & 0.00000 & 0.00000 & 0.00000 \\ 
+			& (0.00000) & (0.00000) & (0.00000) \\ 
+			& & & \\ 
+			Average Minutes Played & 0.184 & 0.023$^{*}$ & 0.137$^{**}$ \\ 
+			& (0.134) & (0.012) & (0.060) \\ 
+			& & & \\ 
+			Age & $-$1.386 & $-$0.266$^{**}$ & $-$1.186$^{**}$ \\ 
+			& (1.117) & (0.108) & (0.524) \\ 
+			& & & \\ 
+			Constant & 20.805 & 3.832$^{**}$ & 17.835$^{**}$ \\ 
+			& (16.143) & (1.511) & (7.149) \\ 
+			& & & \\ 
+			\hline \\[-1.8ex] 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
+	
+	\begin{table}[!htbp] \centering 
+		\caption{IV with Win Shares as the Dependent Variable} 
+		\label{} 
+		\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-5} 
+			\\[-1.8ex] & \multicolumn{4}{c}{Win Share Metrics} \\ 
+			\\[-1.8ex] & Defensive WS & Offensive WS & Total WS & WS Per 48 Minutes\\ 
+			\hline \\[-1.8ex] 
+			Contract Year & 4.273 & $-$0.457 & 3.719 & $-$0.169 \\ 
+			& (3.700) & (1.524) & (3.948) & (0.145) \\ 
+			& & & & \\ 
+			Current Salary & 0.00000 & $-$0.00000 & 0.00000 & $-$0.000 \\ 
+			& (0.00000) & (0.00000) & (0.00000) & (0.000) \\ 
+			& & & & \\ 
+			Average Minutes Played & 0.094$^{**}$ & 0.102$^{***}$ & 0.194$^{***}$ & 0.0005 \\ 
+			& (0.040) & (0.019) & (0.042) & (0.002) \\ 
+			& & & & \\ 
+			Age & $-$0.536 & $-$0.182 & $-$0.708$^{*}$ & 0.012 \\ 
+			& (0.358) & (0.162) & (0.378) & (0.014) \\ 
+			& & & & \\ 
+			Constant & 6.682 & 2.862 & 9.561$^{*}$ & $-$0.011 \\ 
+			& (4.817) & (2.305) & (5.103) & (0.190) \\ 
+			& & & & \\ 
+			\hline \\[-1.8ex] 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
+	
 	\subsection{Clustered data double LASSO inference method}
 	
-	The clustered data method ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a huge reason why we could not get statistically significant results.
+	\subsubsection{Double LASSO without instruments}
+	
+	The clustered data method when we do not utilize instruments ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a possible factor in why we could not get statistically significant results.
 	
 	\begin{table}[!htbp]
 		\centering
@@ -707,9 +771,101 @@ In the IV method, we do not find any significant results. However, the IV regres
 		\end{tabular}
 	\end{table}
 	
+	\subsubsection{Double LASSO with instruments}
+	
+	Surprisingly, with the clustered data, and utilizing the instruments we identified during the 2SLS estimation, double LASSO works pretty well and lead to statistically significant results, although this statistical significance is still of a \emph{slightly} lesser degree than that of the GEE weighted least squares approach for win shares, but this statistical significance is of a \emph{slightly} higher degree when it comes to defensive win shares. We compare the two approaches in Table \ref{lassoivvsgee}. The magnitude of the coefficient matters here: with a regular WOLS, we do not correct for the endogenous effect, so the effect is underestimated. Consequently, for regressions where the coefficient gets close to zero, we start to lose statistical power because the confidence interval will start to overlap $0$. However, when we correct for the endogeneity bias with instruments, the coefficient is no longer underestimated in magnitude and increases drastically in magnitude. Hence, even if the error resulting from the curse of dimensionality and the low number of observations is fairly substantial, and even if the magnitude of the confidence interval is fairly high, because the coefficient is further away from zero, our statistical power also gets better. That does not mean, however, the curse of dimensionality faded from existence. It has merely shifted to the problem of the magnitude of the contract year effect being ambiguous. For instance, the 95\% confidence interval for the contract year effect on win share is (2.65, 18.1). It is quite hard to say exactly how strong the contract year effect. We can only demonstrate that the contract year effect exists.
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO with instruments with win share as the outcome variable}
+		\label{lassoivws} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 10.38       & (2.65, 18.1) & $0.0085$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\ 
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO with instruments with offensive win share as the outcome variable}
+		\label{lassoivows} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 5.54       & (1.17, 9.91) & $0.013$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO with instruments with defensive win share as the outcome variable}
+		\label{lassoivdws} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 5.86       & (1.22, 10.5) & $0.013$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+		\end{tabular}
+	\end{table}
+	
+	\begin{landscape}
+		\begin{table}[!htbp]
+			\centering
+			\caption{Comparison between double LASSO with instruments and weighted OLS with GEE}
+			\label{lassoivvsgee} 
+			\rowcolors{4}{}{gray!10}
+			\begin{tabular}{*4c}
+				\toprule
+				& \multicolumn{3}{c}{Relevant Statistics} \\
+				\cmidrule(lr){2-4}
+				Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+				\midrule
+				Win Shares: WOLS with GEE, Contract Year & 0.401       & (0.126, 0.675) & $0.0043$       \\
+				Win Shares: Double LASSO with instruments, Contract Year & 10.38       & (2.65, 18.1) & $0.0085$       \\
+				Offensive WS: WOLS with GEE, Contract Year & 0.282       & (0.0578, 0.507) & $0.0137$       \\
+				Offensive WS: Double LASSO with instruments, Contract Year & 5.54       & (1.17, 9.91) & $0.013$       \\
+				Defensive WS: WOLS with GEE, Contract Year & 0.102       & ($-$0.0190, 0.223) & $0.09829$       \\
+				Defensive WS: Double LASSO with instruments, Contract Year & 5.86       & (1.22, 10.5) & $0.013$       \\
+				\bottomrule
+				\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+			\end{tabular}
+		\end{table}
+	\end{landscape}
+	
+	\pagebreak
+	
 	\section{Discussions} \label{sec:discussion}
 	
 	\section{Conclusion} \label{sec:conclusion}
+	
+	Overall, we find that being on a contract year marginally, at best, increases an NBA player's production on the court. When running weighted least squares, while the effect of being on the contract year was not significant for most of the proxies for player production, the effect was significantly positive when using win shares and offensive win shares as the dependent variable. Surprisingly, the effect of contract year was much less significant when using defensive win shares as the proxy. This can indicate that players on contract years tend to perform better offensively, possibly due to offensive performance being easier to watch than defensive performance. After all, it is very easy to see if a player is scoring more often and/or facilitating the offense more efficiently. On the contrary, defensive performance, such as consistently staying between the ball-handler and the basket, is harder to track despite its value. Certain factors can push people's perception of a player's defensive performance downwards, such as good offense still scoring on good defense (concretely, consider the case of Kobe Bryant scoring on countless "Kobe Stoppers" throughout his career), and offenses attempting to pull good defenders away from the ball, providing less opportunity for a player to showcase his defensive prowess. This manifests itself in pure offensive stars receiving more praise and accolades, such as All Star selections, than pure defensive stars. These accolades often have contract implications, and so as a result, when players are on the final year of their contracts, they may decidee to give much more effort on offense as opposed to on defense.
+	
+	When using an indicator for whether or not one has a contract year in 2018 as an instrumental variable, the contract-year effect was found not to be significant, even when using win shares as the dependent variable. When using the double LASSO method without the instrumental variable, the contract-year effect was again not found to be significant when using any of the win shares variables as proxies for player production. However, when employing the double LASSO method while also using the same instrumental variable, the contract-year effect was found to be significant when using win shares, offensive win shares, and defensive win shares as proxies for player production. This, the effect of a contract year differs depending on estimation strategy, and combining both LASSO and instrumental variables reveals very large, positive effects on performance.
+
+	Possible avenues for extension include checking for a contract year phenomenon with coaches. This might be tougher question though, because coaches generally do not change their plans on a yearly-basis: coaches often have their own, stable style. Furthermore, different coaches are hired for different purposes: a coach who is good at leading veterans into the playoffs and championship contention may not be the proper coach for developing young players (consider Larry Brown, who won the 2004 championship with the Detroit Pistons but was notorious for giving rookies relatively few chances to play). This differs from our paper, because players are almost always hired for the purpose of winning a championship through their on-court performance.
+
+Another possible extension would be to see if our results hold for other professional basketball leagues. It is possible that a contract year phenomenon may be more pronounced in lesser-known leagues such as the Chinese Basketball Association, because of the generally lower salaries. Many players in such leagues play not for luxurious contracts and salaries, but for lesser ones that help them live on a day-to-day basis. As such, there may be much more of an incentive to play well in contract years. However, this could also be offset by a reputation effect, where players want to play well always so as to not possibly gain a reputation for being a "contract year player", thus making teams more suspicious of him.
+	
+	\clearpage
+	
 	
 	\clearpage
 	
@@ -729,151 +885,139 @@ In the IV method, we do not find any significant results. However, the IV regres
 	
 	We present all tables for our regression results in this section.
 	
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-	% Date and time: Fri, Jun 12, 2020 - 7:22:29 AM
-	\begin{sidewaystable}[!htbp] \centering 
-		\caption{Using Speed Metrics as the Dependent Variable} 
-		\label{} 
-		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-			\\[-1.8ex]\hline 
-			\hline \\[-1.8ex] 
-			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-			\cline{2-4} 
-			\\[-1.8ex] & Average Speed & Offensive Speed & Defensive Speed \\ 
-			\\[-1.8ex] & (1) & (2) & (3)\\ 
-			\hline \\[-1.8ex] 
-			Contract Year & $-$0.006 & $-$0.009 & $-$0.009 \\ 
-			& ($-$0.022, 0.011) & ($-$0.038, 0.021) & ($-$0.031, 0.014) \\ 
-			& p = 0.502 & p = 0.555 & p = 0.444 \\ 
-			& & & \\ 
-			Average Minutes Played & $-$0.005 & $-$0.005 & $-$0.007 \\ 
-			& ($-$0.007, $-$0.003) & ($-$0.009, $-$0.002) & ($-$0.010, $-$0.005) \\ 
-			& p = 0.00000$^{***}$ & p = 0.002$^{***}$ & p = 0.00000$^{***}$ \\ 
-			& & & \\ 
-			Current Salary & 0.000 & 0.000 & $-$0.000 \\ 
-			& ($-$0.000, 0.000) & ($-$0.000, 0.000) & ($-$0.000, $-$0.000) \\ 
-			& p = 0.716 & p = 0.506 & p = 0.006$^{***}$ \\ 
-			& & & \\ 
-			Constant & 4.590 & 5.070 & 4.220 \\ 
-			& (4.490, 4.700) & (4.890, 5.260) & (4.080, 4.360) \\ 
-			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
-			& & & \\ 
-			\hline \\[-1.8ex] 
-			Player Fixed Effects & Yes & Yes & Yes \\ 
-			Year Fixed Effects & Yes & Yes & Yes \\ 
-			Position Fixed Effects & Yes & Yes & Yes \\ 
-			Observations & 820 & 820 & 820 \\ 
-			R$^{2}$ & 0.936 & 0.872 & 0.898 \\ 
-			Adjusted R$^{2}$ & 0.880 & 0.758 & 0.806 \\ 
-			Residual Std. Error (df = 432) & 0.351 & 0.625 & 0.472 \\ 
-			F Statistic (df = 387; 432) & 16.500$^{***}$ & 7.630$^{***}$ & 9.780$^{***}$ \\ 
-			\hline 
-			\hline \\[-1.8ex] 
-			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-		\end{tabular} 
-	\end{sidewaystable} 
-	
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-	% Date and time: Fri, Jun 12, 2020 - 7:23:55 AM
-	\begin{sidewaystable}[!htbp] \centering 
-		\caption{Using Distance as the Dependent Variable} 
-		\label{} 
-		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-			\\[-1.8ex]\hline 
-			\hline \\[-1.8ex] 
-			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-			\cline{2-4} 
-			\\[-1.8ex] & Distance: Defensive & Distance: Offensive & Distance \\ 
-			\\[-1.8ex] & (1) & (2) & (3)\\ 
-			\hline \\[-1.8ex] 
-			Contract Year & $-$0.004 & $-$0.001 & $-$24.800 \\ 
-			& ($-$0.009, 0.002) & ($-$0.008, 0.005) & ($-$72.200, 22.500) \\ 
-			& p = 0.183 & p = 0.722 & p = 0.305 \\ 
-			& & & \\ 
-			Average Minutes Played & 0.033 & 0.039 & 379.000 \\ 
-			& (0.032, 0.034) & (0.038, 0.039) & (373.000, 384.000) \\ 
-			& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
-			& & & \\ 
-			Current Salary & $-$0.000 & 0.000 & 0.00000 \\ 
-			& ($-$0.000, 0.000) & (0.000, 0.000) & ($-$0.00000, 0.00001) \\ 
-			& p = 0.233 & p = 0.002$^{***}$ & p = 0.095$^{*}$ \\ 
-			& & & \\ 
-			Constant & $-$0.0003 & 0.057 & 291.000 \\ 
-			& ($-$0.036, 0.035) & (0.015, 0.099) & ($-$7.550, 590.000) \\ 
-			& p = 0.988 & p = 0.009$^{***}$ & p = 0.057$^{*}$ \\ 
-			& & & \\ 
-			\hline \\[-1.8ex] 
-			Player Fixed Effects & Yes & Yes & Yes \\ 
-			Year Fixed Effects & Yes & Yes & Yes \\ 
-			Position Fixed Effects & Yes & Yes & Yes \\ 
-			Observations & 820 & 820 & 820 \\ 
-			R$^{2}$ & 0.994 & 0.994 & 0.997 \\ 
-			Adjusted R$^{2}$ & 0.989 & 0.989 & 0.994 \\ 
-			Residual Std. Error (df = 432) & 0.119 & 0.142 & 1,003.000 \\ 
-			F Statistic (df = 387; 432) & 194.000$^{***}$ & 197.000$^{***}$ & 366.000$^{***}$ \\ 
-			\hline 
-			\hline \\[-1.8ex] 
-			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-		\end{tabular} 
-	\end{sidewaystable} 
-	
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-	% Date and time: Fri, Jun 12, 2020 - 7:33:56 AM
-	\begin{sidewaystable}[!htbp] \centering 
-		\caption{Using Dribbles, Touches, and Usage Rate as the Dependent Variable} 
-		\label{} 
-		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-			\\[-1.8ex]\hline 
-			\hline \\[-1.8ex] 
-			& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-			\cline{2-4} 
-			\\[-1.8ex] & Average Seconds per Dribble & Average Seconds per Touch & Usage Rate \\ 
-			\\[-1.8ex] & (1) & (2) & (3)\\ 
-			\hline \\[-1.8ex] 
-			Contract Year & $-$0.025 & $-$0.017 & 0.262 \\ 
-			& ($-$0.100, 0.051) & ($-$0.086, 0.052) & ($-$0.229, 0.754) \\ 
-			& p = 0.528 & p = 0.624 & p = 0.297 \\ 
-			& & & \\ 
-			Average Minutes Played & 0.009 & 0.009 & 0.065 \\ 
-			& (0.0004, 0.017) & (0.001, 0.017) & (0.010, 0.120) \\ 
-			& p = 0.041$^{**}$ & p = 0.025$^{**}$ & p = 0.022$^{**}$ \\ 
-			& & & \\ 
-			Current Salary & 0.000 & 0.000 & 0.00000 \\ 
-			& (0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
-			& p = 0.049$^{**}$ & p = 0.078$^{*}$ & p = 0.062$^{*}$ \\ 
-			& & & \\ 
-			Constant & 1.320 & 2.210 & 19.300 \\ 
-			& (0.839, 1.800) & (1.780, 2.650) & (16.200, 22.400) \\ 
-			& p = 0.00000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
-			& & & \\ 
-			\hline \\[-1.8ex] 
-			Player Fixed Effects & Yes & Yes & Yes \\ 
-			Year Fixed Effects & Yes & Yes & Yes \\ 
-			Position Fixed Effects & Yes & Yes & Yes \\ 
-			Observations & 820 & 820 & 820 \\ 
-			R$^{2}$ & 0.973 & 0.969 & 0.915 \\ 
-			Adjusted R$^{2}$ & 0.949 & 0.941 & 0.839 \\ 
-			Residual Std. Error (df = 432) & 1.610 & 1.460 & 10.400 \\ 
-			F Statistic (df = 387; 432) & 40.100$^{***}$ & 34.600$^{***}$ & 12.000$^{***}$ \\ 
-			\hline 
-			\hline \\[-1.8ex] 
-			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-		\end{tabular} 
-	\end{sidewaystable} 
-	
-	\clearpage
-	
-	\section{Figures} \label{sec:fig}
-	
-	%\begin{figure}[hp]
-	%  \centering
-	%  \includegraphics[width=.6\textwidth]{../fig/placeholder.pdf}
-	%  \caption{Placeholder}
-	%  \label{fig:placeholder}
-	%\end{figure}
-	
-	
-	
+	\begin{landscape}
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+		% Date and time: Fri, Jun 12, 2020 - 7:22:29 AM
+		\begin{table}[!htbp] \centering 
+			\caption{Using Speed Metrics as the Dependent Variable} 
+			\label{} 
+			\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+				\\[-1.8ex]\hline 
+				\hline \\[-1.8ex] 
+				& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+				\cline{2-4} 
+				\\[-1.8ex] & Average Speed & Offensive Speed & Defensive Speed \\ 
+				\\[-1.8ex] & (1) & (2) & (3)\\ 
+				\hline \\[-1.8ex] 
+				Contract Year & $-$0.006 & $-$0.009 & $-$0.009 \\ 
+				& ($-$0.022, 0.011) & ($-$0.038, 0.021) & ($-$0.031, 0.014) \\ 
+				& p = 0.502 & p = 0.555 & p = 0.444 \\ 
+				& & & \\ 
+				Average Minutes Played & $-$0.005 & $-$0.005 & $-$0.007 \\ 
+				& ($-$0.007, $-$0.003) & ($-$0.009, $-$0.002) & ($-$0.010, $-$0.005) \\ 
+				& p = 0.00000$^{***}$ & p = 0.002$^{***}$ & p = 0.00000$^{***}$ \\ 
+				& & & \\ 
+				Current Salary & 0.000 & 0.000 & $-$0.000 \\ 
+				& ($-$0.000, 0.000) & ($-$0.000, 0.000) & ($-$0.000, $-$0.000) \\ 
+				& p = 0.716 & p = 0.506 & p = 0.006$^{***}$ \\ 
+				& & & \\ 
+				Constant & 4.590 & 5.070 & 4.220 \\ 
+				& (4.490, 4.700) & (4.890, 5.260) & (4.080, 4.360) \\ 
+				& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+				& & & \\ 
+				\hline \\[-1.8ex] 
+				Player Fixed Effects & Yes & Yes & Yes \\ 
+				Year Fixed Effects & Yes & Yes & Yes \\ 
+				Position Fixed Effects & Yes & Yes & Yes \\ 
+				Observations & 820 & 820 & 820 \\ 
+				R$^{2}$ & 0.936 & 0.872 & 0.898 \\ 
+				Adjusted R$^{2}$ & 0.880 & 0.758 & 0.806 \\ 
+				Residual Std. Error (df = 432) & 0.351 & 0.625 & 0.472 \\ 
+				F Statistic (df = 387; 432) & 16.500$^{***}$ & 7.630$^{***}$ & 9.780$^{***}$ \\ 
+				\hline 
+				\hline \\[-1.8ex] 
+				\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+			\end{tabular} 
+		\end{table} 
+		
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+		% Date and time: Fri, Jun 12, 2020 - 7:23:55 AM
+		\begin{table}[!htbp] \centering 
+			\caption{Using Distance as the Dependent Variable} 
+			\label{} 
+			\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+				\\[-1.8ex]\hline 
+				\hline \\[-1.8ex] 
+				& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+				\cline{2-4} 
+				\\[-1.8ex] & Distance: Defensive & Distance: Offensive & Distance \\ 
+				\\[-1.8ex] & (1) & (2) & (3)\\ 
+				\hline \\[-1.8ex] 
+				Contract Year & $-$0.004 & $-$0.001 & $-$24.800 \\ 
+				& ($-$0.009, 0.002) & ($-$0.008, 0.005) & ($-$72.200, 22.500) \\ 
+				& p = 0.183 & p = 0.722 & p = 0.305 \\ 
+				& & & \\ 
+				Average Minutes Played & 0.033 & 0.039 & 379.000 \\ 
+				& (0.032, 0.034) & (0.038, 0.039) & (373.000, 384.000) \\ 
+				& p = 0.000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+				& & & \\ 
+				Current Salary & $-$0.000 & 0.000 & 0.00000 \\ 
+				& ($-$0.000, 0.000) & (0.000, 0.000) & ($-$0.00000, 0.00001) \\ 
+				& p = 0.233 & p = 0.002$^{***}$ & p = 0.095$^{*}$ \\ 
+				& & & \\ 
+				Constant & $-$0.0003 & 0.057 & 291.000 \\ 
+				& ($-$0.036, 0.035) & (0.015, 0.099) & ($-$7.550, 590.000) \\ 
+				& p = 0.988 & p = 0.009$^{***}$ & p = 0.057$^{*}$ \\ 
+				& & & \\ 
+				\hline \\[-1.8ex] 
+				Player Fixed Effects & Yes & Yes & Yes \\ 
+				Year Fixed Effects & Yes & Yes & Yes \\ 
+				Position Fixed Effects & Yes & Yes & Yes \\ 
+				Observations & 820 & 820 & 820 \\ 
+				R$^{2}$ & 0.994 & 0.994 & 0.997 \\ 
+				Adjusted R$^{2}$ & 0.989 & 0.989 & 0.994 \\ 
+				Residual Std. Error (df = 432) & 0.119 & 0.142 & 1,003.000 \\ 
+				F Statistic (df = 387; 432) & 194.000$^{***}$ & 197.000$^{***}$ & 366.000$^{***}$ \\ 
+				\hline 
+				\hline \\[-1.8ex] 
+				\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+			\end{tabular} 
+		\end{table} 
+		
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+		% Date and time: Fri, Jun 12, 2020 - 7:33:56 AM
+		\begin{table}[!htbp] \centering 
+			\caption{Using Dribbles, Touches, and Usage Rate as the Dependent Variable} 
+			\label{} 
+			\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+				\\[-1.8ex]\hline 
+				\hline \\[-1.8ex] 
+				& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+				\cline{2-4} 
+				\\[-1.8ex] & Average Seconds per Dribble & Average Seconds per Touch & Usage Rate \\ 
+				\\[-1.8ex] & (1) & (2) & (3)\\ 
+				\hline \\[-1.8ex] 
+				Contract Year & $-$0.025 & $-$0.017 & 0.262 \\ 
+				& ($-$0.100, 0.051) & ($-$0.086, 0.052) & ($-$0.229, 0.754) \\ 
+				& p = 0.528 & p = 0.624 & p = 0.297 \\ 
+				& & & \\ 
+				Average Minutes Played & 0.009 & 0.009 & 0.065 \\ 
+				& (0.0004, 0.017) & (0.001, 0.017) & (0.010, 0.120) \\ 
+				& p = 0.041$^{**}$ & p = 0.025$^{**}$ & p = 0.022$^{**}$ \\ 
+				& & & \\ 
+				Current Salary & 0.000 & 0.000 & 0.00000 \\ 
+				& (0.000, 0.00000) & ($-$0.000, 0.000) & ($-$0.000, 0.00000) \\ 
+				& p = 0.049$^{**}$ & p = 0.078$^{*}$ & p = 0.062$^{*}$ \\ 
+				& & & \\ 
+				Constant & 1.320 & 2.210 & 19.300 \\ 
+				& (0.839, 1.800) & (1.780, 2.650) & (16.200, 22.400) \\ 
+				& p = 0.00000$^{***}$ & p = 0.000$^{***}$ & p = 0.000$^{***}$ \\ 
+				& & & \\ 
+				\hline \\[-1.8ex] 
+				Player Fixed Effects & Yes & Yes & Yes \\ 
+				Year Fixed Effects & Yes & Yes & Yes \\ 
+				Position Fixed Effects & Yes & Yes & Yes \\ 
+				Observations & 820 & 820 & 820 \\ 
+				R$^{2}$ & 0.973 & 0.969 & 0.915 \\ 
+				Adjusted R$^{2}$ & 0.949 & 0.941 & 0.839 \\ 
+				Residual Std. Error (df = 432) & 1.610 & 1.460 & 10.400 \\ 
+				F Statistic (df = 387; 432) & 40.100$^{***}$ & 34.600$^{***}$ & 12.000$^{***}$ \\ 
+				\hline 
+				\hline \\[-1.8ex] 
+				\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+			\end{tabular} 
+		\end{table} 
+	\end{landscape}
 	
 	\clearpage
 	
@@ -886,7 +1030,254 @@ In the IV method, we do not find any significant results. However, the IV regres
 	%  \label{fig:placeholder}
 	%\end{figure}
 	
+	We put snippets of our code as a demonstration of what we have done empirically. For the sake of brevity, we do not print our entire code in this paper. For more information and the complete code, please visit \url{https://github.com/Skyrior/contract-year-effect}.
 	
+	\subsection{Test for heteroskedasticity}
+	
+	\begin{lstlisting}
+	
+	## -------------------------------------------------------------------------
+	##
+	## Test for heteroskedasticity
+	##
+	## -------------------------------------------------------------------------
+	
+	hetero2 <- lm(formula = avg_drib_per_touch ~ contract_year + as.factor(name) + pos + as.factor(season) +salary_current, data = nba)
+	
+	bptest(hetero2)
+	
+	\end{lstlisting}
+	
+	\subsection{Fixed Effect weighted OLS}
+	
+	\begin{lstlisting}
+	## -------------------------------------------------------------------------
+	##
+	## Fixed Effect OLS: Usage Rate
+	##
+	## -------------------------------------------------------------------------
+	
+	reg.usage <- lm(formula = usg ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+	+ salary_current, data = nba, weights = nba$min)
+	summary.usage <- my.summary.lm(summary(reg.usage), 
+	my.rows=grep("contract_year|min|season|salary_current",
+	names(coef(reg.usage))))
+	\end{lstlisting}
+	
+	\subsection{IV instrument regression}
+	
+	\begin{lstlisting}
+	ivlmdbo <- ivreg(nba$DEF.Box.Outs ~ nba$contract_year + nba$salary_current
+	+ nba$min + nba$age + nba$pos
+	+ nba$name + nba$season | nba$contract_2018 + nba$salary_current
+	+ nba$min + nba$age + nba$pos
+	+ nba$name + nba$season,
+	weights = nba$min)
+	
+	coeftest(ivlmdbo, vcov. = vcovHC, type = "HC1")
+	
+	testiv <- lm(nba$contract_year ~ nba$contract_2018)
+	
+	linearHypothesis(testiv, "nba$contract_2018 = 0", 
+	vcov = vcovHC, type = "HC1")
+	
+	ivstrength <- linearHypothesis(testiv, "nba$contract_2018 = 0", 
+	vcov = vcovHC, type = "HC1")
+	
+	summary(ivstrength)
+	
+	stargazer(ivstrength)
+	
+	summary(ivlmbo)
+	
+	stargazer(ivlmbo, type = "latex",
+	title="IV Using Box Outs as the Dependent Variables")
+	
+	ivlmws48 <- ivreg(nba$ws_48 ~ nba$contract_year + nba$salary_current
+	+ nba$min + nba$age + nba$pos + nba$team
+	+ nba$name + nba$season | nba$contract_2018 + nba$salary_current
+	+ nba$min + nba$age + nba$pos + nba$team
+	+ nba$name + nba$season,
+	weights = nba$min)
+	
+	coeftest(ivlmws48, vcov. = vcovHC, type = "HC1")
+	\end{lstlisting}
+	
+	\subsection{Clustering the data}
+	
+	\begin{lstlisting}
+	## -------------------------------------------------------------------------
+	##
+	## Get nba.LASSO
+	##
+	## -------------------------------------------------------------------------
+	
+	nba.LASSO <- nba %>%
+	filter(team != "TOT") %>%
+	group_by(team, season) %>%
+	mutate_all(funs(weighted.mean(., min))) %>%
+	summarize_all(mean) %>%
+	select_if(~sum(!is.na(.)) > 0)
+	
+	nba.LASSO.iv <- nbaiv %>%
+	filter(team != "TOT") %>%
+	group_by(team, season) %>%
+	mutate_all(funs(weighted.mean(., min))) %>%
+	summarize_all(mean) %>%
+	select_if(~sum(!is.na(.)) > 0)
+	\end{lstlisting}
+	
+	\subsection{General estimating equation}
+	
+	\begin{lstlisting}
+	## -------------------------------------------------------------------------
+	##
+	## Generalized estimating equation
+	##
+	## -------------------------------------------------------------------------
+	
+	## we require the data to be sorted by the cluster.
+	nba <- nba %>%
+	arrange(team)
+	
+	gee.ws <- geeglm(formula = ws ~ contract_year + min + as.factor(name) + pos + as.factor(season) 
+	+ salary_current,
+	family = gaussian,
+	data = nba,
+	weights = nba$min,
+	id = team)
+	summary.geews <- my.summary.lm(summary(gee.ws), 
+	my.rows=grep("contract_year|min|season|salary_current|Intercept",
+	names(coef(gee.ws))))
+	broom::confint_tidy(gee.ws, parm = "contract_year")
+	broom::confint_tidy(gee.ws, parm = "min")
+	broom::confint_tidy(gee.ws, parm = "salary_current")
+	broom::confint_tidy(gee.ws, parm = "(Intercept)")
+	
+	\end{lstlisting}
+	
+	
+	\subsection{Double LASSO without instruments}
+	
+	\begin{lstlisting}
+	
+	## -------------------------------------------------------------------------
+	##
+	## Double LASSO: WS
+	##
+	## -------------------------------------------------------------------------
+	
+	## We require X to be the matrix of controls. That would be:
+	## Height
+	## Weight
+	## Age
+	## PER - player efficiency rating
+	## min - minutes played
+	## TS - True shooting percentage
+	## x3p_ar - 3-point attempt rate
+	## f_tr - Free throw attempt rate
+	## orb, drb, trb - rebound percentage
+	## ast, stl, blk - assist, steal, block
+	## tov - turnover
+	## usg - usage percentage
+	## obpm, dbpm, bpm - box plus/minus
+	## vorp - value over replacement player
+	## dist_miles, dist_miles_off, dist_miles_def
+	## avg_speed, avg_speed_off, avg_speed_def
+	## salary_current,
+	## box_outs, off_box_outs, def_box_outs
+	## team_reb_on_box_outs,
+	## player_reb_on_box_outs,
+	## touches
+	## front_ct_touches,
+	## time_of_poss,
+	## avg_sec_per_touch,
+	## avg_drib_per_touch,
+	## pts_per_touch,
+	## elbow_touches,
+	## post_ups,
+	## paint_touches,
+	## pts_per_elbow_touch,
+	## pts_per_post_touch,
+	## pts_per_paint_touch
+	
+	X.controls <- c("height", "weight", "age",
+	"min", "f_tr", "orb", "drb", "trb",
+	"ast", "stl", "blk", "tov", "dist_miles",
+	"dist_miles_off", "dist_miles_def", "salary_current",
+	"box_outs", "off_box_outs", "def_box_outs",
+	"team_reb_on_box_outs", "player_reb_on_box_outs",
+	"touches", "front_ct_touches", "time_of_poss",
+	"avg_sec_per_touch", "avg_drib_per_touch",
+	"pts_per_touch", "elbow_touches",
+	"post_ups", "paint_touches", "pts_per_elbow_touch",
+	"pts_per_post_touch", "pts_per_paint_touch")
+	
+	X <- nba.LASSO %>%
+	ungroup %>%
+	select(all_of(X.controls))
+	
+	X <- as.matrix(X)
+	
+	## Y is the matrix of outcome.
+	
+	Y.outcome <- c("ws")
+	
+	Y <- nba.LASSO %>%
+	ungroup %>%
+	select(all_of(Y.outcome))
+	
+	Y <- as.matrix(Y)
+	
+	## Finally D is the matrix of inference variable.
+	
+	D.inference <- c("contract_year")
+	
+	D <- nba.LASSO %>%
+	ungroup %>%
+	select(all_of(D.inference))
+	
+	D <- as.matrix(D)
+	
+	lasso.ws <- rlassoEffect(x = X, y = Y, d = D, method = "double selection",
+	I3 = NULL,
+	post = TRUE)
+	
+	print(lasso.ws)
+	summary(lasso.ws)
+	confint(lasso.ws)
+	plot(lasso.ws)
+	print(lasso.ws$selection.index)
+	\end{lstlisting}
+	
+	\subsection{Double LASSO with instruments}
+	
+	\begin{lstlisting}
+	## -------------------------------------------------------------------------
+	##
+	## Double LASSO: IV
+	##
+	## -------------------------------------------------------------------------
+	
+	lasso.iv.ws <- rlassoIV(formula = ws ~ height + weight + age +
+	min + f_tr + orb + drb + trb +
+	ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+	box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+	touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+	pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+	pts_per_post_touch+pts_per_paint_touch + contract_year | height + weight + age +
+	min + f_tr + orb + drb + trb +
+	ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+	box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+	touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+	pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+	pts_per_post_touch+pts_per_paint_touch + contract_2018,
+	data = nba.LASSO.iv, select.Z = FALSE, select.X = TRUE)
+	
+	print(lasso.iv.ws)
+	summary(lasso.iv.ws)
+	confint(lasso.iv.ws)
+	\end{lstlisting}
 	
 	
 	\clearpage
