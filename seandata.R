@@ -22,3 +22,9 @@ position <- ggplot(ss.pos, aes(x=reorder_size(pos))) + geom_bar() + xlab("Positi
 
 position
 
+ss.height <- subset(data, select = c('height'))
+
+table(ss.height)
+
+height <- ggplot(ss.height, aes(x=height)) + geom_bar() + xlab("Height")
+height
