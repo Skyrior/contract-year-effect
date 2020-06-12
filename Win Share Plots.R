@@ -16,7 +16,7 @@ plot(nba$predicted_regdws, nba$dws, col='blue', pch = 16,
      xlab = "Predicted Defensive Win Shares")
 
 plot(nba$predicted_regows, nba$ows, col='green', pch = 16, 
-     main = "Actual OFfensive Win Shares Against Predicted Offensive Win Shares Using WLS",
+     main = "Actual Offensive Win Shares Against Predicted Offensive Win Shares Using WLS",
      ylab = "Offensive Win Shares", 
      xlab = "Predicted Offensive Win Shares")
 
@@ -24,3 +24,21 @@ plot(nba$predicted_regws, nba$ws, col='red', pch = 16,
      main = "Actual Win Shares Against Predicted Win Shares Using WLS",
      ylab = "Win Shares", 
      xlab = "Predicted Win Shares")
+
+
+plot(nba$contract_year, nba$predicted_regdws, col='blue', pch = 16, 
+     main = "Actual Defensive Win Shares Against Contract Year Using WLS",
+     ylab = "Defensive Win Shares", 
+     xlab = "Contract Year")
+
+plot(nba$contract_year, nba$predicted_regows, col='green', pch = 16, 
+     main = "Actual Offensive Win Shares Against Contract Year Using WLS",
+     ylab = "Offensive Win Shares", 
+     xlab = "Contract Year")
+
+plot(nba$contract_year, nba$predicted_regws,  col='red', pch = 16, 
+     main = "Actual Win Shares Against Contract Year Using WLS",
+     ylab = "Win Shares", 
+     xlab = "Contract Year")
+
+
