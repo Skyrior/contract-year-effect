@@ -1,7 +1,7 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  12 JUN 2020 15:43
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7440 64-bit) (preloaded format=xelatex 2020.6.3)  12 JUN 2020 15:41
 entering extended mode
-**./Project.tex
-(Project.tex
+**"./Project Terry.tex"
+("Project Terry.tex"
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-05-15>
 (D:\applications\Latex\tex/latex/base\article.cls
@@ -573,18 +573,9 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \c@hyp=\count313
 \c@assumption=\count314
 \c@subhyp=\count315
- (Project.aux
 
-LaTeX Warning: Label `' multiply defined.
-
-
-LaTeX Warning: Label `' multiply defined.
-
-
-LaTeX Warning: Label `' multiply defined.
-
-)
-\openout1 = `Project.aux'.
+No file "Project Terry".aux.
+\openout1 = `"Project Terry.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
@@ -597,7 +588,7 @@ LaTeX Font Info:    ... okay on input line 37.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
 7.
- (D:\applications\Latex\tex/latex/base\ts1cmr.fd
+(D:\applications\Latex\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 37.
@@ -668,15 +659,17 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 37.
 LaTeX Info: Redefining \pageref on input line 37.
 LaTeX Info: Redefining \nameref on input line 37.
-
-(Project.out) (Project.out)
 \@outlinefile=\write4
-\openout4 = `Project.out'.
+\openout4 = `"Project Terry.out"'.
+
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 \c@lstlisting=\count317
 LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
 
- (D:\applications\Latex\tex/latex/amsfonts\umsa.fd
+(D:\applications\Latex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
@@ -695,13 +688,108 @@ File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 ) [0
 
 ]
-(Project.toc)
 \tf@toc=\write5
-\openout5 = `Project.toc'.
+\openout5 = `"Project Terry.toc"'.
 
- [1] [2] [3
+ [1]
 
-] [4] [5] [6] [7] [8] [9]
+Package natbib Warning: Citation `holmstrom_contracts_1999' on page 2 undefined
+ on input line 66.
+
+
+Package natbib Warning: Citation `gibbons_1992' on page 2 undefined on input li
+ne 66.
+
+
+Package natbib Warning: Citation `alchian_1972' on page 2 undefined on input li
+ne 68.
+
+
+Package natbib Warning: Citation `holmstrom_contracts_1999' on page 2 undefined
+ on input line 68.
+
+
+Package natbib Warning: Citation `prendergast_1999' on page 2 undefined on inpu
+t line 68.
+
+
+Package natbib Warning: Citation `ress_1994' on page 2 undefined on input line 
+68.
+
+[2
+
+]
+
+Package natbib Warning: Citation `lehn_1982' on page 3 undefined on input line 
+70.
+
+
+Package natbib Warning: Citation `scoggins_1993' on page 3 undefined on input l
+ine 70.
+
+
+Package natbib Warning: Citation `stiroh_2006' on page 3 undefined on input lin
+e 70.
+
+
+Package natbib Warning: Citation `paulsen_2018' on page 3 undefined on input li
+ne 70.
+
+
+Package natbib Warning: Citation `krautmann_1990' on page 3 undefined on input 
+line 70.
+
+
+Package natbib Warning: Citation `maxcy_2002' on page 3 undefined on input line
+ 70.
+
+
+Package natbib Warning: Citation `berri_2007' on page 3 undefined on input line
+ 70.
+
+
+Package natbib Warning: Citation `krautmann_2009' on page 3 undefined on input 
+line 70.
+
+
+Package natbib Warning: Citation `ryan_show_2015' on page 3 undefined on input 
+line 70.
+
+[3]
+
+Package natbib Warning: Citation `holmstrom_contracts_1999' on page 4 undefined
+ on input line 75.
+
+
+Package natbib Warning: Citation `gibbons_1992' on page 4 undefined on input li
+ne 75.
+
+
+Package natbib Warning: Citation `alchian_1972' on page 4 undefined on input li
+ne 76.
+
+
+Package natbib Warning: Citation `holmstrom_contracts_1999' on page 4 undefined
+ on input line 76.
+
+
+Package natbib Warning: Citation `prendergast_1999' on page 4 undefined on inpu
+t line 76.
+
+
+Package natbib Warning: Citation `ress_1994' on page 4 undefined on input line 
+76.
+
+[4] [5] [6] [7] [8]
+
+Package natbib Warning: Citation `breusch_simple_1979' on page 9 undefined on i
+nput line 120.
+
+[9]
+
+Package natbib Warning: Citation `breusch_simple_1979' on page 10 undefined on 
+input line 128.
+
 (D:\applications\Latex\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
@@ -710,134 +798,147 @@ File: lstlang2.sty 2020/03/24 1.8d listings language file
 )
 (D:\applications\Latex\tex/latex/listings\lstlang3.sty
 File: lstlang3.sty 2020/03/24 1.8d listings language file
-) [10] [11] [12] [13]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 213
+) [10]
+
+Package natbib Warning: Citation `aitken_iv.least_1936' on page 11 undefined on
+ input line 179.
+
+
+Package natbib Warning: Citation `carroll_transformation_1988' on page 11 undef
+ined on input line 179.
+
+[11] [12] [13]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 219
 .
-
-(D:\applications\Latex\tex/latex/bbm\ubbm.fd
+ (D:\applications\Latex\tex/latex/bbm\ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [14] [15] [16] [17] [18] [19]
-[20] [21] [22] [23] [24]
+) [14]
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 423.
+Package natbib Warning: Citation `dong_dynamics_2016' on page 15 undefined on i
+nput line 237.
+
+[15]
+
+Package natbib Warning: Citation `liang_longitudinal_1986' on page 16 undefined
+ on input line 247.
+
+[16]
+
+Package natbib Warning: Citation `diggle_analysis_2002' on page 17 undefined on
+ input line 255.
+
+[17] [18] [19] [20] [21]
+
+Package natbib Warning: Citation `urminsky_using_2016' on page 22 undefined on 
+input line 355.
 
 
-Overfull \hbox (35.7314pt too wide) in paragraph at lines 430--467
+Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 22 und
+efined on input line 355.
+
+
+Package natbib Warning: Citation `meinshausen_relaxed_2007' on page 22 undefine
+d on input line 355.
+
+
+Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 22 und
+efined on input line 355.
+
+[22]
+
+Package natbib Warning: Citation `belloni_high-dimensional_2014' on page 23 und
+efined on input line 361.
+
+
+Package natbib Warning: Citation `chernozhukov_high-dimensional_2016-1' on page
+ 23 undefined on input line 369.
+
+[23]
+
+LaTeX Warning: Reference `regboxout' on page 24 undefined on input line 379.
+
+
+LaTeX Warning: Reference `regwinshare' on page 24 undefined on input line 379.
+
+[24]
+
+LaTeX Warning: Float too large for page by 3.47719pt on input line 424.
+
+
+Overfull \hbox (35.7314pt too wide) in paragraph at lines 431--468
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 467.
+LaTeX Warning: Float too large for page by 3.47719pt on input line 468.
 
-[25] [26] [27
+[25] [26]
+
+LaTeX Warning: Reference `geewinshare' on page 27 undefined on input line 474.
 
 
-] [28] [29
+LaTeX Warning: Reference `geelmcomparison' on page 27 undefined on input line 4
+74.
+
+
+LaTeX Warning: Reference `geelmcomparisonw' on page 27 undefined on input line 
+474.
+
+
+LaTeX Warning: Reference `geelmcomparisond' on page 27 undefined on input line 
+474.
+
+[27
+
+
+] [28]
+
+LaTeX Warning: Reference `sec:tab' on page 29 undefined on input line 579.
+
+[29
 
 
 ]
-Overfull \hbox (18.48506pt too wide) in paragraph at lines 621--649
+Overfull \hbox (18.48506pt too wide) in paragraph at lines 623--651
  [][] 
  []
 
-[30] [31] [32] [33] [34
-
-] [35
-
-] [36] (Project.bbl
-Underfull \hbox (badness 4556) in paragraph at lines 9--18
-[]\TU/lmr/m/n/12 A. C. Aitken.  IV.—On Least Squares and Linear Combination of 
-Observa-
- []
+[30] [31] [32]
+No file "Project Terry".bbl.
+[33
 
 
-Underfull \hbox (badness 1320) in paragraph at lines 9--18
-\TU/lmr/m/n/12 tions.  |   []   |   []   |   []   |   []   |   []   |   []   | 
-  [], 55:42–48, 1936.  ISSN
- []
+] [34] [35] [36] [37
 
-
-Underfull \hbox (badness 3148) in paragraph at lines 9--18
-\TU/lmr/m/n/12 0370-1646.  doi: $[][] [] [][][][] [] [][][][][][][][][][][][][]
-[][][][]$.  URL []$[][][][][] [] [] [] [][][] [] [][][][][][][][][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9--18
-[][][] [] [][][][] [] [][][][][][][][] [] [][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9--18
-[][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
- []
-
-
-Underfull \hbox (badness 1348) in paragraph at lines 65--70
-[]\TU/lmr/m/n/12 V. Chernozhukov, C. Hansen, and M. Spindler.  High-Dimensional
- Metrics in R.
- []
-
-[37
-
-
-]) [38] [39
+] [38
 
 ]
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 863.
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 895.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 895.
+("Project Terry.aux")
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 895.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 895.
+Package rerunfilecheck Info: File `"Project Terry".out' has not changed.
+(rerunfilecheck)             Checksum: <no file>.
 
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 907.
+LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Float too large for page by 3.47719pt on input line 951.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-[40] [41] [42]
-File: position.png Graphic file (type bmp)
-<position.png>
-File: height.png Graphic file (type bmp)
-<height.png>
-File: age.png Graphic file (type bmp)
-<age.png>
-File: money.png Graphic file (type bmp)
-<money.png>
-File: ws.png Graphic file (type bmp)
-<ws.png>
-File: ws_48.png Graphic file (type bmp)
-<ws_48.png>
-File: min.png Graphic file (type bmp)
-<min.png>
- [43
-
-
-
-] [44] [45] [46
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1028.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1028.
- (Project.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1028.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1028.
-
-Package rerunfilecheck Info: File `Project.out' has not changed.
-(rerunfilecheck)             Checksum: 850E8BFD3C7101725FF343F4C590D0C3;2240.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1028.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 895.
  ) 
 Here is how much of TeX's memory you used:
- 18257 strings out of 414044
- 310110 string characters out of 2898609
- 833931 words of memory out of 3000000
- 35645 multiletter control sequences out of 15000+200000
- 543468 words of font info for 87 fonts, out of 3000000 for 9000
+ 18111 strings out of 414044
+ 307491 string characters out of 2898609
+ 830748 words of memory out of 3000000
+ 35518 multiletter control sequences out of 15000+200000
+ 543460 words of font info for 86 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
- 51i,12n,77p,2446b,1652s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 51i,13n,77p,2454b,1726s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project.pdf (47 pages).
+Output written on Project Terry.pdf (39 pages).
