@@ -648,3 +648,40 @@ print(lasso.iv.ws)
 summary(lasso.iv.ws)
 confint(lasso.iv.ws)
 
+lasso.iv.ows <- rlassoIV(formula = ows ~ height + weight + age +
+                          min + f_tr + orb + drb + trb +
+                          ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+                          box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+                          touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+                          pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+                          pts_per_post_touch+pts_per_paint_touch + contract_year | height + weight + age +
+                          min + f_tr + orb + drb + trb +
+                          ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+                          box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+                          touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+                          pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+                          pts_per_post_touch+pts_per_paint_touch + contract_2018,
+                        data = nba.LASSO.iv, select.Z = FALSE, select.X = TRUE)
+
+print(lasso.iv.ows)
+summary(lasso.iv.ows)
+confint(lasso.iv.ows)
+
+lasso.iv.dws <- rlassoIV(formula = dws ~ height + weight + age +
+                           min + f_tr + orb + drb + trb +
+                           ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+                           box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+                           touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+                           pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+                           pts_per_post_touch+pts_per_paint_touch + contract_year | height + weight + age +
+                           min + f_tr + orb + drb + trb +
+                           ast + stl + blk +  tov + dist_miles+dist_miles_off+dist_miles_def+salary_current+
+                           box_outs+off_box_outs+def_box_outs+team_reb_on_box_outs+player_reb_on_box_outs+
+                           touches+front_ct_touches+time_of_poss+avg_sec_per_touch+avg_drib_per_touch+
+                           pts_per_touch+elbow_touches+post_ups+paint_touches+pts_per_elbow_touch+
+                           pts_per_post_touch+pts_per_paint_touch + contract_2018,
+                         data = nba.LASSO.iv, select.Z = FALSE, select.X = TRUE)
+
+print(lasso.iv.dws)
+summary(lasso.iv.dws)
+confint(lasso.iv.dws)
