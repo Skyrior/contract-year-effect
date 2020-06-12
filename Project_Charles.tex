@@ -336,7 +336,12 @@
 	
 	We follow and outline the strategy in \cite{chernozhukov_high-dimensional_2016-1} for a double LASSO inference method we're going after. Our inference equation is \[
 	y_{it} = d_{it} \alpha + x_{it}'\beta + \epsilon_{it}
-	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$.
+	\] where $d_{it}$ is the inference variable, that is, the percentage of players on a contract year, weighted by their minutes played on the field. $x_{it}'$ are the usual covariates, and we are interested in the magnitude and direction of $\alpha$. As outlined in the previous section, since contract year could correlate with the error term even at the team level, we can also extend this approach and estimate the causal effect from the contract year effect using instrumental variables. In particular, we utilize the instrumental variables model once again \[
+	\begin{aligned}
+	y_{it} &= \alpha d_{it} + \beta x_{it}' + u_{it} \\
+	d_{it} &= \gamma_0 z_{it} + \gamma x_{it}' + \upsilon_{it}
+	\end{aligned}
+	\] where $d$ is our inference variable once again, and $z_{it}$ is the one-dimensional instrument vector, whether the player was on a contract year in 2018. Since we have one instrument but many potential covariates, we have an issue of low-dimensional instrument and high-dimensional covariates. In this case, as outlined in \cite{chernozhukov_high-dimensional_2016-1}, we partial out the effect of the covariates from the inference variable $d_{it}$, the outcome variable $y_{it}$ and the instrumental variable $z_{it}$ with LASSO. Then, we use the residuals to compute the 2SLS estimator of the coefficient on the inference variable, $\alpha$. Finally, we then perform inference on $\alpha$ using the 2SLS estimator and heteroskedasticity robust standard errors.
 	
 	\section{Results} \label{sec:result}
 	
@@ -552,7 +557,9 @@
 	
 	\subsection{Clustered data double LASSO inference method}
 	
-	The clustered data method ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a huge reason why we could not get statistically significant results.
+	\subsubsection{Double LASSO without instruments}
+	
+	The clustered data method when we do not utilize instruments ultimately did not lead to statistically significant results, despite ultimately only controlling on three covariates: contract year, age, and minutes played. That the number of observations was severely limited, being at 90, was a possible factor in why we could not get statistically significant results.
 	
 	\begin{table}[!htbp]
 		\centering
@@ -604,6 +611,87 @@
 			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: None} \\
 		\end{tabular}
 	\end{table}
+
+	\subsubsection{Double LASSO with instruments}
+	
+	Surprisingly, with the clustered data, and utilizing the instruments we identified during the 2SLS estimation, double LASSO works pretty well and lead to statistically significant results, although this statistical significance is still of a \emph{slightly} lesser degree than that of the GEE weighted least squares approach for win shares, but this statistical significance is of a \emph{slightly} higher degree when it comes to defensive win shares. We compare the two approaches in Table \ref{lassoivvsgee}. The magnitude of the coefficient matters here: with a regular WOLS, we do not correct for the endogenous effect, so the effect is underestimated. Consequently, for regressions where the coefficient gets close to zero, we start to lose statistical power because the confidence interval will start to overlap $0$. However, when we correct for the endogeneity bias with instruments, the coefficient is no longer underestimated in magnitude and increases drastically in magnitude. Hence, even if the error resulting from the curse of dimensionality and the low number of observations is fairly substantial, and even if the magnitude of the confidence interval is fairly high, because the coefficient is further away from zero, our statistical power also gets better. That does not mean, however, the curse of dimensionality faded from existence. It has merely shifted to the problem of the magnitude of the contract year effect being ambiguous. For instance, the 95\% confidence interval for the contract year effect on win share is (2.65, 18.1). It is quite hard to say exactly how strong the contract year effect. We can only demonstrate that the contract year effect exists.
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO with instruments with win share as the outcome variable}
+		\label{lassoivws} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 10.38       & (2.65, 18.1) & $0.0085$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\ 
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO with instruments with offensive win share as the outcome variable}
+		\label{lassoivows} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 5.54       & (1.17, 9.91) & $0.013$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[!htbp]
+		\centering
+		\caption{Double LASSO with instruments with defensive win share as the outcome variable}
+		\label{lassoivdws} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics from double LASSO} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Contract Year & 5.86       & (1.22, 10.5) & $0.013$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+		\end{tabular}
+	\end{table}
+
+	\begin{landscape}
+		\begin{table}[!htbp]
+		\centering
+		\caption{Comparison between double LASSO with instruments and weighted OLS with GEE}
+		\label{lassoivvsgee} 
+		\rowcolors{4}{}{gray!10}
+		\begin{tabular}{*4c}
+			\toprule
+			& \multicolumn{3}{c}{Relevant Statistics} \\
+			\cmidrule(lr){2-4}
+			Variable & Coefficient  & Confidence Interval (95) & $p$-value \\
+			\midrule
+			Win Shares: WOLS with GEE, Contract Year & 0.401       & (0.126, 0.675) & $0.0043$       \\
+			Win Shares: Double LASSO with instruments, Contract Year & 10.38       & (2.65, 18.1) & $0.0085$       \\
+			Offensive WS: WOLS with GEE, Contract Year & 0.282       & (0.0578, 0.507) & $0.0137$       \\
+			Offensive WS: Double LASSO with instruments, Contract Year & 5.54       & (1.17, 9.91) & $0.013$       \\
+			Defensive WS: WOLS with GEE, Contract Year & 0.102       & ($-$0.0190, 0.223) & $0.09829$       \\
+			Defensive WS: Double LASSO with instruments, Contract Year & 5.86       & (1.22, 10.5) & $0.013$       \\
+			\bottomrule
+			\textit{Note:}  & \multicolumn{3}{r}{Selected covariates: Age, Minutes Played} \\
+		\end{tabular}
+	\end{table}
+	\end{landscape}
+
+	\pagebreak
 	
 	\section{Discussions} \label{sec:discussion}
 	
@@ -627,9 +715,10 @@
 	
 	We present all tables for our regression results in this section.
 	
-	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+	\begin{landscape}
+		% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:22:29 AM
-	\begin{sidewaystable}[!htbp] \centering 
+	\begin{table}[!htbp] \centering 
 		\caption{Using Speed Metrics as the Dependent Variable} 
 		\label{} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -669,11 +758,11 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{sidewaystable} 
+	\end{table} 
 
 	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:23:55 AM
-	\begin{sidewaystable}[!htbp] \centering 
+	\begin{table}[!htbp] \centering 
 		\caption{Using Distance as the Dependent Variable} 
 		\label{} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -713,11 +802,11 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{sidewaystable} 
+	\end{table} 
 
 	% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 	% Date and time: Fri, Jun 12, 2020 - 7:33:56 AM
-	\begin{sidewaystable}[!htbp] \centering 
+	\begin{table}[!htbp] \centering 
 		\caption{Using Dribbles, Touches, and Usage Rate as the Dependent Variable} 
 		\label{} 
 		\begin{tabular}{@{\extracolsep{5pt}}lccc} 
@@ -757,7 +846,8 @@
 			\hline \\[-1.8ex] 
 			\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 		\end{tabular} 
-	\end{sidewaystable} 
+	\end{table} 
+	\end{landscape}
 	
 	\clearpage
 	
