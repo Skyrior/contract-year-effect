@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 01:33
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.4.20)  12 JUN 2020 02:18
 entering extended mode
 **./Project_Charles.tex
 (Project_Charles.tex
@@ -804,50 +804,22 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 )
 [0
 
-]
-
-Package natbib Warning: Citation `holmstrom_contracts_1999' on page 1 undefined
- on input line 64.
-
-
-Package natbib Warning: Citation `gibbons_1992' on page 1 undefined on input li
-ne 64.
-
-
-Package natbib Warning: Citation `alchian_1972' on page 1 undefined on input li
-ne 65.
-
-
-Package natbib Warning: Citation `holmstrom_contracts_1999' on page 1 undefined
- on input line 65.
-
-
-Package natbib Warning: Citation `prendergast_1999' on page 1 undefined on inpu
-t line 65.
-
-
-Package natbib Warning: Citation `ress_1994' on page 1 undefined on input line 
-65.
-
-[1] [2] [3] [4] ("C:\Program Files\MiKTeX 2.9\tex/latex/listings\lstlang1.sty"
+] [1] [2] [3] [4] [5] [6] [7] [8]
+("C:\Program Files\MiKTeX 2.9\tex/latex/listings\lstlang1.sty"
 File: lstlang1.sty 2019/02/27 1.8b listings language file
-) ("C:\Program Files\MiKTeX 2.9\tex/latex/listings\lstlang2.sty"
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/listings\lstlang2.sty"
 File: lstlang2.sty 2019/02/27 1.8b listings language file
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/listings\lstlang3.sty"
 File: lstlang3.sty 2019/02/27 1.8b listings language file
-) [5] [6]
-[7]
-
-Package natbib Warning: Citation `dong_dynamics_2016' on page 8 undefined on in
-put line 174.
-
-[8]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 181.
+) [9] [10]
+[11] [12] [13] [14]
+LaTeX Font Info:    Try loading font information for U+bbm on input line 224.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/bbm\ubbm.fd"
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [9]
-(Project_Charles.bbl
+)
+[15] (Project_Charles.bbl
 Underfull \hbox (badness 4556) in paragraph at lines 9--18
 []\TU/lmr/m/n/12 A. C. Aitken.  IV.—On Least Squares and Linear Combination of 
 Observa-
@@ -877,33 +849,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--18
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
  []
 
-[10]) [11] [12
+[16] [17]) [18] [19
 
-] [13
-
-]
-
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 236.
-[14
+] [20
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 236.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
+ [21
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
  (Project_Charles.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 236.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 236.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 279.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
 Package rerunfilecheck Info: File `Project_Charles.out' has not changed.
-(rerunfilecheck)             Checksum: 345651B58B847BD391952A4FE2826B73.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 236.
+(rerunfilecheck)             Checksum: 714F09A0A508DD75227EE18233E51577.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 279.
  ) 
 Here is how much of TeX's memory you used:
- 26300 strings out of 427748
- 468436 string characters out of 3150980
- 761540 words of memory out of 3000000
- 30110 multiletter control sequences out of 15000+200000
+ 26346 strings out of 427748
+ 469401 string characters out of 3150980
+ 767465 words of memory out of 3000000
+ 30156 multiletter control sequences out of 15000+200000
  543468 words of font info for 87 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  46i,12n,77p,2454b,1653s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project_Charles.pdf (15 pages).
+Output written on Project_Charles.pdf (22 pages).
